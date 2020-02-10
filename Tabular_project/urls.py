@@ -15,6 +15,8 @@ Including another URLconf
     CZVXCVXVXC
     aa
     aaa
+    aaa
+    aaa
 """
 from django.contrib import admin
 from django.urls import path
