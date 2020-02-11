@@ -45,6 +45,17 @@
     text-align: center;
     padding: 35px 0;
     }
+    #whitebox{
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    margin-top: 10px;
+    }
+    #textbox{
+    width: 30%;
+    text-align: center;
+    padding: 30px;
+    }
 
     </style>
 
@@ -74,6 +85,50 @@
   </div>
 
     <form action="{% url 'excelsheet' %}">
+
+<div class="container" id="whitebox">
+
+
+    <div class="row">
+
+        <div class="col-3" id="textbox">
+        <p>please enter start date and due date of your exams timetable</p>
+            </div>
+
+        <div class="col" >
+        <label>Start Date</label>
+        <input type="date" class="form-control"  aria-describedby="emailHelp" required>
+            </div>
+        <div class="col" >
+        <label>Due Date</label>
+        <input type="date" class="form-control"  aria-describedby="emailHelp" required>
+            </div>
+      </div>
+
+    <div class="row">
+        <div class="col-3" id="textbox">
+        <p>Please enter available timeslots for each day</p>
+            </div>
+
+        <div class="col" >
+        <label>Day</label>
+
+        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" required>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+            </div>
+        <div class="col" >
+        <label>Timeslot</label>
+        <input type="time" class="form-control"  aria-describedby="emailHelp" required>
+            </div>
+
+      </div>
+
+
+  </div>
+
 
       <div id="bluebox">
           <input type="submit" value="Next" class="btn btn-info">
