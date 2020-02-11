@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>Manual Data</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/cover/">
+    <script src="https://kit.fontawesome.com/24c48f9758.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+<meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#563d7c">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+ ul#menu li {
+  display:inline;
+}
+    #bluebox{
+    width: 100%;
+    background: #3b5a72;
+    text-align: center;
+    padding: 35px 0;
+    }
+
+    </style>
+
+  </head>
+  <body class="text-center">
+<!--  <header class="masthead mb-auto">-->
+<!--    <div class="inner">    &lt;!&ndash; h7ot hena el navbar&ndash;&gt;-->
+<!--    </div>-->
+<!--  </header>-->
+
+
+  <main role="main" >
+  <div class="jumbotron jumbotron-fluid">
+
+    <h1 class="display-4">Manual Data</h1>
+            <ul style="display:inline;">
+                <li><i class="far fa-edit"></i>
+                    <div>Enter Details</div>
+                    </li>
+                <li><i class="fas fa-upload"></i>
+                    <div>Upload Students Data</div>
+                    </li>
+                <li><i class="far fa-paper-plane"></i>
+                 <div>Generate Timetable</div>
+                </li>
+            </ul>
+  </div>
+
+    <form action="{% url 'excelsheet' %}">
+
+      <div id="bluebox">
+          <input type="submit" value="Next" class="btn btn-info">
+      </div>
+    </form>
+  </main>
+
+
+
+
+  <footer class="mastfoot mt-auto">
+  </footer>
+</body>
+</html>
