@@ -37,9 +37,17 @@
         }
       }
 
- ul#menu li {
-  display:inline;
-}
+    ul{
+      list-style-type: none;
+      padding:50px 0px 0px 350px;
+      overflow: hidden;
+    }
+    li{
+      float: left;
+      font: 14px arial, sans-serif;
+      color: #6B7479;
+      padding: 10px;
+    }
     #bluebox{
     width: 100%;
     background: #3b5a72;
@@ -53,8 +61,28 @@
     padding: 50px;
     margin-top: 30px;
     }
-
-
+    .labelbox{
+    padding: 10px;
+    }
+    .active{
+    color: #212529;
+    }
+    hr {
+      border: 0;
+      outline: 0;
+      height: 1px;
+      background-color: #c7c7c7;
+      width: 70px;
+      }
+      .line{
+      border: 0;
+      outline: 0;
+      height: 1px;
+      background-color: #c7c7c7;
+      width: 100%;
+      max-width: 1150px;
+      margin: 0px auto 50px auto;
+      }
 
     </style>
 
@@ -69,43 +97,48 @@
   <main role="main" >
   <div class="jumbotron jumbotron-fluid">
 
-    <h1 class="display-4">Excel Sheet</h1>
-            <ul style="display:inline;">
+    <h1 class="display-4">Students Data</h1>
+      <h6>follow the guide to generate your timetable</h6>
+            <ul>
                 <li><i class="far fa-edit"></i>
-                    <div>Enter Details</div>
+                    <div class="labelbox">Enter Details</div>
                     </li>
-                <li><i class="fas fa-upload"></i>
-                    <div>Upload Students Data</div>
+                <li><hr></li>
+                <li class="active"><i class="fas fa-upload"></i>
+                    <div class="labelbox">Upload Students Data</div>
                     </li>
+                <li><hr></li>
                 <li><i class="far fa-paper-plane"></i>
-                 <div>Generate Timetable</div>
+                 <div class="labelbox">Generate Timetable</div>
                 </li>
             </ul>
   </div>
 
     <form action="{% url 'timetable' %}">
-        <div class="container">
-
-<!--            <div class="blockbox">-->
-<!--              <p>Please upload students data by the following format : mennenenmneemi</p>-->
-
-<!--          <div class="custom-file" id="whitebox">-->
-<!--            <input type="file" class="custom-file-input" required>-->
-<!--            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>-->
-<!--            <div class="invalid-feedback">Example invalid custom file feedback</div>-->
-<!--          </div>-->
-<!--            </div>-->
+<!--        <div class="container">-->
 
         <div>
               <p>Please upload courses data by the following format : mennenenmneemi</p>
 
             <div class="custom-file" id="whitebox">
-            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-            <div class="invalid-feedback">Example invalid custom file feedback</div>
+            <input type="file" class="custom-file-input" id="validatedCustomFile1" required>
+            <label class="custom-file-label" for="validatedCustomFile1">Choose file...</label>
           </div>
 
         </div>
+
+        <div class="line"></div>
+
+        <div>
+              <p>Please upload students data by the following format : mennenenmneemi</p>
+
+            <div class="custom-file" id="whitebox">
+            <input type="file" class="custom-file-input" id="validatedCustomFile2" required>
+            <label class="custom-file-label" for="validatedCustomFile2">Choose file...</label>
+          </div>
+
+        </div>
+
 
             </div>
 
@@ -115,6 +148,7 @@
       <div id="bluebox">
           <input type="submit" value="Next" class="btn btn-info">
       </div>
+
     </form>
   </main>
 

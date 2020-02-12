@@ -53,15 +53,36 @@
         }
       }
 
- ul#menu li {
-  display:inline;
-}
+    ul{
+      list-style-type: none;
+      padding:50px 0px 0px 350px;
+      overflow: hidden;
+    }
+    li{
+      float: left;
+      font: 14px arial, sans-serif;
+      color: #6B7479;
+      padding: 10px;
+    }
     #blackbox{
     width: 100%;
     background: #333333;
     text-align: center;
     padding: 50px;
     }
+    .labelbox{
+    padding: 10px;
+    }
+    .active{
+    color: #212529;
+    }
+    hr {
+      border: 0;
+      outline: 0;
+      height: 1px;
+      background-color: #c7c7c7;
+      width: 70px;
+      }
 
     </style>
 
@@ -75,17 +96,19 @@
 
   <main role="main" >
   <div class="jumbotron jumbotron-fluid">
-
     <h1 class="display-4">Your Timetable</h1>
-            <ul style="display:inline;">
+      <h6>follow the guide to generate your timetable</h6>
+            <ul>
                 <li><i class="far fa-edit"></i>
-                    <div>Enter Details</div>
+                    <div class="labelbox">Enter Details</div>
                     </li>
+				<li><hr></li>
                 <li><i class="fas fa-upload"></i>
-                    <div>Upload Students Data</div>
+                    <div class="labelbox">Upload Students Data</div>
                     </li>
-                <li><i class="far fa-paper-plane"></i>
-                 <div>Generate Timetable</div>
+				<li><hr></li>
+                <li class="active"><i class="far fa-paper-plane"></i>
+                 <div class="labelbox">Generate Timetable</div>
                 </li>
             </ul>
   </div>
