@@ -12,6 +12,23 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/cover/">
     <script src="https://kit.fontawesome.com/24c48f9758.js" crossorigin="anonymous"></script>
 
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -39,11 +56,11 @@
  ul#menu li {
   display:inline;
 }
-    #bluebox{
+    #blackbox{
     width: 100%;
-    background: #3b5a72;
+    background: #333333;
     text-align: center;
-    padding: 35px 0;
+    padding: 50px;
     }
 
     </style>
@@ -73,10 +90,129 @@
             </ul>
   </div>
 
-    <form action="">
+<!--#################################################################################-->
+                        <!--TIMETABLE STRUCTURE-->
 
-      <div id="bluebox">
-          <input type="submit" value="Save" class="btn btn-info">
+	<div class="limiter">
+		<div class="container">
+<!--			<div class="wrap-table100">-->
+
+				<div class="table100 ver2 m-b-110">
+					<table data-vertable="ver2">
+						<thead>
+							<tr class="row100 head">
+								<th class="column100 column1" data-column="column1"></th>
+								<th class="column100 column2" data-column="column2">Sunday</th>
+								<th class="column100 column3" data-column="column3">Monday</th>
+								<th class="column100 column4" data-column="column4">Tuesday</th>
+								<th class="column100 column5" data-column="column5">Wednesday</th>
+								<th class="column100 column6" data-column="column6">Thursday</th>
+								<th class="column100 column7" data-column="column7">Friday</th>
+								<th class="column100 column8" data-column="column8">Saturday</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="row100">
+								<td class="column100 column1" data-column="column1">Lawrence Scott</td>
+								<td class="column100 column2" data-column="column2">8:00 AM</td>
+								<td class="column100 column3" data-column="column3">--</td>
+								<td class="column100 column4" data-column="column4">--</td>
+								<td class="column100 column5" data-column="column5">8:00 AM</td>
+								<td class="column100 column6" data-column="column6">--</td>
+								<td class="column100 column7" data-column="column7">5:00 PM</td>
+								<td class="column100 column8" data-column="column8">8:00 AM</td>
+							</tr>
+
+							<tr class="row100">
+								<td class="column100 column1" data-column="column1">Jane Medina</td>
+								<td class="column100 column2" data-column="column2">--</td>
+								<td class="column100 column3" data-column="column3">5:00 PM</td>
+								<td class="column100 column4" data-column="column4">5:00 PM</td>
+								<td class="column100 column5" data-column="column5">--</td>
+								<td class="column100 column6" data-column="column6">9:00 AM</td>
+								<td class="column100 column7" data-column="column7">--</td>
+								<td class="column100 column8" data-column="column8">--</td>
+							</tr>
+
+							<tr class="row100">
+								<td class="column100 column1" data-column="column1">Billy Mitchell</td>
+								<td class="column100 column2" data-column="column2">9:00 AM</td>
+								<td class="column100 column3" data-column="column3">--</td>
+								<td class="column100 column4" data-column="column4">--</td>
+								<td class="column100 column5" data-column="column5">--</td>
+								<td class="column100 column6" data-column="column6">--</td>
+								<td class="column100 column7" data-column="column7">2:00 PM</td>
+								<td class="column100 column8" data-column="column8">8:00 AM</td>
+							</tr>
+
+							<tr class="row100">
+								<td class="column100 column1" data-column="column1">Beverly Reid</td>
+								<td class="column100 column2" data-column="column2">--</td>
+								<td class="column100 column3" data-column="column3">5:00 PM</td>
+								<td class="column100 column4" data-column="column4">5:00 PM</td>
+								<td class="column100 column5" data-column="column5">--</td>
+								<td class="column100 column6" data-column="column6">9:00 AM</td>
+								<td class="column100 column7" data-column="column7">--</td>
+								<td class="column100 column8" data-column="column8">--</td>
+							</tr>
+
+							<tr class="row100">
+								<td class="column100 column1" data-column="column1">Tiffany Wade</td>
+								<td class="column100 column2" data-column="column2">8:00 AM</td>
+								<td class="column100 column3" data-column="column3">--</td>
+								<td class="column100 column4" data-column="column4">--</td>
+								<td class="column100 column5" data-column="column5">8:00 AM</td>
+								<td class="column100 column6" data-column="column6">--</td>
+								<td class="column100 column7" data-column="column7">5:00 PM</td>
+								<td class="column100 column8" data-column="column8">8:00 AM</td>
+							</tr>
+
+							<tr class="row100">
+								<td class="column100 column1" data-column="column1">Sean Adams</td>
+								<td class="column100 column2" data-column="column2">--</td>
+								<td class="column100 column3" data-column="column3">5:00 PM</td>
+								<td class="column100 column4" data-column="column4">5:00 PM</td>
+								<td class="column100 column5" data-column="column5">--</td>
+								<td class="column100 column6" data-column="column6">9:00 AM</td>
+								<td class="column100 column7" data-column="column7">--</td>
+								<td class="column100 column8" data-column="column8">--</td>
+							</tr>
+
+							<tr class="row100">
+								<td class="column100 column1" data-column="column1">Rachel Simpson</td>
+								<td class="column100 column2" data-column="column2">9:00 AM</td>
+								<td class="column100 column3" data-column="column3">--</td>
+								<td class="column100 column4" data-column="column4">--</td>
+								<td class="column100 column5" data-column="column5">--</td>
+								<td class="column100 column6" data-column="column6">--</td>
+								<td class="column100 column7" data-column="column7">2:00 PM</td>
+								<td class="column100 column8" data-column="column8">8:00 AM</td>
+							</tr>
+
+							<tr class="row100">
+								<td class="column100 column1" data-column="column1">Mark Salazar</td>
+								<td class="column100 column2" data-column="column2">8:00 AM</td>
+								<td class="column100 column3" data-column="column3">--</td>
+								<td class="column100 column4" data-column="column4">--</td>
+								<td class="column100 column5" data-column="column5">8:00 AM</td>
+								<td class="column100 column6" data-column="column6">--</td>
+								<td class="column100 column7" data-column="column7">5:00 PM</td>
+								<td class="column100 column8" data-column="column8">8:00 AM</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+<!--			</div>-->
+		</div>
+	</div>
+
+
+
+<!--#################################################################################-->
+    <form action="">
+      <div id="blackbox">
+          <input type="submit" value="Save" class="btn btn-info btn-lg">
       </div>
     </form>
   </main>
@@ -86,5 +222,17 @@
 
   <footer class="mastfoot mt-auto">
   </footer>
+
+
+  <!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+
 </body>
 </html>

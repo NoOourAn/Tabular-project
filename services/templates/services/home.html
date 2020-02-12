@@ -34,6 +34,82 @@
           font-size: 3.5rem;
         }
       }
+      .milkybox {
+      width: 100%;
+      height: 700px;
+      background: #E9ECEF;
+      text-align: center;
+      }
+      .centeredbox{
+      padding: 200px;
+      }
+      .bluebox {
+      width: 100%;
+      height: 700px;
+      background: #138496;
+      text-align: center;
+      }
+      .bluebox p{
+      font: 30px arial, sans-serif;
+      padding: 100px 300px 0px 300px;
+      color: #ffffff;
+      }
+      .bluebox h3{
+      font: 16px arial, sans-serif;
+      padding: 0px 300px 100px 300px;
+      color: #ffffff;
+      letter-spacing: 1px;
+      line-height: 1.4;
+      }
+      .whitebox{
+      width: 100%;
+      height: 1300px;
+      background: #ffffff;
+      padding: 450px 0px;
+      }
+      .imgbox{
+      width:800px;
+      }
+      .sideimgbox{
+      width:500px;
+      }
+
+      .whitebox p{
+      font: 30px arial, sans-serif;
+      color: #265B7E;
+      }
+      .whitebox h3{
+      font: 16px arial, sans-serif;
+      color: #6B7479;
+      letter-spacing: 1px;
+      line-height: 1.4;
+      }
+      hr {
+      border: 0;
+      outline: 0;
+      height: 1px;
+      background-color: #c7c7c7;
+      width: 100%;
+      max-width: 1150px;
+      margin: 100px auto;
+      }
+      .transbox{
+      width: 100%;
+      height: 400px;
+      background: rgba(0,0,0,0.5);
+      }
+      .bgbox{
+      background: url("{% static 'images/labtop-mockup.png' %}") center center fixed no-repeat;
+      background-size: cover;
+      width: 100%;
+      }
+      .transbox p{
+      font: 30px arial, sans-serif;
+      padding: 120px 100px;
+      color: #ffffff;
+      line-height: 1.4;
+      }
+
 
     </style>
 
@@ -47,12 +123,54 @@
 
 
   <main role="main" >
-  <div class="jumbotron jumbotron-fluid">
+  <div class="milkybox">
+    <div class="centeredbox">
     <h1 class="display-4">Services Home</h1>
-    <p class="lead">Exam Auto Scheduling</p>
+    <p class="lead">Exams Auto Scheduling</p>
     <!--      <img src="{% static 'bg1.jpg' %}">-->
-      <a href="{% url 'manualdata' %}" class="btn btn-lg btn-primary">Create Your Timetable</a>
+      <a href="{% url 'manualdata' %}" class="btn btn-lg btn-info" style="margin:100px;">Create Your Timetable</a>
+      </div>
 </div>
+    <div class="bluebox">
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+      <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</h3>
+      <img src="{% static 'images/labtop-mockup.png' %}" class="imgbox">
+  </div>
+    <div class="whitebox">
+      <div class="container">
+      <div class="row">
+        <div class="col">
+      <img src="{% static 'images/labtop-mockup.png' %}" class="sideimgbox">
+          </div>
+
+      <div class="col">
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+      <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h3>
+  </div>
+        </div>
+      <hr>
+      <div class="row">
+      <div class="col">
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+      <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h3>
+        </div>
+       <div class="col">
+      <img src="{% static 'images/labtop-mockup.png' %}"  class="col">
+        </div>
+        </div>
+
+        </div>
+      </div>
+
+    <div class="bgbox">
+      <div class="transbox">
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+      </div>
+        </div>
+
+
+
+
 
 
   </main>
