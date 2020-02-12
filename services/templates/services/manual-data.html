@@ -13,73 +13,12 @@
     <script src="https://kit.fontawesome.com/24c48f9758.js" crossorigin="anonymous"></script>
 
     <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
 <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#563d7c">
 
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-    ul{
-      list-style-type: none;
-      padding:50px 0px 0px 350px;
-      overflow: hidden;
-    }
-    li{
-      float: left;
-      font: 14px arial, sans-serif;
-      color: #6B7479;
-      padding: 10px;
-    }
-    #bluebox{
-    width: 100%;
-    background: #3b5a72;
-    text-align: center;
-    padding: 35px 0;
-    }
-    #whitebox{
-    width: 100%;
-    text-align: center;
-    padding: 30px;
-    margin-top: 10px;
-    }
-    #textbox{
-    width: 30%;
-    text-align: center;
-    padding: 30px;
-    }
-    .labelbox{
-    padding: 10px;
-    }
-    .active{
-    color: #212529;
-    }
-
-    hr {
-      border: 0;
-      outline: 0;
-      height: 1px;
-      background-color: #c7c7c7;
-      width: 70px;
-      }
-
-    </style>
 
   </head>
   <body class="text-center">
@@ -109,11 +48,11 @@
             </ul>
   </div>
 
-    <form action="{% url 'excelsheet' %}">
 
-<div class="container" id="whitebox">
+    <form method="post" action="{% url 'excelsheet' %}">
+        {% csrf_token %}
 
-
+    <div class="container" id="bigwhitebox">
     <div class="row">
 
         <div class="col-3" id="textbox">
@@ -122,13 +61,14 @@
 
         <div class="col" >
         <label>Start Date</label>
-        <input type="date" class="form-control"  aria-describedby="emailHelp" required>
+        <input type="date" class="form-control" name="startdate" required>   <!-- name = startdate -->
             </div>
         <div class="col" >
         <label>Due Date</label>
-        <input type="date" class="form-control"  aria-describedby="emailHelp" required>
+        <input type="date" class="form-control" name="duedate" required>      <!-- name = duedate -->
             </div>
       </div>
+
 
     <div class="row">
         <div class="col-3" id="textbox">
@@ -146,7 +86,7 @@
             </div>
         <div class="col" >
         <label>Timeslot</label>
-        <input type="time" class="form-control"  aria-describedby="emailHelp" required>
+        <input type="time" class="form-control" required>
             </div>
 
       </div>
