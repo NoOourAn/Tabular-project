@@ -53,20 +53,16 @@
             </ul>
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
     {% block content %}
     <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
-    <form action="{% url 'data'%}" method="post">{% csrf_token %}
+      {% for field in form %}
+        {% if field.error %}
+      <div class="alert alert-danger" role="alert">
+        {{ field.error }}
+        </div>
+        {% endif %}
+      {% endfor %}
+    <form enctype="multipart/form-data" action="{% url 'data'%}" method="post">{% csrf_token %}
 
     <div class="container" id="bigwhitebox">
     <div class="row">
@@ -82,30 +78,37 @@
 <!--        <input type="date" class="form-control" name="duedate" required>      &lt;!&ndash; name = duedate &ndash;&gt;-->
 <!--            </div>-->
 
-            <table>
+            {% if wizard.steps.step1 == 1 %}  <!-- start & due date-->
+            <div class="col-3" id="textbox">
+                <p>please enter start date and due date of your exams timetable</p>
+            </div>
+            {% elif wizard.steps.step1 == 2 %}   <!-- days & timeslots-->
+            <div class="col-3" id="textbox">
+                 <p>Please enter available timeslots for each day</p>
+            </div>
+            {% elif wizard.steps.step1 == 3 %}    <!-- excel sheets-->
+            <div class="col-7" id="textbox">
+              <p>Please upload courses data by the following format : mennenenmneemi</p>
+              <p>Please upload students data by the following format : mennenenmneemi</p>
+            </div>
+
+            {% endif %}
+            <div class="col" id="textbox">
             {{ wizard.management_form }}
             {% if wizard.form.forms %}
                 {{ wizard.form.management_form }}
                 {% for form in wizard.form.forms %}
-                    {% if wizard.steps.index == 0 %}
-                        <div class="col-3" id="textbox">
-                            <p>please enter start date and due date of your exams timetable</p>
-                                </div>
-                    {% endif %}
                     {{ form }}
                 {% endfor %}
             {% else %}
                 {{ wizard.form }}
             {% endif %}
-            </table>
-
+            </div>
       </div>
 
 
 <!--    <div class="row">-->
-<!--        <div class="col-3" id="textbox">-->
-<!--        <p>Please enter available timeslots for each day</p>-->
-<!--            </div>-->
+
 
 <!--        <div class="col" >-->
 <!--        <label>Day</label>-->

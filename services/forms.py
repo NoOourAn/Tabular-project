@@ -9,5 +9,5 @@ class TimeSlots(forms.Form):
     timeslot = forms.IntegerField()
 
 class ExcelSheet(forms.Form):
-    students = forms.FileField()
     courses = forms.FileField()
+    students = forms.FileField()
