@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>Manual Data</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/cover/">
+    <script src="https://kit.fontawesome.com/24c48f9758.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+<meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#563d7c">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+    ul{
+      list-style-type: none;
+      padding:50px 0px 0px 350px;
+      overflow: hidden;
+    }
+    li{
+      float: left;
+      font: 14px arial, sans-serif;
+      color: #6B7479;
+      padding: 10px;
+    }
+    #bluebox{
+    width: 100%;
+    background: #3b5a72;
+    text-align: center;
+    padding: 35px 0;
+    }
+    #whitebox{
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    margin-top: 10px;
+    }
+    #textbox{
+    width: 30%;
+    text-align: center;
+    padding: 30px;
+    }
+    .labelbox{
+    padding: 10px;
+    }
+    .active{
+    color: #212529;
+    }
+
+    hr {
+      border: 0;
+      outline: 0;
+      height: 1px;
+      background-color: #c7c7c7;
+      width: 70px;
+      }
+
+    </style>
+
+  </head>
+  <body class="text-center">
+<!--  <header class="masthead mb-auto">-->
+<!--    <div class="inner">    &lt;!&ndash; h7ot hena el navbar&ndash;&gt;-->
+<!--    </div>-->
+<!--  </header>-->
+
+
+  <main role="main" >
+  <div class="jumbotron jumbotron-fluid">
+
+    <h1 class="display-4">Manual Data</h1>
+      <h6>follow the guide to generate your timetable</h6>
+            <ul>
+                <li class="active"><i class="far fa-edit"></i>
+                    <div class="labelbox">Enter Details</div>
+                    </li>
+                <li><hr></li>
+                <li><i class="fas fa-upload"></i>
+                    <div class="labelbox">Upload Students Data</div>
+                    </li>
+                <li><hr></li>
+                <li><i class="far fa-paper-plane"></i>
+                 <div class="labelbox">Generate Timetable</div>
+                </li>
+            </ul>
+  </div>
+
+    <form action="{% url 'excelsheet' %}">
+
+<div class="container" id="whitebox">
+
+
+    <div class="row">
+
+        <div class="col-3" id="textbox">
+        <p>please enter start date and due date of your exams timetable</p>
+            </div>
+
+        <div class="col" >
+        <label>Start Date</label>
+        <input type="date" class="form-control"  aria-describedby="emailHelp" required>
+            </div>
+        <div class="col" >
+        <label>Due Date</label>
+        <input type="date" class="form-control"  aria-describedby="emailHelp" required>
+            </div>
+      </div>
+
+    <div class="row">
+        <div class="col-3" id="textbox">
+        <p>Please enter available timeslots for each day</p>
+            </div>
+
+        <div class="col" >
+        <label>Day</label>
+
+        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" required>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+            </div>
+        <div class="col" >
+        <label>Timeslot</label>
+        <input type="time" class="form-control"  aria-describedby="emailHelp" required>
+            </div>
+
+      </div>
+
+
+  </div>
+
+
+      <div id="bluebox">
+          <input type="submit" value="Next" class="btn btn-info">
+      </div>
+    </form>
+  </main>
+
+
+
+
+  <footer class="mastfoot mt-auto">
+  </footer>
+</body>
+</html>
