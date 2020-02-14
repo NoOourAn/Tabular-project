@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a0a0b80-cf5d-49c3-b07a-1e0d7085c71c" name="Default Changelist" comment="project started">
-      <change beforePath="$PROJECT_DIR$/.idea/Tabular-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Tabular-project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tabular/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tabular/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,10 +194,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="491" y="76" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1581611566584" />
-    <state x="184" y="7" key="SettingsEditor" timestamp="1581703325206">
+    <state x="184" y="7" key="SettingsEditor" timestamp="1581704116745">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1581703325206" />
+    <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1581704116745" />
     <state x="530" y="281" key="VCS.ChangelistChooser" timestamp="1581349690573">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
