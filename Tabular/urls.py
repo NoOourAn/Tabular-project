@@ -6,4 +6,3 @@ urlpatterns = [
     path('services/' , include('services.url')),
     path('accounts/',include('accounts.urls')),
 ]
-#mmmmmmmmmmmmmm
