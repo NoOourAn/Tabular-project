@@ -1,0 +1,57 @@
+<head>
+    <title>Contact us</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+{% block content %}
+
+<div class="container text-center p-4" style="width:50%; background-color: rgba(0,0,255,.1); ">
+    <form action="{% url 'index' %}" method="POST">
+        {% csrf_token %}
+        <div>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" name="firstname" size="40" class="form-control" aria-required="true" aria-invalid="false" placeholder="First name" required>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" name="lastname" size="40" class="form-control" aria-required="true" aria-invalid="false" placeholder="Last name" required>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input type="email" name="email" size="40" class="form-control" aria-required="true" aria-invalid="false" placeholder="Email" required>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                <input type="text" name="telephonenumber" size="40" class="form-control" aria-required="true" aria-invalid="false" placeholder="Telephone number" required>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                <input type="text" name="country" size="40" class="form-control" aria-required="true" aria-invalid="false" placeholder="Country" required>
+            </div>
+            <br>
+            <div class="input-group">
+                <span class="input-group-addon" style="vertical-align: top ;"><i class="glyphicon glyphicon-comment"></i></span>
+                <textarea name="message" cols="40" rows="10" class="form-control" aria-invalid="false" placeholder="Message (optional)" required></textarea>
+            </div>
+            <br>
+
+            <label>
+                <input type="checkbox" required>
+                <span>I confirm that I've read and understood the information below. I'm happy to receive EventMAP email updates and marketing on this basis.</span>
+            </label>
+            <input type="submit" value="Send" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

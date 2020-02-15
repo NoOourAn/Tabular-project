@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a0a0b80-cf5d-49c3-b07a-1e0d7085c71c" name="Default Changelist" comment="project started">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tabular/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tabular/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tabular/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Tabular/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tabular/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tabular/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/templates/services/manual-data.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/templates/services/manual-data.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +34,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1XcbgtoelEoQWRUkn84wTW6uWYx" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -52,6 +50,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jmagd\OneDrive\Desktop\Tabular-project\contact\templates\contact" />
       <recent name="C:\Users\NoURan\Desktop\Tabular-project\Tabular\static" />
     </key>
   </component>
@@ -160,6 +159,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="project started" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="382" y="301" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1581694896233">
+      <screen x="0" y="0" width="1280" height="994" />
+    </state>
+    <state x="382" y="301" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.994@0.0.1280.994" timestamp="1581694896233" />
     <state x="337" y="0" key="CommitChangelistDialog2" timestamp="1581611306165">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -208,9 +211,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1581350389422" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1581610852031">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="355" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1581799126467">
+      <screen x="0" y="0" width="1280" height="994" />
     </state>
+    <state x="355" y="258" key="com.intellij.ide.util.TipDialog/0.0.1280.994@0.0.1280.994" timestamp="1581799126467" />
     <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1581610852031" />
     <state x="463" y="170" key="git4idea.history.wholeTree.VcsStructureChooser" timestamp="1581350278940">
       <screen x="0" y="0" width="1366" height="728" />
