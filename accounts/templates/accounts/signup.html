@@ -170,10 +170,15 @@ button.social-signin.google {
   <div class="left">
     <h1>Sign up</h1>
 
-      <form method ="POST" action="{%url 'signup' %}"
+      {% if error %}
+      {{ error }}
+      <br/>
+      <br/>
+      {% endif %}
+
+      <form method="POST" action="{% url 'signup' %}">
             {%csrf_token%}
     <input type="text" name="username" placeholder="Username" />
-    <input type="text" name="email" placeholder="E-mail" />
     <input type="password" name="password" placeholder="Password" />
     <input type="password" name="password2" placeholder="Retype password" />
 
@@ -182,7 +187,7 @@ button.social-signin.google {
 
   <div class="right">
     <span class="loginwith">Sign in with<br />social network</span>
-<form/>
+      <form/>
     <button class="social-signin facebook">Log in with facebook</button>
     <button class="social-signin twitter">Log in with Twitter</button>
     <button class="social-signin google">Log in with Google+</button>
