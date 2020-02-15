@@ -15,13 +15,16 @@ def index(request):
 
         contact.save()
 
-        send_mail(
-            contact.FirstName,
-            contact.Message,
-            'johnny.magdy18@gmail.com',
-            ['j.magdy18@yahoo.com'],
-            fail_silently=False,
-        )
+        try:
+            send_mail(
+                contact.FirstName,
+                contact.Message,
+                'johnny.magdy18@gmail.com',
+                ['j.magdy18@yahoo.com'],
+                fail_silently=False,
+            )
+        except ConnectionRefusedError:
+            pass
 
         return render(request, 'contact/index.html', {'Success': 'Message sent successfully'})
     else:
