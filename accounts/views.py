@@ -12,11 +12,14 @@ def signup (request):
         if request.POST['password'] ==request.POST['password2']:
             try:
                 user = User.objects.get(username=request.POST['username'])
-                return render (request,'accounts/signup.html' , {'error':'username has already taken'})
+                return render(request,'accounts/signup.html' , {'error':'username has already taken'})
             except User.DoesNotExist:
                 user =  User.objects.create_user(request.POST['username'], password=request.POST['password'])
                 auth.login(request,user)
                 return redirect('home')
+        else:
+            return render(request, 'accounts/signup.html', {'error': 'PASSWORD MUST MATCH '})
+
     else:
 
         return render (request,'accounts/signup.html')
@@ -27,9 +30,19 @@ def home(request):
 
 
 def login(request):
-    return render(request, 'accounts/login.html')
+    if request.method == 'POST' :
+        user = auth.authenticate(username=request.POST['username'],password =request.POST['password'])
+        if user is not None:
+            auth.login(request,user)
+            return redirect('home')
+        else:
+            return render(request, 'accounts/login.html',{'error':'username or password is not correct'})
+    else:
+        return render(request, 'accounts/login.html')
 
 
 def logout(request):
-    return render(request, 'accounts/logout.html')
+    if request.method == 'POST' :
+        auth.logout(request)
+        return redirect('home')
 
