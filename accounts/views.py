@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect
 from django.contrib.auth.models import User
 from django.contrib  import auth
+from .models import Account
 
 
 
@@ -23,6 +24,24 @@ def signup (request):
     else:
 
         return render (request,'accounts/signup.html')
+
+def osignup (request):
+    if request.method == 'POST' :
+
+        if request.POST['password'] ==request.POST['password2']:
+            try:
+                user = Account.objects.get(username=request.POST['username'],email=request.POST['email'])
+                return render(request,'accounts/signup.html' , {'error':'username or email has already taken'})
+            except Account.DoesNotExist:
+                user =  Account.objects.create_user(email=request.POST['email'],username= request.POST['username'], password=request.POST['password'], cc=request.POST['cc'])
+                auth.login(request,user)
+                return redirect('home')
+        else:
+            return render(request, 'accounts/osignup.html', {'error': 'PASSWORD MUST MATCH '})
+
+    else:
+
+        return render (request,'accounts/osignup.html')
 
 
 def home(request):

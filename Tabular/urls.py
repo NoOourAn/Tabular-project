@@ -8,5 +8,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('contact/', include('contact.urls')),
     path('student/', views.student),
-    path('',views.home),
+    path('',views.home, name='home'),
 ]
