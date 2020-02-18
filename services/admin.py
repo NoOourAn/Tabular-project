@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import Timetables
 
-# Register your models here.
+admin.site.register(Timetables)
