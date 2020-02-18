@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a0a0b80-cf5d-49c3-b07a-1e0d7085c71c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Tabular-project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Tabular-project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/migrations/0002_auto_20200217_2002.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact/migrations/0002_auto_20200214_2322.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/models.py" afterDir="false" />
-    </list>
+    <list default="true" id="3a0a0b80-cf5d-49c3-b07a-1e0d7085c71c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
