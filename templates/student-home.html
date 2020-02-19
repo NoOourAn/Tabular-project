@@ -61,7 +61,7 @@
       }
 
       .footer-style{
-      height: 50px;
+      height: 55px;
       width: 100% ;
       background-color: #343a40;
 
@@ -69,8 +69,14 @@
 
 
       .footer-style{
-      position: absolute;
+      position: fixed;
       bottom:0px;
+      }
+      .tablebox{
+      width: 100%;
+      height: 500px;
+      padding: 150px;
+      background-color: #ffffff;
       }
 
 
@@ -80,6 +86,8 @@
     <link href="jumbotron.css" rel="stylesheet">
   </head>
   <body>
+
+
   <div class="all">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <a class="font-italic text-white-50 nav-link " href="#">Tabular</a>
@@ -118,20 +126,36 @@
     <div class="transbox">
       <h1 class="display-3 ">Search</h1>
       <p>search for your schedual using your organization.</p>
+
+
+
 <!--      <p><a class="btn btn-primary btn-sm" href="#" role="button">Learn more &raquo;</a></p>-->
       <div class="btn-group" role="group" aria-label="Basic example">
-          <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <form method="post" action="{% url 'student' %}" class="form-inline mt-2 mt-md-0" >{% csrf_token %}
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
-
         </div>
 
     </div>
   </div>
 
+    <div class="tablebox">
+        {% if code %}
+        <div class="alert alert-success" role="alert">
+            Found it!
+        </div>
+        <a href="#">{{ code }}</a>
+        {% endif %}
+        {% if error %}
+        <div class="alert alert-warning" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+    </div>
 
 
+</main>
 
 
 
@@ -151,7 +175,7 @@
 
 
 
-</main>
+
 
 
 
