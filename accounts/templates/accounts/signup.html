@@ -181,10 +181,20 @@ button.social-signin.google {
 
       <form method="POST" action="{% url 'signup' %}">
             {%csrf_token%}
+    <input type="email" name="email" placeholder="email" />
     <input type="text" name="username" placeholder="Username" />
-    <input type="password" name="password" placeholder="Password" />
-    <input type="password" name="password2" placeholder="Retype password" />
+              <input type="text" name="age" placeholder="age" />
 
+              <input type="text" name="gender" placeholder="gender" />
+                        <input type="text" name="level" placeholder="level" />
+
+
+          <input type="text" name="univ" placeholder="univ" />
+          <input type="text" name="faculty" placeholder="faculty" />
+    <input type="password" name="password" placeholder="Password" />
+
+
+    <input type="password" name="password2" placeholder="Retype password" />
     <input type="submit" name="signup_submit" value="Sign me up" />
   </div>
 

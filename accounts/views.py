@@ -2,6 +2,7 @@ from django.shortcuts import render , redirect
 from django.contrib.auth.models import User
 from django.contrib  import auth
 from .models import Account
+from django.contrib.auth import authenticate, login as loogin
 
 
 
@@ -12,10 +13,10 @@ def signup (request):
 
         if request.POST['password'] ==request.POST['password2']:
             try:
-                user = User.objects.get(username=request.POST['username'])
+                user = Account.objects.get(username=request.POST['username'],email=request.POST['email'],)
                 return render(request,'accounts/signup.html' , {'error':'username has already taken'})
-            except User.DoesNotExist:
-                user =  User.objects.create_user(request.POST['username'], password=request.POST['password'])
+            except Account.DoesNotExist:
+                user =  Account.objects.create_user(username= request.POST['username'],email=request.POST['email'], password=request.POST['password'], cc='0',univ=request.POST['univ'],faculty=request.POST['faculty'],gender=request.POST['gender'],age=request.POST['age'],level=request.POST['level'])
                 auth.login(request,user)
                 return redirect('home')
         else:
@@ -30,10 +31,10 @@ def osignup (request):
 
         if request.POST['password'] ==request.POST['password2']:
             try:
-                user = Account.objects.get(username=request.POST['username'],email=request.POST['email'])
+                user = Account.objects.get(username=request.POST['username'],email=request.POST['email'],univ=request.POST['univ'],faculty=request.POST['faculty'],)
                 return render(request,'accounts/signup.html' , {'error':'username or email has already taken'})
             except Account.DoesNotExist:
-                user =  Account.objects.create_user(email=request.POST['email'],username= request.POST['username'], password=request.POST['password'], cc=request.POST['cc'])
+                user =  Account.objects.create_user(username= request.POST['username'],email=request.POST['email'], password=request.POST['password'], cc=request.POST['cc'],univ=request.POST['univ'],faculty=request.POST['faculty'],gender='x',age='0',level='0')
                 auth.login(request,user)
                 return redirect('home')
         else:
@@ -44,18 +45,16 @@ def osignup (request):
         return render (request,'accounts/osignup.html')
 
 
-def home(request):
-    return render(request, 'accounts/home.html')
 
 
 def login(request):
     if request.method == 'POST' :
-        user = auth.authenticate(username=request.POST['username'],password =request.POST['password'])
+        user = authenticate(username=request.POST['username'],password =request.POST['password'])
         if user is not None:
-            auth.login(request,user)
+            loogin(request,user)
             return redirect('home')
         else:
-            return render(request, 'accounts/login.html',{'error':'username or password is not correct'})
+            return render(request, 'accounts/login.html',{'error':'username or password is not correct m3 enohom correcr'})
     else:
         return render(request, 'accounts/login.html')
 
