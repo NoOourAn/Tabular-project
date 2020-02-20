@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser , BaseUserManager
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self,username,email,password=None,cc=None,gender=None,age=None,univ=None,faculty=None,level=None ,):
+    def create_user(self,username,email,password=None,cc=None,gender=None,age=None,univ=None,faculty=None,level=None ,is_S=False,is_U=True):
         if not email:
             raise ValueError("user must have an email address")
         if not username:
@@ -18,6 +18,9 @@ class MyAccountManager(BaseUserManager):
             univ=univ,
             faculty=faculty,
             level=level,
+            is_U=is_U,
+            is_S = is_S
+
 
         )
 
@@ -26,8 +29,7 @@ class MyAccountManager(BaseUserManager):
         user.is_admin = False
         user.is_staff = False
         user.is_superuser = False
-        user.is_U = False
-        user.is_S = False
+
 
         user.save(using=self.db)
         return user
@@ -117,12 +119,12 @@ class Account(AbstractBaseUser):
     username         = models.CharField(max_length=30 ,unique=True)
     date_joined      = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
     last_login       = models.DateTimeField(verbose_name='lst login', auto_now=True)
-    cc               = models.IntegerField(verbose_name='cc' )
-    age              = models.IntegerField(verbose_name='age' )
+    cc               = models.PositiveSmallIntegerField(verbose_name='cc' )
+    age              = models.PositiveSmallIntegerField(verbose_name='age' )
     univ             = models.CharField(verbose_name="univ" ,max_length=60 ,)
     faculty          = models.CharField(verbose_name="faculty" ,max_length=30 ,)
     gender           = models.CharField(verbose_name="gender" ,max_length=10 ,)
-    level            = models.PositiveSmallIntegerField(verbose_name='age' )
+    level            = models.PositiveSmallIntegerField(verbose_name='level' )
     is_active        = models.BooleanField(default=True)
     is_admin         = models.BooleanField(default=False)
     is_staff         = models.BooleanField(default=False)
