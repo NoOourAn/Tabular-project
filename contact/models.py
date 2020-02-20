@@ -8,7 +8,10 @@ class Contact(models.Model):
     TelephoneNumber = models.IntegerField()
     Country = models.CharField(max_length=255)
     Message = models.TextField()
+    CreatedAt = models.DateTimeField()
+
+    def created_pretty(self):
+        return self.CreatedAt.strftime('%b %e %Y')
 
     def __str__(self):
-        return self.FirstName+self.LastName
-
+        return self.FirstName + " " + self.LastName

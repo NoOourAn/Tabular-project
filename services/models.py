@@ -3,7 +3,10 @@ from datetime import date , timezone ,timedelta
 from django import utils
 
 # Create your models here.
+
+
 class Timetables(models.Model):
+
     def return_date_time():
         now = utils.timezone.now()
         return now + timedelta(days=7)
@@ -19,5 +22,6 @@ class Timetables(models.Model):
     accessCode = models.TextField(default='')  #editable=False
     orgId = models.IntegerField(default=0)   #forign key mn table el accounts(organisations)/one(org) to many(timetables)/one(timetable) to one(org) / editable = False
 
-
+    def __str__(self):
+        return self.accessCode
 
