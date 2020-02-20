@@ -18,7 +18,7 @@ def student(request):
         try:
             table = Timetables.objects.get(accessCode=code)
             # if table is not None:
-            return render(request,'student-home.html',{'code':code})
+            return render(request,'student-home.html',{'code':code , 'table':table})
         except Timetables.DoesNotExist:
             # elif table.DoesNotExist:
             return render(request, 'student-home.html',{'error':'not valid'})

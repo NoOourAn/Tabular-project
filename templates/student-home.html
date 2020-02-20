@@ -145,7 +145,7 @@
         <div class="alert alert-success" role="alert">
             Found it!
         </div>
-        <a href="#">{{ code }}</a>
+        <a href="{% url 'timetable' {{table}} %}">{{ code }}</a>
         {% endif %}
         {% if error %}
         <div class="alert alert-warning" role="alert">
