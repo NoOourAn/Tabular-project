@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render , get_object_or_404
 from formtools.wizard.views import SessionWizardView
 from django.core.files.storage import FileSystemStorage
+from .models import Timetables
 
 # from services import forms
 
@@ -11,8 +12,9 @@ def step1(request):
 def step2(request):
     return render(request , 'services/excel-sheet.html')
 
-def step3(request):
-    return render(request, 'services/generated-timetable.html')
+def step3(request, tt_id):
+    timetable = get_object_or_404(Timetables , accessCode = tt_id)
+    return render(request, 'services/generated-timetable.html' ,{'tt':timetable})
 
 def home(request):
     return render(request, 'services/home.html')
