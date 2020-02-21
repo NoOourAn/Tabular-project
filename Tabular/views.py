@@ -1,19 +1,26 @@
 from django.shortcuts import render
 from services.models import Timetables
 
+# from django.http import HttpResponsePermanentRedirect
+# from django.urls import reverse
+#
+#
+# def method(request):
+#     return HttpResponsePermanentRedirect(reverse('contact:index'))
+
 
 def home(request):
     return render(request, 'home.html')
 
 
 def student(request):
-<<<<<<< HEAD
+
     return render(request, 'student-home.html')
 
 
 def about(request):
     return render(request, 'about.html')
-=======
+
     # accodes = request.GET['search']
     # print(accodes)
     # if request.method == 'POST':
@@ -38,4 +45,4 @@ def about(request):
 
 
 
->>>>>>> c285e37c0d85a53f95fad301e0350158016c8d6e
+
