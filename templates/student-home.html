@@ -2,7 +2,7 @@
 
 <html lang="en">
   <head>
-      {% load staticfiles %}
+      {% load static %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -61,18 +61,33 @@
       width: 100%;
       }
 
-      .footer-style{
-      height: 55px;
+       .footer-container{
+      height: 56px;
       width: 100% ;
-      background-color: #343a40;
+      background-color:#343a40;
+      padding-top: 16px;
+      padding-left: 80px;
+      padding-right: 80px;
+      }
+      .footer-container p{
+      color:rgba(255,255,255,.5);
+      }
+      .footer-container a{
+      color:#28a745;
+      text-decoration: none;
+      }
+      #logo {
+      color: rgba(255,255,255,.5);
+      font-size: x-large;
+      font-family: cursive;
+      font-style: italic;
 
       }
 
 
-      .footer-style{
-      position: fixed;
-      bottom:0px;
-      }
+
+
+
       .tablebox{
       width: 100%;
       height: 500px;
@@ -91,7 +106,7 @@
 
   <div class="all">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="font-italic text-white-50 nav-link " href="#">Tabular</a>
+  <a class="nav-link" id="logo" href="#">Tabular</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -146,7 +161,8 @@
         <div class="alert alert-success" role="alert">
             Found it!
         </div>
-        <a href="{% url 'timetable' {{table}} %}">{{ code }}</a>
+        <a href="{% url 'timetable' %}">{{ code }}</a>
+
         {% endif %}
         {% if error %}
         <div class="alert alert-warning" role="alert">
@@ -164,14 +180,11 @@
   ================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
 
- <div class="footer-style">
-
   <!-- FOOTER -->
-  <footer class="container footer-dark" ">
-  <p class="float-right"><a href="#">Back to top</a></p>
-  <p >&copy;{% now "Y" %} Copyright <a class="dark-grey-text" href="#">Tabular</a> </p>
-
-</footer>
+  <footer class="footer-container" ">
+    <p class="float-right"><a href="#">Back to top</a></p>
+    <p>&copy;{% now "Y" %} Copyright <a class="dark-grey-text" href="#">Tabular</a> </p>
+  </footer>
 </div>
 
 

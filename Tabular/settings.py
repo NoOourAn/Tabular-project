@@ -31,16 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'contact',
-    'formtools',
-    'accounts.apps.AccountsConfig',
-    'services.apps.ServicesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'contact',
+    'formtools',
+    'accounts.apps.AccountsConfig',
+    'services.apps.ServicesConfig',
 ]
 
 MIDDLEWARE = [

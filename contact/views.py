@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Contact
 from django.core.mail import send_mail
+from django.utils import timezone
 
 
 def index(request):
@@ -12,6 +13,7 @@ def index(request):
         contact.TelephoneNumber = request.POST['telephonenumber']
         contact.Country = request.POST['country']
         contact.Message = request.POST['message']
+        contact.CreatedAt = timezone.datetime.now()
 
         contact.save()
 
@@ -26,6 +28,6 @@ def index(request):
         except ConnectionRefusedError:
             pass
 
-        return render(request, 'contact/index.html', {'Success': 'Message sent successfully'})
+        return render(request, 'contact/index.html', {'success': 'Message sent successfully'})
     else:
         return render(request, 'contact/index.html')
