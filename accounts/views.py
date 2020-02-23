@@ -18,13 +18,13 @@ def signup (request):
             except Account.DoesNotExist:
                 user =  Account.objects.create_user(username= request.POST['username'],email=request.POST['email'], password=request.POST['password'], cc='0',univ=request.POST['univ'],faculty=request.POST['faculty'],gender=request.POST['gender'],age=request.POST['age'],level=request.POST['level'],is_S=True,is_U=False)
                 auth.login(request,user)
-                return redirect('home')
+                return redirect('student')
         else:
-            return render(request, 'accounts/signup.html', {'error': 'PASSWORD MUST MATCH '})
+            return render(request, 'accounts/signupp.html', {'error': 'PASSWORD MUST MATCH '})
 
     else:
 
-        return render (request,'accounts/signup.html')
+        return render (request,'accounts/signupp.html')
 
 def osignup (request):
     if request.method == 'POST' :
@@ -36,13 +36,13 @@ def osignup (request):
             except Account.DoesNotExist:
                 user =  Account.objects.create_user(username= request.POST['username'],email=request.POST['email'], password=request.POST['password'], cc=request.POST['cc'],univ=request.POST['univ'],faculty=request.POST['faculty'],gender='x',age='0',level='0',is_S=False,is_U=True)
                 auth.login(request,user)
-                return redirect('home')
+                return redirect('manualdata')
         else:
-            return render(request, 'accounts/osignup.html', {'error': 'PASSWORD MUST MATCH '})
+            return render(request, 'accounts/signupoo.html', {'error': 'PASSWORD MUST MATCH '})
 
     else:
 
-        return render (request,'accounts/osignup.html')
+        return render (request,'accounts/signupoo.html')
 
 
 
@@ -52,7 +52,10 @@ def login(request):
         user = authenticate(username=request.POST['username'],password =request.POST['password'])
         if user is not None:
             loogin(request,user)
-            return redirect('home')
+            if request.user.is_U:
+                return redirect('manualdata')
+            else:
+                return redirect('student')
         else:
             return render(request, 'accounts/login.html',{'error':'username or password is not correct m3 enohom correcr'})
     else:
