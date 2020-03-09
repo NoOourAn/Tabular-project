@@ -10,6 +10,7 @@ urlpatterns = [
     path('manual-data', views.step1 , name='manualdata'),
     path('excel-sheet', views.step2, name='excelsheet'),
     path('timetable/<str:tt_id>', views.step3, name='timetable'),
+    path('boom', views.boom, name='boom'),
 
     url('data', DataWizard.as_view([ManualData, TimeSlots , ExcelSheet]) ,  name='data'),
 

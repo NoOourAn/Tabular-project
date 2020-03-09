@@ -1,4 +1,4 @@
-from django.shortcuts import render , get_object_or_404
+from django.shortcuts import render , get_object_or_404, redirect
 from formtools.wizard.views import SessionWizardView
 from django.core.files.storage import FileSystemStorage
 from .models import Timetables
@@ -33,7 +33,7 @@ def home(request):
 #     days = cleaned_data['duedate'] - cleaned_data['startdate']
 #     return days
 
-
+from services import TimeTable
 class DataWizard(SessionWizardView):
     file_storage = FileSystemStorage(location='/media/files')
     template_name = "services/manual-data.html"
@@ -43,4 +43,18 @@ class DataWizard(SessionWizardView):
 
     def done(self, form_list, **kwargs):
         form_data = [form.cleaned_data for form in form_list]
-        return render(self.request, 'services/generated-timetable.html', {'form_data': form_data})
+        return render(self.request, 'services/generated-timetable.html', {'form_data': form_data , 'wait': 'we will send your timetable to your mail ASAP!'})
+
+def boom(request):
+    tt = TimeTable.generateTT()
+    TT = Timetables()
+    TT.exams = tt
+    TT.save()
+    timeslots = []
+    for i in tt:
+        if i[4] not in timeslots:
+            timeslots.append(i[4])
+    timeslots.sort
+
+    return render(request, 'services/generated-timetable.html', {'success': 'hahahahahahahahaaaa', 'tt': tt , 'timeslots':timeslots})
+
