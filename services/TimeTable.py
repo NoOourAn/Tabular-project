@@ -2,6 +2,7 @@ import prettytable as prettytable
 from random import randint
 from random import random
 from datetime import datetime
+import services.dbconvert as ma3lomat
 
 class Instructor:
     def __init__(self, id, name):
@@ -96,8 +97,9 @@ class Department:
 
 
 class Data:
-    ROOMS = [["R1", 350], ["R2", 350], ["R3", 350], ["R4", 350], ["R5", 350], ["R6", 350], ["R7", 350], ["R8", 350],
-             ["R9", 350], ["R10", 350]]  # excelsheet
+    ROOMS = ma3lomat.listoflists
+    # ROOMS = [["R1", 350], ["R2", 350], ["R3", 350], ["R4", 350], ["R5", 350], ["R6", 350], ["R7", 350], ["R8", 350],
+    #          ["R9", 350], ["R10", 350]]  # excelsheet
     Time_Avilable = [[1, "09:00 - 10:00", "SUNDAY" , "1/1"],
                      [2, "10:00 - 11:00", "SUNDAY" , "1/1"],
                      [3 , "11:00 - 12:00", "SUNDAY" , "1/1"],
@@ -318,49 +320,53 @@ class Data:
                  20190281, 20190282, 20190283, 20190284, 20190285, 20190286, 20190287, 20190288, 20190289, 20190290,
                  20190291, 20190292, 20190293, 20190294, 20190295, 20190296, 20190297, 20190298]
 
-    cat = {
-        "mm": list_2019,
-        "ds": list_2016,
-        "ai": list_2016,
-        "co": list_2016,
-        "os2": list_2016,
-        "concepts": list_2016,
-        "ethics": list_2016,
-        "db2": list_2016,
-        "ir": list_2017,
-        "logic": list_2017,
-        "or": list_2017,
-        "pat": list_2017,
-        "cs": list_2017,
-        "is": list_2017,
-        "math1": list_2017,
-        "eng1": list_2018,
-        "phy": list_2018,
-        "elec": list_2018,
-        "econ": list_2018,
-        "it": list_2018,
-        "math2": list_2018,
-        "stat": list_2018,
-        "eng2": list_2019,
-        "pl": list_2019,
-        "algo": list_2019,
-        "hr": list_2019,
-        "db1": list_2019,
-        "pl2": list_2019}
+    # cat = {
+    #     "mm": list_2019,
+    #     "ds": list_2016,
+    #     "ai": list_2016,
+    #     "co": list_2016,
+    #     "os2": list_2016,
+    #     "concepts": list_2016,
+    #     "ethics": list_2016,
+    #     "db2": list_2016,
+    #     "ir": list_2017,
+    #     "logic": list_2017,
+    #     "or": list_2017,
+    #     "pat": list_2017,
+    #     "cs": list_2017,
+    #     "is": list_2017,
+    #     "math1": list_2017,
+    #     "eng1": list_2018,
+    #     "phy": list_2018,
+    #     "elec": list_2018,
+    #     "econ": list_2018,
+    #     "it": list_2018,
+    #     "math2": list_2018,
+    #     "stat": list_2018,
+    #     "eng2": list_2019,
+    #     "pl": list_2019,
+    #     "algo": list_2019,
+    #     "hr": list_2019,
+    #     "db1": list_2019,
+    #     "pl2": list_2019}
+
+    cat = ma3lomat.dict_obj
+    co = ma3lomat.dict_obj2
 
     def __init__(self):
         self._rooms = []
         self._TimeAvilable = []
         self._instructors = []
         self._students = []
+        self._co = []
         # self._studentcategory = {}
 
         for i in range(0, len(self.ROOMS)):
             self._rooms.append(Room(self.ROOMS[i][0], self.ROOMS[i][1]))
         for i in range(0, len(self.Time_Avilable)):
             self._TimeAvilable.append(TimeAvilable(self.Time_Avilable[i][0], self.Time_Avilable[i][1], self.Time_Avilable[i][2] ,self.Time_Avilable[i][3]))
-        for i in range(0, len(self.INSTRUCTORS)):
-            self._instructors.append(Instructor(self.INSTRUCTORS[i][0], self.INSTRUCTORS[i][1]))
+        # for i in range(0, len(self.INSTRUCTORS)):
+        #     self._instructors.append(Instructor(self.INSTRUCTORS[i][0], self.INSTRUCTORS[i][1]))
         # for i in range(0, len(self.STUDENT)):
         #     self._students.append(Student(self.STUDENT[i][0], self.STUDENT[i][1], self.STUDENT[i][2]))
         # if self.STUDENT[i][2] in self._studentcategory:
@@ -368,71 +374,108 @@ class Data:
         #     self._studentcategory[self.STUDENT[i][2]] = stu + self.STUDENT[i][1]
         # else:
         #     self._studentcategory[self.STUDENT[i][2]] =  self.STUDENT[i][1]
-        course1 = Courses("C1", "mm", [self._instructors[0], self._instructors[1]], self.cat["mm"],
-                          len(self.cat["mm"]))  # (code, name, instructors,students, maxNumbOfStudents)
-        course2 = Courses("C2", "pl", [self._instructors[0], self._instructors[1], self._instructors[2]],
-                          self.cat["pl"], len(self.cat["pl"]))
-        course3 = Courses("C3", "ir", [self._instructors[0], self._instructors[1]], self.cat["ir"], len(self.cat["ir"]))
-        course4 = Courses("C4", "or", [self._instructors[2], self._instructors[3]], self.cat["or"], len(self.cat["or"]))
-        course5 = Courses("C5", "ds", [self._instructors[3]], self.cat["ds"], len(self.cat["ds"]))
-        course6 = Courses("C6", "logic", [self._instructors[0], self._instructors[2]], self.cat["logic"],
-                          len(self.cat["logic"]))
-        course7 = Courses("C7", "pat", [self._instructors[1], self._instructors[3]], self.cat["pat"],
-                          len(self.cat["pat"]))
-        course8 = Courses("C8", "cs", [self._instructors[2], self._instructors[3]], self.cat["cs"], len(self.cat["cs"]))
-        course9 = Courses("C9", "is", [self._instructors[1], self._instructors[3]], self.cat["is"], len(self.cat["is"]))
-        course10 = Courses("C10", "math1", [self._instructors[1], self._instructors[3]], self.cat["math1"],
-                           len(self.cat["math1"]))
-        course11 = Courses("C11", "eng1", [self._instructors[2], self._instructors[3]], self.cat["eng1"],
-                           len(self.cat["eng1"]))
-        course12 = Courses("C12", "elec", [self._instructors[0], self._instructors[1], self._instructors[2]],
-                           self.cat["elec"], len(self.cat["elec"]))
-        course13 = Courses("C13", "phy", [self._instructors[1], self._instructors[3]], self.cat["phy"],
-                           len(self.cat["phy"]))
-        course14 = Courses("C14", "econ", [self._instructors[2], self._instructors[3]], self.cat["econ"],
-                           len(self.cat["econ"]))
-        course15 = Courses("C15", "it", [self._instructors[0], self._instructors[1], self._instructors[2]],
-                           self.cat["it"], len(self.cat["it"]))
-        course16 = Courses("C16", "math2", [self._instructors[1], self._instructors[3]], self.cat["math2"],
-                           len(self.cat["math2"]))
-        course17 = Courses("C17", "algo", [self._instructors[3]], self.cat["algo"], len(self.cat["algo"]))
-        course18 = Courses("C18", "stat", [self._instructors[2], self._instructors[3]], self.cat["stat"],
-                           len(self.cat["stat"]))
-        course19 = Courses("C19", "eng2", [self._instructors[1], self._instructors[3]], self.cat["eng2"],
-                           len(self.cat["eng2"]))
-        course20 = Courses("C20", "db1", [self._instructors[2], self._instructors[3]], self.cat["db1"],
-                           len(self.cat["db1"]))
-        course21 = Courses("C21", "hr", [self._instructors[2], self._instructors[3]], self.cat["hr"],
-                           len(self.cat["hr"]))
-        course22 = Courses("C22", "pl2", [self._instructors[0], self._instructors[1], self._instructors[2]],
-                           self.cat["pl2"], len(self.cat["pl2"]))
-        course23 = Courses("C23", "ai", [self._instructors[2], self._instructors[3]], self.cat["ai"],
-                           len(self.cat["ai"]))
-        course24 = Courses("C24", "co", [self._instructors[2], self._instructors[3]], self.cat["co"],
-                           len(self.cat["co"]))
-        course25 = Courses("C25", "os2", [self._instructors[0], self._instructors[3]], self.cat["os2"],
-                           len(self.cat["os2"]))
-        course26 = Courses("C26", "concepts", [self._instructors[2], self._instructors[0]], self.cat["concepts"],
-                           len(self.cat["concepts"]))
-        course27 = Courses("C27", "ethics", [self._instructors[0], self._instructors[1]], self.cat["ethics"],
-                           len(self.cat["ethics"]))
-        course28 = Courses("C28", "db2", [self._instructors[0], self._instructors[2]], self.cat["db2"],
-                           len(self.cat["db2"]))
 
-        self._courses = [course1, course2, course3, course4, course5, course6, course7, course8, course9, course10,
-                         course11, course12, course13, course14, course15, course16, course17, course18, course19,
-                         course20, course21, course22, course23, course24, course25, course26, course27, course28]
-        dept1 = Department("Cs", [course1, course3, course8, course9, course16, course17, course22, course23, course24,
-                                  course25, course26])
-        dept2 = Department("Is",
-                           [course2, course4, course10, course14, course15, course18, course19, course27, course28,
-                            course5])
-        dept3 = Department("It", [course6, course7, course11, course12, course13, course20, course21])
-        self.depts = [dept1, dept2, dept3]
+        # course1 = Courses("C1", "mm", [self._instructors[0], self._instructors[1]], self.cat["mm"],
+        #                   len(self.cat["mm"]))  # (code, name, instructors,students, maxNumbOfStudents)
+        # course2 = Courses("C2", "pl", [self._instructors[0], self._instructors[1], self._instructors[2]],
+        #                   self.cat["pl"], len(self.cat["pl"]))
+        # course3 = Courses("C3", "ir", [self._instructors[0], self._instructors[1]], self.cat["ir"], len(self.cat["ir"]))
+        # course4 = Courses("C4", "or", [self._instructors[2], self._instructors[3]], self.cat["or"], len(self.cat["or"]))
+        # course5 = Courses("C5", "ds", [self._instructors[3]], self.cat["ds"], len(self.cat["ds"]))
+        # course6 = Courses("C6", "logic", [self._instructors[0], self._instructors[2]], self.cat["logic"],
+        #                   len(self.cat["logic"]))
+        # course7 = Courses("C7", "pat", [self._instructors[1], self._instructors[3]], self.cat["pat"],
+        #                   len(self.cat["pat"]))
+        # course8 = Courses("C8", "cs", [self._instructors[2], self._instructors[3]], self.cat["cs"], len(self.cat["cs"]))
+        # course9 = Courses("C9", "is", [self._instructors[1], self._instructors[3]], self.cat["is"], len(self.cat["is"]))
+        # course10 = Courses("C10", "math1", [self._instructors[1], self._instructors[3]], self.cat["math1"],
+        #                    len(self.cat["math1"]))
+        # course11 = Courses("C11", "eng1", [self._instructors[2], self._instructors[3]], self.cat["eng1"],
+        #                    len(self.cat["eng1"]))
+        # course12 = Courses("C12", "elec", [self._instructors[0], self._instructors[1], self._instructors[2]],
+        #                    self.cat["elec"], len(self.cat["elec"]))
+        # course13 = Courses("C13", "phy", [self._instructors[1], self._instructors[3]], self.cat["phy"],
+        #                    len(self.cat["phy"]))
+        # course14 = Courses("C14", "econ", [self._instructors[2], self._instructors[3]], self.cat["econ"],
+        #                    len(self.cat["econ"]))
+        # course15 = Courses("C15", "it", [self._instructors[0], self._instructors[1], self._instructors[2]],
+        #                    self.cat["it"], len(self.cat["it"]))
+        # course16 = Courses("C16", "math2", [self._instructors[1], self._instructors[3]], self.cat["math2"],
+        #                    len(self.cat["math2"]))
+        # course17 = Courses("C17", "algo", [self._instructors[3]], self.cat["algo"], len(self.cat["algo"]))
+        # course18 = Courses("C18", "stat", [self._instructors[2], self._instructors[3]], self.cat["stat"],
+        #                    len(self.cat["stat"]))
+        # course19 = Courses("C19", "eng2", [self._instructors[1], self._instructors[3]], self.cat["eng2"],
+        #                    len(self.cat["eng2"]))
+        # course20 = Courses("C20", "db1", [self._instructors[2], self._instructors[3]], self.cat["db1"],
+        #                    len(self.cat["db1"]))
+        # course21 = Courses("C21", "hr", [self._instructors[2], self._instructors[3]], self.cat["hr"],
+        #                    len(self.cat["hr"]))
+        # course22 = Courses("C22", "pl2", [self._instructors[0], self._instructors[1], self._instructors[2]],
+        #                    self.cat["pl2"], len(self.cat["pl2"]))
+        # course23 = Courses("C23", "ai", [self._instructors[2], self._instructors[3]], self.cat["ai"],
+        #                    len(self.cat["ai"]))
+        # course24 = Courses("C24", "co", [self._instructors[2], self._instructors[3]], self.cat["co"],
+        #                    len(self.cat["co"]))
+        # course25 = Courses("C25", "os2", [self._instructors[0], self._instructors[3]], self.cat["os2"],
+        #                    len(self.cat["os2"]))
+        # course26 = Courses("C26", "concepts", [self._instructors[2], self._instructors[0]], self.cat["concepts"],
+        #                    len(self.cat["concepts"]))
+        # course27 = Courses("C27", "ethics", [self._instructors[0], self._instructors[1]], self.cat["ethics"],
+        #                    len(self.cat["ethics"]))
+        # course28 = Courses("C28", "db2", [self._instructors[0], self._instructors[2]], self.cat["db2"],
+        #                    len(self.cat["db2"]))
+        #
+        # self._courses = [course1, course2, course3, course4, course5, course6, course7, course8, course9, course10,
+        #                  course11, course12, course13, course14, course15, course16, course17, course18, course19,
+        #                  course20, course21, course22, course23, course24, course25, course26, course27, course28]
+        # dept1 = Department("Cs", [course1, course3, course8, course9, course16, course17, course22, course23, course24,
+        #                           course25, course26])
+        # dept2 = Department("Is",
+        #                    [course2, course4, course10, course14, course15, course18, course19, course27, course28,
+        #                     course5])
+        # dept3 = Department("It", [course6, course7, course11, course12, course13, course20, course21])
+        # self.depts = [dept1, dept2, dept3]
+        # self.numberOfClasses = 0
+        # for i in range(0, len(self.depts)):
+        #     self.numberOfClasses += len(self.depts[i].get_Courses())
+        # # self.numberOfClasses = len(self._courses)
+
+        courses_list = []
+        # for l in courses_list:
+        #     coursee = Courses()
+        id = 0
+        for key in ma3lomat.dict_obj2:
+            for key2 in ma3lomat.dict_obj:
+
+                if ma3lomat.dict_obj2[key][0] == key2:
+                    self._instructors.append(Instructor(id, ma3lomat.dict_obj2[key][1]))
+                    coursee = Courses(key, ma3lomat.dict_obj2[key][0], [self._instructors[id]], ma3lomat.dict_obj[key2],
+                                      ma3lomat.dict_obj2[key][3])
+                    courses_list.append(coursee)
+                    id = id + 1
+
+        self._courses = courses_list
+
+        deptlist = []
+        for key in ma3lomat.testdept:
+            d = []
+            for i in self._courses:
+                if i.get_name() in ma3lomat.testdept[key]:
+                    d.append(i)
+            print(d)
+            print("booom")
+            print(len(d))
+
+            deptt = Department(key, d)
+            deptlist.append(deptt)
+        print("booom22")
+        print(len(d))
+        self.depts = deptlist
         self.numberOfClasses = 0
-        for i in range(0, len(self.depts)):
-            self.numberOfClasses += len(self.depts[i].get_Courses())
-        # self.numberOfClasses = len(self._courses)
+        # for i in range(0, len(self.depts)):
+        #     self.numberOfClasses += len(self.depts[i].get_Courses())
+        self.numberOfClasses = len(self._courses)
 
     def get_rooms(self):
         return self._rooms
