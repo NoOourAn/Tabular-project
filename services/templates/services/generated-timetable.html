@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     {% load staticfiles %}
+	{% load timetable_filters %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -129,19 +130,37 @@
 
 						</thead>
 						<tbody>
-						{% for i in tt %}
-							<tr class="row100">
-								<td class="column100 column1" data-column="column1">{{ i.2 }} <br> {{ i.3 }} </td>
-								{% for j in timeslots %}
-									{% if i.4 == j %}
-										<td class="column2">{{ i.0 }}</td>
-									{% else %}
-										<td class="column2">...</td>
-									{% endif %}
-								{% endfor %}
 
-							</tr>
-						{% endfor %}
+
+
+<!--						{% for i in tt %}-->
+<!--							<tr class="row100">-->
+<!--								<td class="column100 column1" data-column="column1">{{ i.2 }} <br> {{ i.3 }} </td>-->
+<!--								{% for j in timeslots %}-->
+<!--									{% if i.4 == j %}-->
+<!--										<td class="column2">{{ i.0 }}</td>-->
+<!--									{% else %}-->
+<!--										<td class="column2">...</td>-->
+<!--									{% endif %}-->
+<!--								{% endfor %}-->
+<!--							</tr>-->
+<!--						{% endfor %}-->
+
+
+							{% for key, value in subjects.items %}
+								<tr class="row100">
+									<td class="column100 column1" data-column="column1">{{ key }}</td>
+										{% for j in timeslots %}
+											{% if j not in value %}
+												<td class="column2">...</td>
+											{% else %}
+												<td class="column2">{{ value|get_subject:j }} <br> {{ value|get_room:j }}</td>
+											{% endif %}
+										{% endfor %}
+								</tr>
+							{% endfor %}
+
+
 <!--							<tr class="row100">-->
 <!--								<td class="column100 column1" data-column="column1">Jane Medina</td>-->
 <!--								<td class="column100 column2" data-column="column2">&#45;&#45;</td>-->
@@ -231,9 +250,9 @@
 
 
 <!--#################################################################################-->
-    <form action="">
+    <form action="{% url 'pdf' %}" method="get">
       <div id="blackbox">
-          <input type="submit" value="Save" class="btn btn-info btn-lg">
+          <input type="submit" value="Create pdf" class="btn btn-info">
       </div>
     </form>
   </main>

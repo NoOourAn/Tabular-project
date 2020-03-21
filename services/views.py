@@ -2,6 +2,8 @@ from django.shortcuts import render , get_object_or_404, redirect
 from formtools.wizard.views import SessionWizardView
 from django.core.files.storage import FileSystemStorage
 from .models import Timetables
+from django.http import HttpResponse
+from services.utils import render_to_pdf
 
 # from services import forms
 
@@ -45,16 +47,39 @@ class DataWizard(SessionWizardView):
         form_data = [form.cleaned_data for form in form_list]
         return render(self.request, 'services/generated-timetable.html', {'form_data': form_data , 'wait': 'we will send your timetable to your mail ASAP!'})
 
+
+to_pdf = []
 def boom(request):
     tt = TimeTable.generateTT()
+    global to_pdf
+    to_pdf = tt
     TT = Timetables()
     TT.exams = tt
     TT.save()
-    timeslots = []
+    subjects = {}
     for i in tt:
-        if i[4] not in timeslots:
-            timeslots.append(i[4])
+        # if i[4] not in timeslots:
+        #     timeslots.append(i[4])
+        if i[3] in subjects:
+            templist = subjects[i[3]]
+            templist[i[4]] = [i[0],i[1],i[2]]
+            subjects[i[3]] = templist
+        else:
+            templist = {i[4]:[i[0],i[1],i[2]]}
+            subjects[i[3]] = templist
+    timeslots = TimeTable.get_timeslots()
     timeslots.sort
+    print(timeslots)
+    print(subjects)
 
-    return render(request, 'services/generated-timetable.html', {'success': 'hahahahahahahahaaaa', 'tt': tt , 'timeslots':timeslots})
+    return render(request, 'services/generated-timetable.html', {'success': 'hahahahahahahahaaaa', 'tt': tt , 'timeslots':timeslots, 'subjects':subjects})
 
+def create_pdf(request):
+    data = {
+        'a': 'weeee',
+        'b': to_pdf,
+        'c': 'Noura amora',  #7aga htegi mn el auth
+        'd': 1233434,
+    }
+    pdf = render_to_pdf('services/pdf.html', data)
+    return HttpResponse(pdf, content_type='application/pdf')

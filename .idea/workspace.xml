@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3a0a0b80-cf5d-49c3-b07a-1e0d7085c71c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/migrations/0002_auto_20200229_2150.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/TimeTable.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/TimeTable.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/templates/services/generated-timetable.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/templates/services/generated-timetable.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/url.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/url.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/views.py" afterDir="false" />
@@ -19,6 +18,7 @@
       <list>
         <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML4 File" />
       </list>
     </option>
   </component>
@@ -36,7 +36,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="DefaultHtmlFileTemplate" value="HTML4 File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
@@ -160,10 +160,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.TimeTable" />
+        <item itemvalue="Python.TimeTable (1)" />
         <item itemvalue="Python.db convert" />
         <item itemvalue="Python.timetable (1)" />
         <item itemvalue="Python.timetable" />
-        <item itemvalue="Python.TimeTable (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -276,26 +276,26 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="112" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1582137744604" />
-    <state width="1345" height="182" key="GridCell.Tab.0.bottom" timestamp="1582166644457">
+    <state width="1345" height="9" key="GridCell.Tab.0.bottom" timestamp="1584476999257">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="182" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582166644457" />
-    <state width="1345" height="182" key="GridCell.Tab.0.center" timestamp="1582166644457">
+    <state width="1345" height="9" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584476999257" />
+    <state width="1345" height="9" key="GridCell.Tab.0.center" timestamp="1584476999257">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="182" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582166644457" />
-    <state width="1345" height="182" key="GridCell.Tab.0.left" timestamp="1582166644456">
+    <state width="1345" height="9" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584476999257" />
+    <state width="1345" height="9" key="GridCell.Tab.0.left" timestamp="1584476999257">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="182" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582166644456" />
-    <state width="1345" height="182" key="GridCell.Tab.0.right" timestamp="1582166644457">
+    <state width="1345" height="9" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584476999257" />
+    <state width="1345" height="9" key="GridCell.Tab.0.right" timestamp="1584476999257">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="182" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582166644457" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1582320146506">
+    <state width="1345" height="9" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584476999257" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1584658441872">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1582320146506" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1584658441872" />
     <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1583771628755">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

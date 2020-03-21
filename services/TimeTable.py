@@ -679,6 +679,14 @@ class Display:
             availableTimeAvilableTable.add_row([timeAvilable[i].get_id(), timeAvilable[i].get_time(), timeAvilable[i].get_day() , timeAvilable[i].get_date()])
         print(availableTimeAvilableTable)
 
+    def get_Time_slots(self):
+        timeslots = []
+        timeAvilable = data.get_TimeAvilable()
+        for i in range(0, len(timeAvilable)):
+            if timeAvilable[i].get_time() not in timeslots:
+                timeslots.append(timeAvilable[i].get_time())
+        return timeslots
+
     def print_generation(self, population):
         table1 = prettytable.PrettyTable(
             ['schedule #', 'fitness', '# of conflicts', 'classes[dept,course,room,instructor,no of students]'])
@@ -751,4 +759,9 @@ def generateTT():
     print("\n\n")
     display.print_schedule_as_table(population.get_schedules()[0])
     return display.save_schedule_as_model(population.get_schedules()[0])
+
+def get_timeslots():
+    display = Display()
+    return display.get_Time_slots()
+
 

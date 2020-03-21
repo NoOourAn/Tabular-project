@@ -11,6 +11,7 @@ urlpatterns = [
     path('excel-sheet', views.step2, name='excelsheet'),
     path('timetable/<str:tt_id>', views.step3, name='timetable'),
     path('boom', views.boom, name='boom'),
+    path('pdf', views.create_pdf, name='pdf'),
 
     url('data', DataWizard.as_view([ManualData, TimeSlots , ExcelSheet]) ,  name='data'),
 
