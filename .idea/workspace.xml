@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="3a0a0b80-cf5d-49c3-b07a-1e0d7085c71c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db convert.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/TimeTable.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/TimeTable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/signupoo.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/signupoo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/dbconvert.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/dbconvert.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/templates/services/excel-sheet.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/templates/services/excel-sheet.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/templates/services/manual-data.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/templates/services/manual-data.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/url.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/url.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,9 +19,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
         <option value="HTML4 File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -34,7 +39,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DefaultHtmlFileTemplate" value="HTML4 File" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -290,14 +295,20 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1345" height="9" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584476999257" />
-    <state x="184" y="7" key="SettingsEditor" timestamp="1584753621637">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="207" y="8" key="SettingsEditor" timestamp="1586132382496">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584753621637" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1584753098536">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="207" y="8" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586132382496" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1586313563907">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586313563907" />
+    <state x="426" y="214" key="com.intellij.ide.util.TipDialog" timestamp="1586303576096">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1584753098536" />
+    <state x="426" y="214" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1586303576096" />
     <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1583771628755">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -14,12 +14,18 @@ def step1(request):
 def step2(request):
     return render(request , 'services/excel-sheet.html')
 
+
 def step3(request, tt_id):
     timetable = get_object_or_404(Timetables , accessCode = tt_id)
     return render(request, 'services/generated-timetable.html' ,{'tt':timetable})
 
 def home(request):
     return render(request, 'services/home.html')
+def examsnumber(request):
+    return render(request, 'services/exams-number.html')
+
+def fields(request):
+    return render(request , 'services/excel-sheet.html')
 
 
 # FORMS = [("manualdata", forms.ManualData),
