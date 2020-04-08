@@ -31,8 +31,7 @@ for i in range(sheet.nrows):
 #         continue
 #     maxofstudent.add_cat(subjects,len(students))
 #
-# print(maxofstudent)
-print(dict_obj)
+
 
 
 loc2 = ('C:/Users/NoURan/Desktop/Tabular-project/services/excel/MINIUNIVROOMSDATASET.xlsx')  #rooms
@@ -54,7 +53,6 @@ for i in range(sheet2.nrows):
     sublist.append(rooms)
     sublist.append(capacity)
     listoflists.append(sublist)
-print(listoflists)
 
 loc = ('C:/Users/NoURan/Desktop/Tabular-project/services/excel/C.xlsx') #courses
 wb = xlrd.open_workbook(loc)
@@ -71,7 +69,6 @@ for i in range(sheet.nrows):
     students= sheet.row_values(i,j)
     dict_obj2.add_cat(subjects,students)
 
-print(dict_obj2)
 
 for key in dict_obj2 :
     testdept.add_cat(dict_obj2[key][2],listfadia)
@@ -88,7 +85,6 @@ for x in testdept:
     testdept[x]=l
 
 
-print(testdept)
 
 
 

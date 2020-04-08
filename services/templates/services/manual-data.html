@@ -2,10 +2,10 @@
 <html lang="en">
   <head>
     {% load staticfiles %}
-    {% load i18n %}
-    {% block head %}
-    {{ wizard.form.media }}
-    {% endblock %}
+<!--    {% load i18n %}-->
+<!--    {% block head %}-->
+<!--    {{ wizard.form.media }}-->
+<!--    {% endblock %}-->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -53,98 +53,31 @@
             </ul>
   </div>
 
-    {% block content %}
-    <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
-      {% for field in form %}
-        {% if field.error %}
-      <div class="alert alert-danger" role="alert">
-        {{ field.error }}
-        </div>
-        {% endif %}
-      {% endfor %}
-    <form enctype="multipart/form-data" action="{% url 'data'%}" method="post">{% csrf_token %}
-
-    <div class="container" id="bigwhitebox">
-    <div class="row">
-
-
-
-<!--        <div class="col" >-->
-<!--        <label>Start Date</label>-->
-<!--        <input type="date" class="form-control" name="startdate" required>   &lt;!&ndash; name = startdate &ndash;&gt;-->
-<!--            </div>-->
-<!--        <div class="col" >-->
-<!--        <label>Due Date</label>-->
-<!--        <input type="date" class="form-control" name="duedate" required>      &lt;!&ndash; name = duedate &ndash;&gt;-->
-<!--            </div>-->
-
-            {% if wizard.steps.step1 == 1 %}  <!-- start & due date-->
-            <div class="col-3" id="textbox">
-                <p>please enter start date and due date of your exams timetable</p>
-            </div>
-            {% elif wizard.steps.step1 == 2 %}   <!-- days & timeslots-->
-            <div class="col-3" id="textbox">
-                 <p>Please enter available timeslots for each day</p>
+         <form method="post" action="{% url 'excelsheet' %}">
+             {% csrf_token %}
+            <div class="container" id="bigwhitebox">
+                <div class="row">
+                    <div class="col-3" id="textbox">
+                <h6>follow the guide to generate your timetable</h6>
+                    <div class="col" >
+                    <label>Start Date</label>
+                    <input type="date" class="form-control" name="startdate" required>   <!-- name = startdate -->
+                        </div>
+                    <div class="col" >
+                    <label>Due Date</label>
+                    <input type="date" class="form-control" name="duedate" required>      <!-- name = duedate -->
+                        </div>
+                  </div>
+                </div>
             </div>
 
-
-
-
-            {% elif wizard.steps.step1 == 3 %}    <!-- excel sheets-->
-            <div class="col-7" id="textbox">
-              <p>Please upload courses data by the following format : mennenenmneemi</p>
-              <p>Please upload students data by the following format : mennenenmneemi</p>
-            </div>
-
-            {% endif %}
-            <div class="col" id="textbox">
-            {{ wizard.management_form }}
-            {% if wizard.form.forms %}
-                {{ wizard.form.management_form }}
-                {% for form in wizard.form.forms %}
-                    {{ form }}
-                {% endfor %}
-            {% else %}
-                {{ wizard.form }}
-            {% endif %}
-            </div>
-      </div>
-
-
-<!--    <div class="row">-->
-
-
-<!--        <div class="col" >-->
-<!--        <label>Day</label>-->
-
-<!--        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" required>-->
-<!--            <option value="1">One</option>-->
-<!--            <option value="2">Two</option>-->
-<!--            <option value="3">Three</option>-->
-<!--          </select>-->
-<!--            </div>-->
-<!--        <div class="col" >-->
-<!--        <label>Timeslot</label>-->
-<!--        <input type="time" class="form-control" required>-->
-<!--            </div>-->
-
-<!--      </div>-->
-
-
-  </div>
-
-            {% if wizard.steps.prev %}
+                </div>
           <div id="bluebox">
-            <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="btn btn-info">prev step</button>
-            <button name="wizard_goto_step" type="submit" value="submit" class="btn btn-info">next step</button>
-                    </div>
-            {% else %}
-          <div id="bluebox">
-            <button name="wizard_goto_step" type="submit" value="submit" class="btn btn-info">next step</button>
-                    </div>
-            {% endif %}
-             </form>
-            {% endblock %}
+              <input type="submit" value="Next" class="btn btn-info">
+          </div>
+        </form>
+
+
   </main>
 
 

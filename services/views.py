@@ -14,12 +14,19 @@ def step1(request):
 def step2(request):
     return render(request , 'services/excel-sheet.html')
 
-def step3(request, tt_id):
-    timetable = get_object_or_404(Timetables , accessCode = tt_id)
-    return render(request, 'services/generated-timetable.html' ,{'tt':timetable})
+# def step3(request, tt_id):
+#     timetable = get_object_or_404(Timetables , accessCode = tt_id)
+#     return render(request, 'services/generated-timetable.html' ,{'tt':timetable})
+
+def step3(request):
+    return render(request, 'services/generated-timetable.html')
 
 def home(request):
     return render(request, 'services/home.html')
+
+def timeslots(request):
+    return render(request, 'services/timeslots.html')
+
 
 
 # FORMS = [("manualdata", forms.ManualData),
@@ -36,16 +43,20 @@ def home(request):
 #     return days
 
 from services import TimeTable
-class DataWizard(SessionWizardView):
-    file_storage = FileSystemStorage(location='/media/files')
-    template_name = "services/manual-data.html"
 
-    # def get_template_name(self):
-    #     return [TEMPLATES[self.steps.current]]
-
-    def done(self, form_list, **kwargs):
-        form_data = [form.cleaned_data for form in form_list]
-        return render(self.request, 'services/generated-timetable.html', {'form_data': form_data , 'wait': 'we will send your timetable to your mail ASAP!'})
+# data = []
+# class DataWizard(SessionWizardView):
+#     file_storage = FileSystemStorage(location='/media/files')
+#     template_name = "services/manual-data.html"
+#
+#     # def get_template_name(self):
+#     #     return [TEMPLATES[self.steps.current]]
+#
+#     def done(self, form_list, **kwargs):
+#         form_data = [form.cleaned_data for form in form_list]
+#         global data
+#         data = form_data
+#         return render(self.request, 'services/generated-timetable.html', {'form_data': form_data , 'wait': 'we will send your timetable to your mail ASAP!'})
 
 
 to_pdf = []
@@ -55,6 +66,8 @@ def boom(request):
     to_pdf = tt
     TT = Timetables()
     TT.exams = tt
+    # TT.startDate = data[0]['startdate']
+    # TT.dueDate = data[0]["duedate"]
     TT.save()
     subjects = {}
     for i in tt:
@@ -76,9 +89,9 @@ def boom(request):
 
 def create_pdf(request):
     data = {
-        'a': 'weeee',
+        'a': 'noura amora',
         'b': to_pdf,
-        'c': 'Noura amora',  #7aga htegi mn el auth
+        'c': 'baba samy <3 ',  #7aga htegi mn el auth
         'd': 1233434,
     }
     pdf = render_to_pdf('services/pdf.html', data)

@@ -463,14 +463,10 @@ class Data:
             for i in self._courses:
                 if i.get_name() in ma3lomat.testdept[key]:
                     d.append(i)
-            print(d)
-            print("booom")
-            print(len(d))
 
             deptt = Department(key, d)
             deptlist.append(deptt)
-        print("booom22")
-        print(len(d))
+
         self.depts = deptlist
         self.numberOfClasses = 0
         # for i in range(0, len(self.depts)):

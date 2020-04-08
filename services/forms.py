@@ -31,6 +31,7 @@ def default_end_time():
 class ManualData(forms.Form):
     startdate = forms.DateField(label='Start Date ',initial=date.today().strftime("%Y-%m-%d"))
     duedate = forms.DateField(label='Start Date ',initial=return_date_time)
+    ts = forms.IntegerField(label='ts')
 
 class TimeSlots(forms.Form):
     # days = forms.IntegerField(label='Day ', widget=forms.Select(choices=FRUIT_CHOICES))
