@@ -12,7 +12,7 @@ class my_dictionary(dict):
 
 
 
-loc = ('C:/Users/NoURan/Desktop/Tabular-project/services/excel/MINIUNIVDATASET.xlsx')  #cat
+loc = ('C:/Users/nesma/Desktop/MINIUNIVDATASET.xlsx')  #cat
 
 wb = xlrd.open_workbook(loc)
 sheet = wb.sheet_by_index(0)
@@ -34,7 +34,7 @@ for i in range(sheet.nrows):
 
 
 
-loc2 = ('C:/Users/NoURan/Desktop/Tabular-project/services/excel/MINIUNIVROOMSDATASET.xlsx')  #rooms
+loc2 = ('C:/Users/nesma/Desktop/MINIUNIVROOMSDATASET.xlsx')  #rooms
 
 wb2 = xlrd.open_workbook(loc2)
 sheet2 = wb2.sheet_by_index(0)
@@ -54,7 +54,7 @@ for i in range(sheet2.nrows):
     sublist.append(capacity)
     listoflists.append(sublist)
 
-loc = ('C:/Users/NoURan/Desktop/Tabular-project/services/excel/C.xlsx') #courses
+loc = ('C:/Users/nesma/Desktop/C.xlsx') #courses
 wb = xlrd.open_workbook(loc)
 sheet = wb.sheet_by_index(0)
 sheet.cell_value(0, 0)

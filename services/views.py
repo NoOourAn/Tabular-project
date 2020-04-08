@@ -20,9 +20,18 @@ def step2(request):
 
 def step3(request):
     return render(request, 'services/generated-timetable.html')
+#
+# def step3(request, tt_id):
+#     timetable = get_object_or_404(Timetables , accessCode = tt_id)
+#     return render(request, 'services/generated-timetable.html' ,{'tt':timetable})
 
 def home(request):
     return render(request, 'services/home.html')
+def examsnumber(request):
+    return render(request, 'services/exams-number.html')
+
+def fields(request):
+    return render(request , 'services/excel-sheet.html')
 
 def timeslots(request):
     return render(request, 'services/timeslots.html')

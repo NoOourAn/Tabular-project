@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    {% load staticfiles %}
+    {% load static%}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -53,24 +53,33 @@
     <form action="{% url 'timetable' %}">
 <!--        <div class="container">-->
 
-        <div>
-              <p>Please upload courses data by the following format : mennenenmneemi</p>
-
+        <div class="container" id="bigwhitebox">
+    <div class="row">
+<div class="col" >
+        <label>student database</label>
             <div class="custom-file" id="whitebox">
             <input type="file" class="custom-file-input" id="validatedCustomFile1" required>
-            <label class="custom-file-label" for="validatedCustomFile1">Choose file...</label>
+            <label class="custom-file-label" for="validatedCustomFile1">...</label>
+                     </div>
           </div>
 
-        </div>
 
-        <div class="line"></div>
-
-        <div>
-              <p>Please upload students data by the following format : mennenenmneemi</p>
-
+<div class="col" >
+        <label>subjects database</label>
             <div class="custom-file" id="whitebox">
-            <input type="file" class="custom-file-input" id="validatedCustomFile2" required>
-            <label class="custom-file-label" for="validatedCustomFile2">Choose file...</label>
+            <input type="file" class="custom-file-input" id="validatedCustomFile1" required>
+            <label class="custom-file-label" for="validatedCustomFile1">...</label>
+                     </div>
+          </div>
+
+
+
+<div class="col" >
+        <label>rooms database</label>
+            <div class="custom-file" id="whitebox">
+            <input type="file" class="custom-file-input" id="validatedCustomFile1" required>
+            <label class="custom-file-label" for="validatedCustomFile1">...</label>
+                     </div>
           </div>
 
         </div>
@@ -85,6 +94,7 @@
           </div>
 
         </div>
+
 
 
             </div>
