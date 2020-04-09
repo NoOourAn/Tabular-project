@@ -50,61 +50,45 @@
             </ul>
   </div>
 
-    <form action="{% url 'timetable' %}">
-<!--        <div class="container">-->
-
+    <form enctype="multipart/form-data" action="{% url 'timetable' %}" method="POST">
+        {% csrf_token %}
         <div class="container" id="bigwhitebox">
-    <div class="row">
-<div class="col" >
-        <label>student database</label>
+
+        <div>
+                <label>student database</label>
+              <p>Please upload students data by the following format : mennenenmneemi</p>
             <div class="custom-file" id="whitebox">
-            <input type="file" class="custom-file-input" id="validatedCustomFile1" required>
-            <label class="custom-file-label" for="validatedCustomFile1">...</label>
-                     </div>
+            <input type="file" class="custom-file-input" id="validatedCustomFile1" name="st-db" required>
+            <label class="custom-file-label" for="validatedCustomFile1">Choose file...</label>
           </div>
-
-
-<div class="col" >
-        <label>subjects database</label>
-            <div class="custom-file" id="whitebox">
-            <input type="file" class="custom-file-input" id="validatedCustomFile1" required>
-            <label class="custom-file-label" for="validatedCustomFile1">...</label>
-                     </div>
-          </div>
-
-
-
-<div class="col" >
-        <label>rooms database</label>
-            <div class="custom-file" id="whitebox">
-            <input type="file" class="custom-file-input" id="validatedCustomFile1" required>
-            <label class="custom-file-label" for="validatedCustomFile1">...</label>
-                     </div>
-          </div>
-
         </div>
+
                <div class="line"></div>
 
         <div>
+                <label>subjects database</label>
               <p>Please upload students data by the following format : mennenenmneemi</p>
-
             <div class="custom-file" id="whitebox">
-            <input type="file" class="custom-file-input" id="validatedCustomFile2" required>
+            <input type="file" class="custom-file-input" id="validatedCustomFile2" name="sub-db" required>
             <label class="custom-file-label" for="validatedCustomFile2">Choose file...</label>
           </div>
-
         </div>
 
+            <div class="line"></div>
 
-
+        <div>
+             <label>rooms database</label>
+              <p>Please upload students data by the following format : mennenenmneemi</p>
+            <div class="custom-file" id="whitebox">
+            <input name="rm-db" type="file" class="custom-file-input" id="validatedCustomFile3" required>
+            <label class="custom-file-label" for="validatedCustomFile3">Choose file...</label>
+          </div>
+        </div>
             </div>
 
-
-
-
       <div id="bluebox">
-          <input type="submit" value="Next" class="btn btn-info">
-      </div>
+        <button name="wizard_goto_step" type="submit" value="submit" class="btn btn-info">next step</button>
+        </div>
 
     </form>
   </main>

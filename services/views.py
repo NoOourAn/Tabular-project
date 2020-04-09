@@ -5,78 +5,83 @@ from .models import Timetables
 from django.http import HttpResponse
 from services.utils import render_to_pdf
 
-# from services import forms
+from services import TimeTable
 
-# Create your views here.
+to_pdf = []
+startdate = None
+duedate = None
+noofexams = None
+timeslots = None
+studentdb = None
+subjectdb = None
+roomdb = None
+
+
+def home(request):
+    return render(request, 'services/home.html')
+
 def step1(request):
     return render(request, 'services/manual-data.html')
 
 def step2(request):
-    return render(request , 'services/excel-sheet.html')
+    if request.method == 'POST':
+        global startdate,duedate,noofexams
+        startdate = request.POST['startdate']
+        duedate = request.POST['duedate']
+        noofexams = request.POST['examsNo']
 
-# def step3(request, tt_id):
-#     timetable = get_object_or_404(Timetables , accessCode = tt_id)
-#     return render(request, 'services/generated-timetable.html' ,{'tt':timetable})
-
-def step3(request):
-    return render(request, 'services/generated-timetable.html')
-#
-# def step3(request, tt_id):
-#     timetable = get_object_or_404(Timetables , accessCode = tt_id)
-#     return render(request, 'services/generated-timetable.html' ,{'tt':timetable})
-
-def home(request):
-    return render(request, 'services/home.html')
-def examsnumber(request):
-    return render(request, 'services/exams-number.html')
-
-def fields(request):
-    return render(request , 'services/excel-sheet.html')
-
-def timeslots(request):
+    print(startdate)
+    print(duedate)
+    print(noofexams)
     return render(request, 'services/timeslots.html')
 
+def step3(request):
+    if request.method == 'POST':
+        global timeslots
+        timeslots = request.POST['myInputs[]']
 
+    print(timeslots)
+    return render(request , 'services/excel-sheet.html')
 
-# FORMS = [("manualdata", forms.ManualData),
-#          ("timeslots", forms.TimeSlots),
-#          ("excelsheet", forms.ExcelSheet)]
-#
-# TEMPLATES = {"manualdata": "services/manual-data.html",
-#              "timeslots": "services/time-slots.html",
-#              "excelsheet": "services/excel-sheet.html"}
-#
-# def count_days(wizard):
-#     cleaned_data = wizard.get_cleaned_data_for_step('manualdata') or {'method': 'none'}
-#     days = cleaned_data['duedate'] - cleaned_data['startdate']
-#     return days
+# def step3(request, tt_id):
+#     timetable = get_object_or_404(Timetables , accessCode = tt_id)
+#     return render(request, 'services/generated-timetable.html' ,{'tt':timetable})
 
-from services import TimeTable
+def step4(request):
+    if request.method == 'POST':
+        global studentdb,roomdb,subjectdb
+        doc = request.FILES  # returns a dict-like object
+        studentdb = doc['st-db']
+        subjectdb = doc['sub-db']
+        roomdb = doc['rm-db']
 
-# data = []
-# class DataWizard(SessionWizardView):
-#     file_storage = FileSystemStorage(location='/media/files')
-#     template_name = "services/manual-data.html"
-#
-#     # def get_template_name(self):
-#     #     return [TEMPLATES[self.steps.current]]
-#
-#     def done(self, form_list, **kwargs):
-#         form_data = [form.cleaned_data for form in form_list]
-#         global data
-#         data = form_data
-#         return render(self.request, 'services/generated-timetable.html', {'form_data': form_data , 'wait': 'we will send your timetable to your mail ASAP!'})
+    print(studentdb)
+    print(subjectdb)
+    print(roomdb)
+    return render(request, 'services/generated-timetable.html')
 
+from services import dbconvert
 
-to_pdf = []
+# assign = dbconvert.assign_filename()
+
 def boom(request):
+    dbconvert.fetch_data.assign.set_StudentsFilename(studentdb)
+    dbconvert.fetch_data.assign.set_SubjectsFilename(subjectdb)
+    dbconvert.fetch_data.assign.set_RoomsFilename(roomdb)
+    print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+    print(dbconvert.fetch_data.assign.get_SubjectsFilename())
+    print(dbconvert.fetch_data.assign.get_StudentsFilename())
+    print(dbconvert.fetch_data.assign.get_RoomsFilename())
+
     tt = TimeTable.generateTT()
     global to_pdf
     to_pdf = tt
     TT = Timetables()
+    TT.startDate = startdate
+    TT.dueDate = duedate
+    # TT.orgId = "boom"
+    # TT.accessCode = 1
     TT.exams = tt
-    # TT.startDate = data[0]['startdate']
-    # TT.dueDate = data[0]["duedate"]
     TT.save()
     subjects = {}
     for i in tt:
@@ -89,9 +94,9 @@ def boom(request):
         else:
             templist = {i[4]:[i[0],i[1],i[2]]}
             subjects[i[3]] = templist
-    timeslots = TimeTable.get_timeslots()
-    timeslots.sort
-    print(timeslots)
+    # timeslots = TimeTable.get_timeslots()
+    # timeslots.sort
+    # print(timeslots)
     print(subjects)
 
     return render(request, 'services/generated-timetable.html', {'success': 'hahahahahahahahaaaa', 'tt': tt , 'timeslots':timeslots, 'subjects':subjects})

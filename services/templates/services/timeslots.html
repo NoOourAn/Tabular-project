@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
   <head>
-    {% load staticfiles %}
-<!--    {% load i18n %}-->
-<!--    {% block head %}-->
-<!--    {{ wizard.form.media }}-->
-<!--    {% endblock %}-->
+    {% load static %}
+    {% load i18n %}
+    {% block head %}
+    {{ wizard.form.media }}
+    {% endblock %}
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,40 +19,18 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<!--	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
 <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#563d7c">
 
-<script>
+      <script src="services/my.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    var counter = 0;
 
-    function moreFields() {
-        counter++;
-        var newFields = document.getElementById('readroot').cloneNode(true);
-        newFields.id = '';
-        newFields.style.display = 'block';
-        var newField = newFields.childNodes;
-        for (var i=0;i<newField.length;i++) {
-            var theName = newField[i].name
-            if (theName)
-                newField[i].name = theName + counter;
-        }
-        var insertHere = document.getElementById('writeroot');
-        insertHere.parentNode.insertBefore(newFields,insertHere);
-    }
-
-    window.onload = moreFields;
-
-    </script>
 
   </head>
   <body class="text-center">
-<!--  <header class="masthead mb-auto">-->
-<!--    <div class="inner">    &lt;!&ndash; h7ot hena el navbar&ndash;&gt;-->
-<!--    </div>-->
-<!--  </header>-->
 
 
   <main role="main" >
@@ -76,52 +54,45 @@
   </div>
 
 
-        <div id="readroot" style="display: none">
+<!--<div class="container1">-->
+<!--    <button class="add_form_field">Add New Field &nbsp;-->
+<!--      <span style="font-size:16px; font-weight:bold;">+ </span>-->
+<!--    </button>-->
+<!--    <div><input type="text" name="mytext[]"></div>-->
+<!--</div>-->
 
-	<input type="button" value="Remove review"
-		onclick="this.parentNode.parentNode.removeChild(this.parentNode);" /><br /><br />
-	<input name="cd" value="title" />
+      <script  language="Javascript">
+          var counter = 1;
+           var limit = 56;
+function addInput(divName){
+     if (counter == limit)  {
+          alert("You have reached the limit of adding " + counter + " inputs");
+     }
+     else {
+          var newdiv = document.createElement('div');
+          newdiv.innerHTML = "TimeSlot" + (counter + 1) + " <br><input type='text' name='myInputs[]'>";
+          document.getElementById(divName).appendChild(newdiv);
+          counter++;
+     }
+}
+      </script>
 
-	<select name="rankingsel">
-		<option>Rating</option>
-		<option value="excellent">Excellent</option>
-		<option value="good">Good</option>
-		<option value="ok">OK</option>
-		<option value="poor">Poor</option>
-		<option value="bad">Bad</option>
-	</select><br /><br />
+     <div class="container" id="bigwhitebox">
+        <div class="row">
+            <div class="col" >
+    <form enctype="multipart/form-data" action="{% url 'excelsheet'%}" method="POST">
+        {% csrf_token %}
+         <div id="dynamicInput">
+             TimeSlot 1<br><input type="text" name="myInputs[]">
+         </div>
+         <input type="button" value="Add another TimeSlot" onClick="addInput('dynamicInput');">
 
-	<textarea rows="5" cols="20" name="review">Short review</textarea>
-	<br />Radio buttons included to test them in Explorer:<br />
-	<input type="radio" name="something" value="test1" />Test 1<br />
-	<input type="radio" name="something" value="test2" />Test 2
+          <div id="bluebox">
+            <button name="wizard_goto_step" type="submit" value="submit" class="btn btn-info">next step</button>
+            </div>
 
-</div>
+    </form>
 
-<form method="post" action="/cgi-bin/show_params.cgi">
-
-	<span id="writeroot"></span>
-
-	<input type="button" id="moreFields" value="Give me more fields!"     onclick="
-	    var counter = 0;
-        counter++;
-        var newFields = document.getElementById('readroot').cloneNode(true);
-        newFields.id = '';
-        newFields.style.display = 'block';
-        var newField = newFields.childNodes;
-        for (var i=0;i<newField.length;i++) {
-            var theName = newField[i].name
-            if (theName)
-                newField[i].name = theName + counter;
-        }
-        var insertHere = document.getElementById('writeroot');
-        insertHere.parentNode.insertBefore(newFields,insertHere);
-            " />
-	<input type="submit" value="Send form" />
-
-</form>
-
-  </main>
 
 
 

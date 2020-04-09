@@ -97,7 +97,10 @@ class Department:
 
 
 class Data:
-    ROOMS = ma3lomat.listoflists
+    # ROOMS = ma3lomat.listoflists
+    # print("nnnnnnn")
+    # print(ROOMS)
+
     # ROOMS = [["R1", 350], ["R2", 350], ["R3", 350], ["R4", 350], ["R5", 350], ["R6", 350], ["R7", 350], ["R8", 350],
     #          ["R9", 350], ["R10", 350]]  # excelsheet
     Time_Avilable = [[1, "09:00 - 10:00", "SUNDAY" , "1/1"],
@@ -350,10 +353,26 @@ class Data:
     #     "db1": list_2019,
     #     "pl2": list_2019}
 
-    cat = ma3lomat.dict_obj
-    co = ma3lomat.dict_obj2
+    # cat = ma3lomat.dict_obj
+    # co = ma3lomat.dict_obj2
 
+
+    print("dat")
     def __init__(self):
+        print("dataaaaaa")
+        excel = ma3lomat.fetch_data()
+        print("adadadaddada")
+        print(excel.fetch_rooms_data())    # el error mn awl hennnnaaaaaaaa -_-
+        self.ROOMS = excel.fetch_rooms_data()
+        self.cat = excel.fetch_subjects_data()
+        self.co = excel.fetch_students_data()
+        self.d = excel.fetch_dept_data()
+        print("xxxxxxxxxxxx")
+        print(self.ROOMS)
+        print(self.cat)
+        print(self.co)
+        print(self.d)
+
         self._rooms = []
         self._TimeAvilable = []
         self._instructors = []
@@ -445,23 +464,23 @@ class Data:
         # for l in courses_list:
         #     coursee = Courses()
         id = 0
-        for key in ma3lomat.dict_obj2:
-            for key2 in ma3lomat.dict_obj:
+        for key in self.co:
+            for key2 in self.cat:
 
-                if ma3lomat.dict_obj2[key][0] == key2:
-                    self._instructors.append(Instructor(id, ma3lomat.dict_obj2[key][1]))
-                    coursee = Courses(key, ma3lomat.dict_obj2[key][0], [self._instructors[id]], ma3lomat.dict_obj[key2],
-                                      ma3lomat.dict_obj2[key][3])
+                if self.co[key][0] == key2:
+                    self._instructors.append(Instructor(id, self.co[key][1]))
+                    coursee = Courses(key, self.co[key][0], [self._instructors[id]], self.cat[key2],
+                                      self.co[key][3])
                     courses_list.append(coursee)
                     id = id + 1
 
         self._courses = courses_list
 
         deptlist = []
-        for key in ma3lomat.testdept:
+        for key in self.d:
             d = []
             for i in self._courses:
-                if i.get_name() in ma3lomat.testdept[key]:
+                if i.get_name() in self.d[key]:
                     d.append(i)
 
             deptt = Department(key, d)
@@ -536,7 +555,7 @@ class Exam:
 
 class schedule:
     def __init__(self):
-        self.data = data
+        self.data = Data()  # used in schedule class
         self.exams = []  # of the schedule instances
         self.num_of_conflict = 0
         self.fitness = -1
@@ -550,8 +569,8 @@ class schedule:
             for j in range(0, len(courses)):
                 new_exam = Exam(self.examcounter, depts[i], courses[j], courses[j].get_students())
                 self.examcounter += 1
-                new_exam.set_TimeAvilable(data.get_TimeAvilable()[randint(0, len(data.get_TimeAvilable()) - 1)])
-                new_exam.set_room(data.get_rooms()[randint(0, len(data.get_rooms()) - 1)])
+                new_exam.set_TimeAvilable(self.data.get_TimeAvilable()[randint(0, len(self.data.get_TimeAvilable()) - 1)])
+                new_exam.set_room(self.data.get_rooms()[randint(0, len(self.data.get_rooms()) - 1)])
                 new_exam.set_instructor(courses[j].get_instructors()[randint(0, len(courses[j].get_instructors()) - 1)])
                 self.exams.append(new_exam)
         return self
@@ -598,11 +617,15 @@ class schedule:
 
 class Population:
     def __init__(self, size):
+        print("popu class")
         self.size = size
-        self.data = data  # mlhaaa4 lazma t2rebn
+        # self.data = data  # mlhaaa4 lazma t2rebn
         self.schedules = []
+        print("popu class")
         for i in range(0, size):
-            self.schedules.append(schedule().initialize())
+            print("popu class before")
+            self.schedules.append(schedule().initialize())   # bycreate el popu mn class schedule
+            print("popu class after")
 
     def get_schedules(self):
         return self.schedules
@@ -610,18 +633,22 @@ class Population:
 
 ############################## L7d hena done ^_^
 class genatic_algorithm:
+    POPULATION_SIZE = 10
+    NUMB_OFELITE_SCHEDULES = 1  ####
+    TORNAMENT_SELECTON_SIZE = 2  ####  no of parents
+    MUTATION_RATE = 0.1  ####
 
     def evolve(self, popu):  # de bs elly bst5dmha direct fe el main w hia btst5dm elly t7tha
         return self.mutation(self.crossover(popu))
 
     def crossover(self, popu):
         crossover_pop = Population(0)
-        for i in range(NUMB_OFELITE_SCHEDULES):
+        for i in range(self.NUMB_OFELITE_SCHEDULES):
             crossover_pop.get_schedules().append(
                 popu.get_schedules()[i])  # take a copy of population list not reference(only the last 9)
         # i = NUMB_OFELITE_SCHEDULES
         i = 0
-        while i < POPULATION_SIZE:
+        while i < self.POPULATION_SIZE:
             schedule1 = self.select_tournament_population(popu).get_schedules()[0]
             schedule2 = self.select_tournament_population(popu).get_schedules()[1]
             crossover_pop.get_schedules().append(self.crossover_schedule(schedule1, schedule2))
@@ -629,7 +656,7 @@ class genatic_algorithm:
         return crossover_pop
 
     def mutation(self, popu):  # mutate every schedule in population
-        for i in range(0, POPULATION_SIZE):  # NUMB_OFELITE_SCHEDULES
+        for i in range(0, self.POPULATION_SIZE):  # NUMB_OFELITE_SCHEDULES
             self.mutate_schedule(popu.get_schedules()[i])
         return popu
 
@@ -645,144 +672,143 @@ class genatic_algorithm:
     def mutate_schedule(self, mutate):  # mutate 1 schedule
         scheduler = schedule().initialize()
         for i in range(0, len(mutate.get_exams())):
-            if (MUTATION_RATE > random()):
+            if (self.MUTATION_RATE > random()):
                 mutate.get_exams()[i] = scheduler.get_exams()[i]
         return mutate
 
     def select_tournament_population(self, popu):  # to select parents
         tournament_pop = Population(0)
         i = 0
-        while i < TORNAMENT_SELECTON_SIZE:
-            tournament_pop.get_schedules().append(popu.get_schedules()[randint(0, POPULATION_SIZE - 1)])
+        while i < self.TORNAMENT_SELECTON_SIZE:
+            tournament_pop.get_schedules().append(popu.get_schedules()[randint(0, self.POPULATION_SIZE - 1)])
             i += 1
         tournament_pop.get_schedules().sort(key=get_sort_key, reverse=True)
         return tournament_pop
 
 
-class Display:
-    def print_available_data(self):
-        print("> ALL Available Data")
-        self.print_dept()
-        self.print_course()
-        self.print_room()
-        self.print_instructor()
-        self.print_Time_Avilable()
+# class Display:
+#     data = Data()
+#     def print_available_data(self):
+#         print("> ALL Available Data")
+#         self.print_dept()
+#         self.print_course()
+#         self.print_room()
+#         self.print_instructor()
+#         self.print_Time_Avilable()
+#
+#     def print_dept(self):
+#         depts = self.data.get_depts()
+#         print(len(depts))
+#         availableDeptsTable = prettytable.PrettyTable(['dept', 'course'])
+#         for i in range(0, len(depts)):
+#             courses = depts.__getitem__(i).get_Courses()
+#             tempStr = "["
+#             for j in range(0, len(courses) - 1):
+#                 tempStr += courses[j].__str__() + ", "
+#             tempStr += courses[len(courses) - 1].__str__() + "]"
+#             availableDeptsTable.add_row([depts.__getitem__(i).get_name(), tempStr])
+#
+#         print(availableDeptsTable)
+#
+#     def print_course(self):
+#         availableCoursesTable = prettytable.PrettyTable(['id', 'course #', 'max # of students', 'instructors'])
+#         courses = self.data.get_courses()
+#         for i in range(0, len(courses)):
+#             instructors = courses[i].get_instructors()
+#             tempStr = ""
+#             for j in range(0, len(instructors) - 1):
+#                 tempStr += instructors[j].__str__() + ","
+#             tempStr += instructors[len(instructors) - 1].__str__()
+#             availableCoursesTable.add_row(
+#                 [courses[i].get_number(), courses[i].get_name(), str(courses[i].get_maxNumbOfStudents()), tempStr])
+#         print(availableCoursesTable)
+#
+#     def print_instructor(self):
+#         # data = Data()
+#         availableInstructorsTable = prettytable.PrettyTable(['id', 'instructors'])
+#         instructors = self.data.get_instructors()
+#         for i in range(0, len(instructors)):
+#             availableInstructorsTable.add_row([instructors[i].get_id(), instructors[i].get_name()])
+#
+#         print(availableInstructorsTable)
+#
+#     def print_room(self):
+#         availableRoomsTable = prettytable.PrettyTable(['room #', 'max seating capacity'])
+#         rooms = self.data.get_rooms()
+#         for i in range(0, len(rooms)):
+#             availableRoomsTable.add_row([str(rooms[i].get_number()), str(rooms[i].get_seatingCapacity())])
+#         print(availableRoomsTable)
+#
+#     def print_Time_Avilable(self):
+#         availableTimeAvilableTable = prettytable.PrettyTable(['id', 'Time', 'day', 'date'])
+#         timeAvilable = self.data.get_TimeAvilable()
+#         for i in range(0, len(timeAvilable)):
+#             availableTimeAvilableTable.add_row([timeAvilable[i].get_id(), timeAvilable[i].get_time(), timeAvilable[i].get_day() , timeAvilable[i].get_date()])
+#         print(availableTimeAvilableTable)
+#
+#     def get_Time_slots(self):
+#         timeslots = []
+#         timeAvilable = self.data.get_TimeAvilable()
+#         for i in range(0, len(timeAvilable)):
+#             if timeAvilable[i].get_time() not in timeslots:
+#                 timeslots.append(timeAvilable[i].get_time())
+#         return timeslots
+#
+#     def print_generation(self, population):
+#         table1 = prettytable.PrettyTable(
+#             ['schedule #', 'fitness', '# of conflicts', 'classes[dept,course,room,instructor,no of students]'])
+#         schedules = population.get_schedules()
+#         for i in range(0, len(schedules)):
+#             table1.add_row(
+#                 [str(i), round(schedules[i].get_fitness(), 3), schedules[i].get_number_Of_conflict(), schedules[i]])
+#         print(table1)
+#
+#     def print_schedule_as_table(self, schedule):
+#         classes = schedule.get_exams()
+#         table = prettytable.PrettyTable(
+#             ['Exam #', 'Dept', 'Course(number , max # of students)', 'Room (Capacity)', 'Instructor', 'TimeAvilable'])
+#         for i in range(0, len(classes)):
+#             table.add_row([
+#                 str(i), classes[i].get_dept().get_name(), classes[i].get_course().get_name() + " (" +
+#                            classes[i].get_course().get_number() + ", " + str(
+#                 classes[i].get_course().get_maxNumbOfStudents()) + ")",
+#                            classes[i].get_room().get_number() + " (" + str(
+#                                classes[i].get_room().get_seatingCapacity()) + ")",
+#                            classes[i].get_instructor().get_name() + " (" + str(
+#                                classes[i].get_instructor().get_id()) + ")",
+#                            classes[i].get_TimeAvilable().get_time() + " (" + str(
+#                                classes[i].get_TimeAvilable().get_id()) + ")" + " " +
+#                            classes[i].get_TimeAvilable().get_day() + " " +
+#                            classes[i].get_TimeAvilable().get_date()
+#                           ])
+#         print(table)
+#
+#     def save_schedule_as_model(self, schedule):
+#         exams = []
+#         classes = schedule.get_exams()
+#         for i in range(0, len(classes)):
+#             exams.append([classes[i].get_course().get_name(), classes[i].get_room().get_number(),  classes[i].get_TimeAvilable().get_day() ,  classes[i].get_TimeAvilable().get_date(),  classes[i].get_TimeAvilable().get_time()])
+#         # exams.sort(key=sort_by_id)
+#         exams.sort(key=sort_by_id)
+#         return exams
 
-    def print_dept(self):
-        depts = data.get_depts()
-        print(len(depts))
-        availableDeptsTable = prettytable.PrettyTable(['dept', 'course'])
-        for i in range(0, len(depts)):
-            courses = depts.__getitem__(i).get_Courses()
-            tempStr = "["
-            for j in range(0, len(courses) - 1):
-                tempStr += courses[j].__str__() + ", "
-            tempStr += courses[len(courses) - 1].__str__() + "]"
-            availableDeptsTable.add_row([depts.__getitem__(i).get_name(), tempStr])
-
-        print(availableDeptsTable)
-
-    def print_course(self):
-        availableCoursesTable = prettytable.PrettyTable(['id', 'course #', 'max # of students', 'instructors'])
-        courses = data.get_courses()
-        for i in range(0, len(courses)):
-            instructors = courses[i].get_instructors()
-            tempStr = ""
-            for j in range(0, len(instructors) - 1):
-                tempStr += instructors[j].__str__() + ","
-            tempStr += instructors[len(instructors) - 1].__str__()
-            availableCoursesTable.add_row(
-                [courses[i].get_number(), courses[i].get_name(), str(courses[i].get_maxNumbOfStudents()), tempStr])
-        print(availableCoursesTable)
-
-    def print_instructor(self):
-        data = Data()
-        availableInstructorsTable = prettytable.PrettyTable(['id', 'instructors'])
-        instructors = data.get_instructors()
-        for i in range(0, len(instructors)):
-            availableInstructorsTable.add_row([instructors[i].get_id(), instructors[i].get_name()])
-
-        print(availableInstructorsTable)
-
-    def print_room(self):
-        availableRoomsTable = prettytable.PrettyTable(['room #', 'max seating capacity'])
-        rooms = data.get_rooms()
-        for i in range(0, len(rooms)):
-            availableRoomsTable.add_row([str(rooms[i].get_number()), str(rooms[i].get_seatingCapacity())])
-        print(availableRoomsTable)
-
-    def print_Time_Avilable(self):
-        availableTimeAvilableTable = prettytable.PrettyTable(['id', 'Time', 'day', 'date'])
-        timeAvilable = data.get_TimeAvilable()
-        for i in range(0, len(timeAvilable)):
-            availableTimeAvilableTable.add_row([timeAvilable[i].get_id(), timeAvilable[i].get_time(), timeAvilable[i].get_day() , timeAvilable[i].get_date()])
-        print(availableTimeAvilableTable)
-
-    def get_Time_slots(self):
-        timeslots = []
-        timeAvilable = data.get_TimeAvilable()
-        for i in range(0, len(timeAvilable)):
-            if timeAvilable[i].get_time() not in timeslots:
-                timeslots.append(timeAvilable[i].get_time())
-        return timeslots
-
-    def print_generation(self, population):
-        table1 = prettytable.PrettyTable(
-            ['schedule #', 'fitness', '# of conflicts', 'classes[dept,course,room,instructor,no of students]'])
-        schedules = population.get_schedules()
-        for i in range(0, len(schedules)):
-            table1.add_row(
-                [str(i), round(schedules[i].get_fitness(), 3), schedules[i].get_number_Of_conflict(), schedules[i]])
-        print(table1)
-
-    def print_schedule_as_table(self, schedule):
-        classes = schedule.get_exams()
-        table = prettytable.PrettyTable(
-            ['Exam #', 'Dept', 'Course(number , max # of students)', 'Room (Capacity)', 'Instructor', 'TimeAvilable'])
-        for i in range(0, len(classes)):
-            table.add_row([
-                str(i), classes[i].get_dept().get_name(), classes[i].get_course().get_name() + " (" +
-                           classes[i].get_course().get_number() + ", " + str(
-                classes[i].get_course().get_maxNumbOfStudents()) + ")",
-                           classes[i].get_room().get_number() + " (" + str(
-                               classes[i].get_room().get_seatingCapacity()) + ")",
-                           classes[i].get_instructor().get_name() + " (" + str(
-                               classes[i].get_instructor().get_id()) + ")",
-                           classes[i].get_TimeAvilable().get_time() + " (" + str(
-                               classes[i].get_TimeAvilable().get_id()) + ")" + " " +
-                           classes[i].get_TimeAvilable().get_day() + " " +
-                           classes[i].get_TimeAvilable().get_date()
-                          ])
-        print(table)
-
-    def save_schedule_as_model(self, schedule):
-        exams = []
-        classes = schedule.get_exams()
-        for i in range(0, len(classes)):
-            exams.append([classes[i].get_course().get_name(), classes[i].get_room().get_number(),  classes[i].get_TimeAvilable().get_day() ,  classes[i].get_TimeAvilable().get_date(),  classes[i].get_TimeAvilable().get_time()])
-        # exams.sort(key=sort_by_id)
-        exams.sort(key=sort_by_id)
-        return exams
-
-data = Data()  # used in schedule class
-POPULATION_SIZE = 10
-NUMB_OFELITE_SCHEDULES = 1  ####
-TORNAMENT_SELECTON_SIZE = 2  ####  no of parents
-MUTATION_RATE = 0.1  ####
 
 def get_sort_key(list):
     return list.get_fitness()  # de func mwgoda fe class schedule
 
 def sort_by_id(exams):
-    return datetime.strptime(exams[3],"%d/%m")
-
+    return datetime.strptime(exams[3], "%d/%m")
 
 def generateTT():
-    display = Display()
-    display.print_available_data()
+    POPULATION_SIZE = 10
+    # display = Display()
+    # display.print_available_data()
     genrationNumber = 0
     print("\n> Generation # " + str(genrationNumber))
-    population = Population(POPULATION_SIZE)  # awl random generation
+    # by3tl hena
+    print("qqqqqqqqqqqq")
+    population = Population(POPULATION_SIZE)  # awl random generation  --- awl nadha LL data
+    print("ppppppppp")    #m4 bt print -_-
 
     population.get_schedules().sort(key=get_sort_key, reverse=True)  # higher fitness & less no. of conflicts foooooo2
     # display.print_generation(population)
@@ -793,14 +819,22 @@ def generateTT():
         print("\n> Generation # " + str(genrationNumber))
         population = genatic.evolve(population)
         population.get_schedules().sort(key=get_sort_key, reverse=True)  # reverse 34an by sort 7sb elfitness
-        display.print_generation(population)
+        # display.print_generation(population)
 
     print("\n\n")
-    display.print_schedule_as_table(population.get_schedules()[0])
-    return display.save_schedule_as_model(population.get_schedules()[0])
+    # display.print_schedule_as_table(population.get_schedules()[0])
 
-def get_timeslots():
-    display = Display()
-    return display.get_Time_slots()
+    exams = []
+    classes = population.get_schedules()[0].get_exams()
+    for i in range(0, len(classes)):
+        exams.append([classes[i].get_course().get_name(), classes[i].get_room().get_number(),  classes[i].get_TimeAvilable().get_day() ,  classes[i].get_TimeAvilable().get_date(),  classes[i].get_TimeAvilable().get_time()])
+    # exams.sort(key=sort_by_id)
+    exams.sort(key=sort_by_id)
+    return exams
 
+    # return display.save_schedule_as_model(population.get_schedules()[0])
+
+# def get_timeslots():
+#     display = Display()
+#     return display.get_Time_slots()
 
