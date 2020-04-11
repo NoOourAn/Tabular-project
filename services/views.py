@@ -4,7 +4,7 @@ from django.core.files.storage import FileSystemStorage
 from .models import Timetables
 from django.http import HttpResponse
 from services.utils import render_to_pdf
-
+import openpyxl
 from services import TimeTable
 
 to_pdf = []
@@ -15,6 +15,7 @@ timeslots = None
 studentdb = None
 subjectdb = None
 roomdb = None
+wb = None
 
 
 def home(request):
@@ -49,11 +50,18 @@ def step3(request):
 
 def step4(request):
     if request.method == 'POST':
-        global studentdb,roomdb,subjectdb
+        global studentdb,roomdb,subjectdb,wb
         doc = request.FILES  # returns a dict-like object
-        studentdb = doc['st-db']
-        subjectdb = doc['sub-db']
-        roomdb = doc['rm-db']
+        # studentdb = doc['st-db']
+        # subjectdb = doc['sub-db']
+        # roomdb = doc['rm-db']
+
+        # excel_file = request.FILES["excel_file"]
+        studentdb = openpyxl.load_workbook(doc['st-db'])
+        subjectdb = openpyxl.load_workbook(doc['sub-db'])
+        roomdb = openpyxl.load_workbook(doc['rm-db'])
+
+
 
     print(studentdb)
     print(subjectdb)

@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3a0a0b80-cf5d-49c3-b07a-1e0d7085c71c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/TimeTable.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/TimeTable.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/dbconvert.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/dbconvert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/templates/services/exams-number.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/templates/services/excel-sheet.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/templates/services/excel-sheet.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/templates/services/generated-timetable.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/templates/services/generated-timetable.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/templates/services/manual-data.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/templates/services/manual-data.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/templates/services/timeslots.html" beforeDir="false" afterPath="$PROJECT_DIR$/services/templates/services/timeslots.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/url.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/url.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,9 +44,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="442" y="168" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1586389942274" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1586445458341">
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1586578555334">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1586445458341" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1586578555334" />
   </component>
 </project>
