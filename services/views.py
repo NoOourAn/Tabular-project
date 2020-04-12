@@ -12,7 +12,7 @@ to_pdf = []
 startdate = None
 duedate = None
 noofexams = None
-timeslots = None
+timeslotss = None
 studentdb = None
 subjectdb = None
 roomdb = None
@@ -39,10 +39,10 @@ def step2(request):
 
 def step3(request):
     if request.method == 'POST':
-        global timeslots
-        timeslots = request.POST['myInputs[]']
+        global timeslotss
+        timeslotss = request.POST['myInputs[]']
 
-    print(timeslots)
+    print(timeslotss)
     return render(request , 'services/excel-sheet.html')
 
 # def step3(request, tt_id):
@@ -53,20 +53,9 @@ def step4(request):
     if request.method == 'POST':
         global studentdb,roomdb,subjectdb,wb
         doc = request.FILES  # returns a dict-like object
-        # studentdb = doc['st-db']
-        # subjectdb = doc['sub-db']
-        # roomdb = doc['rm-db']
-
-        # excel_file = request.FILES["excel_file"]
         studentdb = openpyxl.load_workbook(doc['st-db'])
         subjectdb = openpyxl.load_workbook(doc['sub-db'])
         roomdb = openpyxl.load_workbook(doc['rm-db'])
-
-
-
-    print(studentdb)
-    print(subjectdb)
-    print(roomdb)
     return render(request, 'services/generated-timetable.html')
 
 from services import dbconvert
@@ -81,8 +70,6 @@ def boom(request):
     print(dbconvert.fetch_data.assign.get_SubjectsFilename())
     print(dbconvert.fetch_data.assign.get_StudentsFilename())
     print(dbconvert.fetch_data.assign.get_RoomsFilename())
-
-
     tt = TimeTable.generateTT()
     global to_pdf
     to_pdf = tt
@@ -93,10 +80,12 @@ def boom(request):
     # TT.accessCode = 1
     TT.exams = tt
     TT.save()
+    timeslots = TimeTable.get_timeslots()
+    timeslots.sort
     subjects = {}
     for i in tt:
-        # if i[4] not in timeslots:
-        #     timeslots.append(i[4])
+        if i[4] not in timeslots:
+            timeslots.append(i[4])
         if i[3] in subjects:
             templist = subjects[i[3]]
             templist[i[4]] = [i[0],i[1],i[2]]
@@ -104,11 +93,6 @@ def boom(request):
         else:
             templist = {i[4]:[i[0],i[1],i[2]]}
             subjects[i[3]] = templist
-    # timeslots = TimeTable.get_timeslots()
-    # timeslots.sort
-    # print(timeslots)
-    print(subjects)
-
     return render(request, 'services/generated-timetable.html', {'success': 'hahahahahahahahaaaa', 'tt': tt , 'timeslots':timeslots, 'subjects':subjects})
 
 def create_pdf(request):
