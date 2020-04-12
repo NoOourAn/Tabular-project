@@ -686,111 +686,111 @@ class genatic_algorithm:
         return tournament_pop
 
 
-# class Display:
-#     data = Data()
-#     def print_available_data(self):
-#         print("> ALL Available Data")
-#         self.print_dept()
-#         self.print_course()
-#         self.print_room()
-#         self.print_instructor()
-#         self.print_Time_Avilable()
-#
-#     def print_dept(self):
-#         depts = self.data.get_depts()
-#         print(len(depts))
-#         availableDeptsTable = prettytable.PrettyTable(['dept', 'course'])
-#         for i in range(0, len(depts)):
-#             courses = depts.__getitem__(i).get_Courses()
-#             tempStr = "["
-#             for j in range(0, len(courses) - 1):
-#                 tempStr += courses[j].__str__() + ", "
-#             tempStr += courses[len(courses) - 1].__str__() + "]"
-#             availableDeptsTable.add_row([depts.__getitem__(i).get_name(), tempStr])
-#
-#         print(availableDeptsTable)
-#
-#     def print_course(self):
-#         availableCoursesTable = prettytable.PrettyTable(['id', 'course #', 'max # of students', 'instructors'])
-#         courses = self.data.get_courses()
-#         for i in range(0, len(courses)):
-#             instructors = courses[i].get_instructors()
-#             tempStr = ""
-#             for j in range(0, len(instructors) - 1):
-#                 tempStr += instructors[j].__str__() + ","
-#             tempStr += instructors[len(instructors) - 1].__str__()
-#             availableCoursesTable.add_row(
-#                 [courses[i].get_number(), courses[i].get_name(), str(courses[i].get_maxNumbOfStudents()), tempStr])
-#         print(availableCoursesTable)
-#
-#     def print_instructor(self):
-#         # data = Data()
-#         availableInstructorsTable = prettytable.PrettyTable(['id', 'instructors'])
-#         instructors = self.data.get_instructors()
-#         for i in range(0, len(instructors)):
-#             availableInstructorsTable.add_row([instructors[i].get_id(), instructors[i].get_name()])
-#
-#         print(availableInstructorsTable)
-#
-#     def print_room(self):
-#         availableRoomsTable = prettytable.PrettyTable(['room #', 'max seating capacity'])
-#         rooms = self.data.get_rooms()
-#         for i in range(0, len(rooms)):
-#             availableRoomsTable.add_row([str(rooms[i].get_number()), str(rooms[i].get_seatingCapacity())])
-#         print(availableRoomsTable)
-#
-#     def print_Time_Avilable(self):
-#         availableTimeAvilableTable = prettytable.PrettyTable(['id', 'Time', 'day', 'date'])
-#         timeAvilable = self.data.get_TimeAvilable()
-#         for i in range(0, len(timeAvilable)):
-#             availableTimeAvilableTable.add_row([timeAvilable[i].get_id(), timeAvilable[i].get_time(), timeAvilable[i].get_day() , timeAvilable[i].get_date()])
-#         print(availableTimeAvilableTable)
-#
-#     def get_Time_slots(self):
-#         timeslots = []
-#         timeAvilable = self.data.get_TimeAvilable()
-#         for i in range(0, len(timeAvilable)):
-#             if timeAvilable[i].get_time() not in timeslots:
-#                 timeslots.append(timeAvilable[i].get_time())
-#         return timeslots
-#
-#     def print_generation(self, population):
-#         table1 = prettytable.PrettyTable(
-#             ['schedule #', 'fitness', '# of conflicts', 'classes[dept,course,room,instructor,no of students]'])
-#         schedules = population.get_schedules()
-#         for i in range(0, len(schedules)):
-#             table1.add_row(
-#                 [str(i), round(schedules[i].get_fitness(), 3), schedules[i].get_number_Of_conflict(), schedules[i]])
-#         print(table1)
-#
-#     def print_schedule_as_table(self, schedule):
-#         classes = schedule.get_exams()
-#         table = prettytable.PrettyTable(
-#             ['Exam #', 'Dept', 'Course(number , max # of students)', 'Room (Capacity)', 'Instructor', 'TimeAvilable'])
-#         for i in range(0, len(classes)):
-#             table.add_row([
-#                 str(i), classes[i].get_dept().get_name(), classes[i].get_course().get_name() + " (" +
-#                            classes[i].get_course().get_number() + ", " + str(
-#                 classes[i].get_course().get_maxNumbOfStudents()) + ")",
-#                            classes[i].get_room().get_number() + " (" + str(
-#                                classes[i].get_room().get_seatingCapacity()) + ")",
-#                            classes[i].get_instructor().get_name() + " (" + str(
-#                                classes[i].get_instructor().get_id()) + ")",
-#                            classes[i].get_TimeAvilable().get_time() + " (" + str(
-#                                classes[i].get_TimeAvilable().get_id()) + ")" + " " +
-#                            classes[i].get_TimeAvilable().get_day() + " " +
-#                            classes[i].get_TimeAvilable().get_date()
-#                           ])
-#         print(table)
-#
-#     def save_schedule_as_model(self, schedule):
-#         exams = []
-#         classes = schedule.get_exams()
-#         for i in range(0, len(classes)):
-#             exams.append([classes[i].get_course().get_name(), classes[i].get_room().get_number(),  classes[i].get_TimeAvilable().get_day() ,  classes[i].get_TimeAvilable().get_date(),  classes[i].get_TimeAvilable().get_time()])
-#         # exams.sort(key=sort_by_id)
-#         exams.sort(key=sort_by_id)
-#         return exams
+class Display:
+    data = Data()
+    def print_available_data(self):
+        print("> ALL Available Data")
+        self.print_dept()
+        self.print_course()
+        self.print_room()
+        self.print_instructor()
+        self.print_Time_Avilable()
+
+    def print_dept(self):
+        depts = self.data.get_depts()
+        print(len(depts))
+        availableDeptsTable = prettytable.PrettyTable(['dept', 'course'])
+        for i in range(0, len(depts)):
+            courses = depts.__getitem__(i).get_Courses()
+            tempStr = "["
+            for j in range(0, len(courses) - 1):
+                tempStr += courses[j].__str__() + ", "
+            tempStr += courses[len(courses) - 1].__str__() + "]"
+            availableDeptsTable.add_row([depts.__getitem__(i).get_name(), tempStr])
+
+        print(availableDeptsTable)
+
+    def print_course(self):
+        availableCoursesTable = prettytable.PrettyTable(['id', 'course #', 'max # of students', 'instructors'])
+        courses = self.data.get_courses()
+        for i in range(0, len(courses)):
+            instructors = courses[i].get_instructors()
+            tempStr = ""
+            for j in range(0, len(instructors) - 1):
+                tempStr += instructors[j].__str__() + ","
+            tempStr += instructors[len(instructors) - 1].__str__()
+            availableCoursesTable.add_row(
+                [courses[i].get_number(), courses[i].get_name(), str(courses[i].get_maxNumbOfStudents()), tempStr])
+        print(availableCoursesTable)
+
+    def print_instructor(self):
+        # data = Data()
+        availableInstructorsTable = prettytable.PrettyTable(['id', 'instructors'])
+        instructors = self.data.get_instructors()
+        for i in range(0, len(instructors)):
+            availableInstructorsTable.add_row([instructors[i].get_id(), instructors[i].get_name()])
+
+        print(availableInstructorsTable)
+
+    def print_room(self):
+        availableRoomsTable = prettytable.PrettyTable(['room #', 'max seating capacity'])
+        rooms = self.data.get_rooms()
+        for i in range(0, len(rooms)):
+            availableRoomsTable.add_row([str(rooms[i].get_number()), str(rooms[i].get_seatingCapacity())])
+        print(availableRoomsTable)
+
+    def print_Time_Avilable(self):
+        availableTimeAvilableTable = prettytable.PrettyTable(['id', 'Time', 'day', 'date'])
+        timeAvilable = self.data.get_TimeAvilable()
+        for i in range(0, len(timeAvilable)):
+            availableTimeAvilableTable.add_row([timeAvilable[i].get_id(), timeAvilable[i].get_time(), timeAvilable[i].get_day() , timeAvilable[i].get_date()])
+        print(availableTimeAvilableTable)
+
+    def get_Time_slots(self):
+        timeslots = []
+        timeAvilable = self.data.get_TimeAvilable()
+        for i in range(0, len(timeAvilable)):
+            if timeAvilable[i].get_time() not in timeslots:
+                timeslots.append(timeAvilable[i].get_time())
+        return timeslots
+
+    def print_generation(self, population):
+        table1 = prettytable.PrettyTable(
+            ['schedule #', 'fitness', '# of conflicts', 'classes[dept,course,room,instructor,no of students]'])
+        schedules = population.get_schedules()
+        for i in range(0, len(schedules)):
+            table1.add_row(
+                [str(i), round(schedules[i].get_fitness(), 3), schedules[i].get_number_Of_conflict(), schedules[i]])
+        print(table1)
+
+    def print_schedule_as_table(self, schedule):
+        classes = schedule.get_exams()
+        table = prettytable.PrettyTable(
+            ['Exam #', 'Dept', 'Course(number , max # of students)', 'Room (Capacity)', 'Instructor', 'TimeAvilable'])
+        for i in range(0, len(classes)):
+            table.add_row([
+                str(i), classes[i].get_dept().get_name(), classes[i].get_course().get_name() + " (" +
+                           classes[i].get_course().get_number() + ", " + str(
+                classes[i].get_course().get_maxNumbOfStudents()) + ")",
+                           classes[i].get_room().get_number() + " (" + str(
+                               classes[i].get_room().get_seatingCapacity()) + ")",
+                           classes[i].get_instructor().get_name() + " (" + str(
+                               classes[i].get_instructor().get_id()) + ")",
+                           classes[i].get_TimeAvilable().get_time() + " (" + str(
+                               classes[i].get_TimeAvilable().get_id()) + ")" + " " +
+                           classes[i].get_TimeAvilable().get_day() + " " +
+                           classes[i].get_TimeAvilable().get_date()
+                          ])
+        print(table)
+
+    def save_schedule_as_model(self, schedule):
+        exams = []
+        classes = schedule.get_exams()
+        for i in range(0, len(classes)):
+            exams.append([classes[i].get_course().get_name(), classes[i].get_room().get_number(),  classes[i].get_TimeAvilable().get_day() ,  classes[i].get_TimeAvilable().get_date(),  classes[i].get_TimeAvilable().get_time()])
+        # exams.sort(key=sort_by_id)
+        exams.sort(key=sort_by_id)
+        return exams
 
 
 def get_sort_key(list):
@@ -801,8 +801,8 @@ def sort_by_id(exams):
 
 def generateTT():
     POPULATION_SIZE = 10
-    # display = Display()
-    # display.print_available_data()
+    display = Display()
+    display.print_available_data()
     genrationNumber = 0
     print("\n> Generation # " + str(genrationNumber))
     # by3tl hena
@@ -811,7 +811,7 @@ def generateTT():
     print("ppppppppp")    #m4 bt print -_-
 
     population.get_schedules().sort(key=get_sort_key, reverse=True)  # higher fitness & less no. of conflicts foooooo2
-    # display.print_generation(population)
+    display.print_generation(population)
     genatic = genatic_algorithm()
 
     while (population.get_schedules()[0].get_fitness() != 1.0):
@@ -819,22 +819,22 @@ def generateTT():
         print("\n> Generation # " + str(genrationNumber))
         population = genatic.evolve(population)
         population.get_schedules().sort(key=get_sort_key, reverse=True)  # reverse 34an by sort 7sb elfitness
-        # display.print_generation(population)
+        display.print_generation(population)
 
     print("\n\n")
     # display.print_schedule_as_table(population.get_schedules()[0])
 
-    exams = []
-    classes = population.get_schedules()[0].get_exams()
-    for i in range(0, len(classes)):
-        exams.append([classes[i].get_course().get_name(), classes[i].get_room().get_number(),  classes[i].get_TimeAvilable().get_day() ,  classes[i].get_TimeAvilable().get_date(),  classes[i].get_TimeAvilable().get_time()])
+    # exams = []
+    # classes = population.get_schedules()[0].get_exams()
+    # for i in range(0, len(classes)):
+    #     exams.append([classes[i].get_course().get_name(), classes[i].get_room().get_number(),  classes[i].get_TimeAvilable().get_day() ,  classes[i].get_TimeAvilable().get_date(),  classes[i].get_TimeAvilable().get_time()])
+    # # exams.sort(key=sort_by_id)
     # exams.sort(key=sort_by_id)
-    exams.sort(key=sort_by_id)
-    return exams
+    # return exams
 
-    # return display.save_schedule_as_model(population.get_schedules()[0])
+    return display.save_schedule_as_model(population.get_schedules()[0])
 
-# def get_timeslots():
-#     display = Display()
-#     return display.get_Time_slots()
+def get_timeslots():
+    display = Display()
+    return display.get_Time_slots()
 

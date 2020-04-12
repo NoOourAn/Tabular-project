@@ -51,15 +51,17 @@ class fetch_data:
             #     students= sheet.row_values(i,1)
             #     dict_obj.add_cat(subjects,students)
             i = 1
-            for row in sheet.iter_rows(values_only=True):
+            for row in sheet.iter_rows( values_only=True):
                 subjects = sheet.cell(row=i, column=1)
                 students = []
-                for col in sheet.iter_cols(min_col=2, values_only=True):
-                    for cell in col:
-                        students.append(cell)
-                dict_obj.add_cat(subjects,students)
-                i = i+1
-            # wb.release_resources()
+                j = 2
+                for cell in row:
+                    temp = sheet.cell(row=i, column=j)
+                    students.append(temp.value)
+                    j = j + 1
+                dict_obj.add_cat(subjects.value, students)
+                i = i + 1
+            # print(dict_obj)
         return dict_obj
     #     print(students[i])
     #     while students[i] == '' :
@@ -75,7 +77,7 @@ class fetch_data:
         # loc2 = self.assign.get_RoomsFilename()
         # wb2 = xlrd.open_workbook(loc2, on_demand=True)
         wb = self.assign.get_RoomsFilename()
-        if wb != "":
+        if wb != None:
             # sheet2 = wb2.sheet_by_index(0)
             worksheet = wb["Sheet1"]
             # worksheet.cell_value(0, 0)
@@ -90,8 +92,11 @@ class fetch_data:
             for row in worksheet.iter_rows():
                 row_data = []
                 for cell in row:
-                    row_data.append(str(cell.value))    #feha 7aga 8lt
+                    row_data.append(cell.value)    #feha 7aga 8lt
                 excel_data.append(row_data)
+            # print(row_data)
+            #
+            # print(excel_data)
 
             # wb2.release_resources()
         return excel_data
@@ -99,7 +104,11 @@ class fetch_data:
     def fetch_subjects_data(self):
         # loc = ('C:/Users/NoURan/Desktop/Tabular-project/services/excel/C.xlsx') #courses
         listfadia = []
+        realsubjects=[]
+        realstudents=[]
+
         dict_obj2 = my_dictionary()
+        testdept = my_dictionary()
         # loc = self.assign.get_SubjectsFilename()
         # wb = xlrd.open_workbook(loc, on_demand=True)
         wb = self.assign.get_SubjectsFilename()
@@ -115,24 +124,30 @@ class fetch_data:
             #     dict_obj2.add_cat(subjects,students)
 
             i = 1
-            for row in sheet.iter_rows(values_only=True):
+            for row in sheet.iter_rows(max_col=4,values_only=True):
                 subjects = sheet.cell(row=i, column=1)
                 students = []
-                for col in sheet.iter_cols(min_col=2, values_only=True):
-                    for cell in col:
-                        students.append(cell)
-                dict_obj2.add_cat(subjects,students)
+                j = 2
+                for col in sheet.iter_cols(max_col=4,values_only=True):
+                    temp = sheet.cell(row=i,column=j)
+                    students.append(temp.value)
+                    j=j+1
+                dict_obj2.add_cat(subjects.value, students)
                 i = i+1
+            print(dict_obj2)
 
             for key in dict_obj2 :
-                self.testdept.add_cat(dict_obj2[key][2],listfadia)
-            for x in self.testdept:
+
+                testdept.add_cat(dict_obj2[key][2],listfadia)
+            for x in testdept:
                 l = []
                 for key in dict_obj2:
                     if x == dict_obj2[key][2]:
                         l.append(dict_obj2[key][0])
-                self.testdept[x]=l
+                testdept[x]=l
             # wb.release_resources()
+            # print("laaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaast")
+            # print(testdept)
         return dict_obj2
 
     def fetch_dept_data(self):

@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from services.utils import render_to_pdf
 import openpyxl
 from services import TimeTable
+from services import dbconvert
 
 to_pdf = []
 startdate = None
@@ -80,6 +81,7 @@ def boom(request):
     print(dbconvert.fetch_data.assign.get_SubjectsFilename())
     print(dbconvert.fetch_data.assign.get_StudentsFilename())
     print(dbconvert.fetch_data.assign.get_RoomsFilename())
+
 
     tt = TimeTable.generateTT()
     global to_pdf
