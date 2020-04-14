@@ -12,7 +12,66 @@ to_pdf = []
 startdate = None
 duedate = None
 noofexams = None
-timeslotss = None
+timeslotss = [[1, "09:00 - 10:00", "SUNDAY" , "1/1"],
+             [2, "10:00 - 11:00", "SUNDAY" , "1/1"],
+             [3 , "11:00 - 12:00", "SUNDAY" , "1/1"],
+             [4 , "09:00 - 10:00", "SUNDAY" , "8/1"],
+             [5 , "10:00 - 11:00", "SUNDAY" , "8/1"],
+             [6 , "11:00 - 12:00", "SUNDAY" , "8/1"],
+             [7 , "09:00 - 10:00", "SUNDAY" , "15/1"],
+             [8 , "10:00 - 11:00", "SUNDAY" , "15/1"],
+             [9 , "11:00 - 12:00", "SUNDAY" , "15/1"],
+             [10 , "09:00 - 10:00", "SUNDAY" , "22/1"],
+             [11 , "10:00 - 11:00", "SUNDAY" , "22/1"],
+             [12 , "11:00 - 12:00", "SUNDAY" , "22/1"],
+             [13 , "09:00 - 10:00", "MONDAY" , "2/1"],
+             [14 , "10:00 - 11:00", "MONDAY" , "2/1"],
+             [15 , "11:00 - 12:00", "MONDAY" , "2/1"],
+             [16 , "09:00 - 10:00", "MONDAY" , "9/1"],
+             [17 , "10:00 - 11:00", "MONDAY" , "9/1"],
+             [18 , "11:00 - 12:00", "MONDAY" , "9/1"],
+             [19 , "09:00 - 10:00", "MONDAY" , "16/1"],
+             [20 , "10:00 - 11:00", "MONDAY" , "16/1"],
+             [21 , "11:00 - 12:00", "MONDAY" , "16/1"],
+             [22 , "09:00 - 10:00", "MONDAY" , "23/1"],
+             [23 , "10:00 - 11:00", "MONDAY" , "23/1"],
+             [24 , "11:00 - 12:00", "MONDAY" , "23/1"],
+             [25 , "09:00 - 10:00", "TUESDAY" , "3/1"],
+             [26 , "10:00 - 11:00", "TUESDAY" , "3/1"],
+             [27 , "11:00 - 12:00", "TUESDAY" , "3/1"],
+             [28 , "09:00 - 10:00", "TUESDAY" , "10/1"],
+             [29 , "10:00 - 11:00", "TUESDAY" , "10/1"],
+             [30 , "11:00 - 12:00", "TUESDAY" , "10/1"],
+             [31 , "09:00 - 10:00", "TUESDAY" , "17/1"],
+             [32 , "10:00 - 11:00", "TUESDAY" , "17/1"],
+             [33 , "11:00 - 12:00", "TUESDAY" , "17/1"],
+             [34 , "09:00 - 10:00", "TUESDAY" , "24/1"],
+             [35 , "10:00 - 11:00", "TUESDAY" , "24/1"],
+             [36 , "11:00 - 12:00", "TUESDAY" , "24/1"],
+             [37 , "09:00 - 10:00", "WEDNSDAY" , "4/1"],
+             [38 , "10:00 - 11:00", "WEDNSDAY" , "4/1"],
+             [39 , "11:00 - 12:00", "WEDNSDAY" , "4/1"],
+             [40 , "09:00 - 10:00", "WEDNSDAY" , "11/1"],
+             [41 , "10:00 - 11:00", "WEDNSDAY" , "11/1"],
+             [42 , "11:00 - 12:00", "WEDNSDAY" , "11/1"],
+             [43 , "09:00 - 10:00", "WEDNSDAY" , "18/1"],
+             [44 , "10:00 - 11:00", "WEDNSDAY" , "18/1"],
+             [45 , "11:00 - 12:00", "WEDNSDAY" , "18/1"],
+             [46 , "09:00 - 10:00", "WEDNSDAY" , "25/1"],
+             [47 , "10:00 - 11:00", "WEDNSDAY" , "25/1"],
+             [48 , "11:00 - 12:00", "WEDNSDAY" , "25/1"],
+             [49 , "09:00 - 10:00", "THURSDAY" , "5/1"],
+             [50 , "10:00 - 11:00", "THURSDAY" , "5/1"],
+             [51 , "11:00 - 12:00", "THURSDAY" , "5/1"],
+             [52 , "09:00 - 10:00", "THURSDAY" , "12/1"],
+             [53 , "10:00 - 11:00", "THURSDAY" , "12/1"],
+             [54 , "11:00 - 12:00", "THURSDAY" , "12/1"],
+             [55 , "09:00 - 10:00", "THURSDAY" , "19/1"],
+             [56 , "10:00 - 11:00", "THURSDAY" , "19/1"],
+             [57 , "11:00 - 12:00", "THURSDAY" , "19/1"],
+             [58 , "09:00 - 10:00", "THURSDAY" , "26/1"],
+             [59 , "10:00 - 11:00", "THURSDAY" , "26/1"],
+             [60 , "11:00 - 12:00", "THURSDAY" , "26/1"]]
 studentdb = None
 subjectdb = None
 roomdb = None
@@ -38,11 +97,11 @@ def step2(request):
     return render(request, 'services/timeslots.html')
 
 def step3(request):
-    if request.method == 'POST':
-        global timeslotss
-        timeslotss = request.POST['myInputs[]']
+    #if request.method == 'POST':
+        #global timeslotss
+        #timeslotss = request.POST['myInputs[]']
 
-    print(timeslotss)
+    #print(timeslotss)
     return render(request , 'services/excel-sheet.html')
 
 # def step3(request, tt_id):
@@ -63,13 +122,10 @@ from services import dbconvert
 # assign = dbconvert.assign_filename()
 
 def boom(request):
-    dbconvert.fetch_data.assign.set_StudentsFilename(studentdb)
-    dbconvert.fetch_data.assign.set_SubjectsFilename(subjectdb)
-    dbconvert.fetch_data.assign.set_RoomsFilename(roomdb)
-    print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
-    print(dbconvert.fetch_data.assign.get_SubjectsFilename())
-    print(dbconvert.fetch_data.assign.get_StudentsFilename())
-    print(dbconvert.fetch_data.assign.get_RoomsFilename())
+    dbconvert.fetch_data.assign.set_StudentsFile(studentdb)
+    dbconvert.fetch_data.assign.set_SubjectsFile(subjectdb)
+    dbconvert.fetch_data.assign.set_RoomsFile(roomdb)
+    dbconvert.fetch_data.assign.set_TimeSlots(timeslotss)
     tt = TimeTable.generateTT()
     global to_pdf
     to_pdf = tt
