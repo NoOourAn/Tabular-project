@@ -2,10 +2,12 @@
 <html lang="en">
   <head>
     {% load static %}
-    {% load i18n %}
-    {% block head %}
-    {{ wizard.form.media }}
-    {% endblock %}
+<!--    {% load i18n %}-->
+<!--    {% block head %}-->
+<!--    {{ wizard.form.media }}-->
+<!--    {% endblock %}-->
+
+
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,13 +26,10 @@
 <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#563d7c">
 
-      <script src="services/my.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
 
   </head>
   <body class="text-center">
+
 
 
   <main role="main" >
@@ -54,44 +53,68 @@
   </div>
 
 
-<!--<div class="container1">-->
-<!--    <button class="add_form_field">Add New Field &nbsp;-->
-<!--      <span style="font-size:16px; font-weight:bold;">+ </span>-->
-<!--    </button>-->
-<!--    <div><input type="text" name="mytext[]"></div>-->
-<!--</div>-->
 
-      <script  language="Javascript">
-          var counter = 1;
-           var limit = 56;
-function addInput(divName){
-     if (counter == limit)  {
-          alert("You have reached the limit of adding " + counter + " inputs");
-     }
-     else {
-          var newdiv = document.createElement('div');
-          newdiv.innerHTML = "TimeSlot" + (counter + 1) + " <br><input type='text' name='myInputs[]'>";
-          document.getElementById(divName).appendChild(newdiv);
-          counter++;
-     }
-}
-      </script>
 
-     <div class="container" id="bigwhitebox">
-        <div class="row">
-            <div class="col" >
-    <form enctype="multipart/form-data" action="{% url 'excelsheet'%}" method="POST">
+<!--    {% block content %}-->
+<!--      {% for field in form %}-->
+<!--        {% if field.error %}-->
+<!--      <div class="alert alert-danger" role="alert">-->
+<!--        {{ field.error }}-->
+<!--        </div>-->
+<!--        {% endif %}-->
+<!--      {% endfor %}-->
+<!--                  {% endblock %}-->
+
+
+    <form enctype="multipart/form-data" action="{%url 'excelsheet'%}" method="post">
         {% csrf_token %}
-         <div id="dynamicInput">
-             TimeSlot 1<br><input type="text" name="myInputs[]">
-         </div>
-         <input type="button" value="Add another TimeSlot" onClick="addInput('dynamicInput');">
+    <div class="container" id="bigwhitebox">
+    <div class="row">
+        <div class="col" >
+            <br/>
+             <br/>
 
-          <div id="bluebox">
-            <button name="wizard_goto_step" type="submit" value="submit" class="btn btn-info">next step</button>
+
+
+        <div class="row" >
+        <label>the number of exams</label>
+        <input type="number"  name="numberofexams" required>   <!-- name = startdate -->
             </div>
+ <br/>
+        <div class="row" >
+        <label>number of exams per day</label>
+        <input type="number"  name="numberofexamsperday" required>      <!-- name = duedate -->
+            </div>
+ <br/>
+        <div class="row" >
+        <label>the first exam start date</label>
+        <input type="time"  name="thefirstexamstartdate" required>
+            </div>
+ <br/>
+        <div class="row" >
+        <label>the gap time between the exams</label>
+        <input type="time"  name="thegaptimebetweentheexams" required>
+            </div>
+ <br/>
+        <div class="row" >
+        <label>exam duration</label>
+        <input type="time"  name="examduration<" required>
+            </div>
+ <br/>
 
-    </form>
+      </div>
+    </div>
+
+      <div id="bluebox">
+        <button name="wizard_goto_step" type="submit" value="submit" class="btn btn-info">next step</button>
+        </div>
+
+
+        </form>
+
+
+
+  </main>
 
 
 

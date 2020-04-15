@@ -13,6 +13,7 @@ startdate = None
 duedate = None
 noofexams = None
 timeslotss = None
+timeslot = None
 studentdb = None
 subjectdb = None
 roomdb = None
@@ -40,9 +41,72 @@ def step2(request):
 def step3(request):
     if request.method == 'POST':
         global timeslotss
-        timeslotss = request.POST['myInputs[]']
+        global timeslot
 
-    print(timeslotss)
+        timeslotss=[]
+        timeslot = []
+        no_of_time_slots =None
+        end_date=None
+        second_exam_start_date=None
+        second_exam_end_date=None
+        third_exam_start_date=None
+        third_exam_end_date=None
+
+
+        numberofexams =request.POST['numberofexams']
+        numberofexamsperday =request.POST['numberofexamsperday']
+        thefirstexamstartdate =request.POST['thefirstexamstartdate']
+        thegaptimebetweentheexams =request.POST['thegaptimebetweentheexams']
+        # examduration =request.POST['examduration']
+        examduration="03:00 AM"
+
+        numberofexams= int(numberofexams)
+        numberofexamsperday =int(numberofexamsperday)
+        print(numberofexams)
+        print(numberofexamsperday)
+
+
+        no_of_time_slots = numberofexams
+        the_first_exam_start_date=thefirstexamstartdate
+
+        if numberofexamsperday >= 1:
+            end_date=the_first_exam_start_date+examduration
+            if numberofexamsperday >= 2:
+                second_exam_start_date = end_date + thegaptimebetweentheexams
+                second_exam_end_date = end_date + examduration
+                if numberofexamsperday == 3:
+                    third_exam_start_date = second_exam_end_date + thegaptimebetweentheexams
+                    third_exam_end_date = second_exam_end_date + examduration
+
+
+        for x in range(1,no_of_time_slots):
+            if numberofexamsperday == 1:
+                timeslot = []
+                timeslot = [x, the_first_exam_start_date, end_date]
+
+            if numberofexamsperday == 2:
+                timeslot = []
+                timeslot = [x,the_first_exam_start_date, end_date]
+                timeslotss.append(timeslot)
+                timeslot = []
+                timeslot = [x,second_exam_start_date, second_exam_end_date]
+                timeslotss.append(timeslot)
+
+            if numberofexamsperday == 3:
+                timeslot = []
+                timeslot = [x, the_first_exam_start_date, end_date]
+                timeslotss.append(timeslot)
+                timeslot = []
+                timeslot = [x, second_exam_start_date, second_exam_end_date]
+                timeslotss.append(timeslot)
+                timeslot = []
+                timeslot = [x, third_exam_start_date, third_exam_end_date]
+                timeslotss.append(timeslot)
+        print(timeslotss)
+
+
+
+
     return render(request , 'services/excel-sheet.html')
 
 # def step3(request, tt_id):
