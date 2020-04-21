@@ -30,8 +30,6 @@
   </head>
   <body class="text-center">
 
-
-
   <main role="main" >
   <div class="jumbotron jumbotron-fluid">
 
@@ -52,9 +50,6 @@
             </ul>
   </div>
 
-
-
-
 <!--    {% block content %}-->
 <!--      {% for field in form %}-->
 <!--        {% if field.error %}-->
@@ -65,58 +60,99 @@
 <!--      {% endfor %}-->
 <!--                  {% endblock %}-->
 
-
     <form enctype="multipart/form-data" action="{%url 'excelsheet'%}" method="post">
         {% csrf_token %}
-    <div class="container" id="bigwhitebox">
-    <div class="row">
-        <div class="col" >
-            <br/>
-             <br/>
+        <div class="container" id="bigwhitebox">
+            <div class="row">
+                <div class="col">
+                    <br/>
+                    <br/>
+                    <div class="row" >
+                        <label>the number of exams</label>
+                        <input type="number"  name="numberofexams" required>   <!-- name = startdate -->
+                    </div>
+                    <br/>
+                    <div class="row" >
+                        <label>number of exams per day</label>
+                        <input type="number"  name="numberofexamsperday" required>      <!-- name = duedate -->
+                    </div>
+                    <br/>
 
+                    <div class="row" >
+                        <label>the first exam start date</label>
+                        <input type="datetime-local"  name="thefirstexamstartdate" required>
+                    </div>
+                    <br/>
 
+                    <div class="row" >
+                        <label>general exam start time</label>
+                        <input type="time"  name="generalexamstarttime" required>
+                    </div>
+                    <br/>
 
-        <div class="row" >
-        <label>the number of exams</label>
-        <input type="number"  name="numberofexams" required>   <!-- name = startdate -->
-            </div>
- <br/>
-        <div class="row" >
-        <label>number of exams per day</label>
-        <input type="number"  name="numberofexamsperday" required>      <!-- name = duedate -->
-            </div>
- <br/>
-        <div class="row" >
-        <label>the first exam start date</label>
-        <input type="time"  name="thefirstexamstartdate" required>
-            </div>
- <br/>
-        <div class="row" >
-        <label>the gap time between the exams</label>
-        <input type="time"  name="thegaptimebetweentheexams" required>
-            </div>
- <br/>
-        <div class="row" >
-        <label>exam duration</label>
-        <input type="time"  name="examduration<" required>
-            </div>
- <br/>
+                    <div class="row" >
+                        <label>general exam start time</label>
+                        <input type="time"  name="generalexamendtime" required>
+                    </div>
+                    <br/>
 
-      </div>
-    </div>
+                    <div class="row" >
+                        <label>the last exam start date</label>
+                        <input type="datetime-local"  name="thelastexamstartdate" required>
+                    </div>
+                    <br/>
 
-      <div id="bluebox">
-        <button name="wizard_goto_step" type="submit" value="submit" class="btn btn-info">next step</button>
+<!--                    <div class="row" >-->
+<!--                        <label>the gap time between the exams</label>-->
+<!--                        <input type="number"  name="thegaptimebetweentheexams" required>-->
+<!--                    </div>-->
+
+<!--                    <br/>-->
+
+                    <div class="row" >
+                        <label>exam duration</label>
+                    </div>
+
+                    <div class="row" style="margin:10px">
+
+                        <label>Hours:</label> <p style="margin-left:7px" id="outputH"></p>
+                        <input type="range" min="0" max="3" value="1" name="examdurationH" required id="sliderH" style="background: #d3d3d3; border-radius: 20px; margin-bottom:10px;">
+
+                        <label>Minutes:</label> <p style="margin-left:7px" id="outputM"></p>
+                        <input type="range" min="0" max="60" value="0" name="examdurationM" required id="sliderM" style="background: #d3d3d3; border-radius: 20px;">
+
+                    </div>
+                    <br/>
+                </div>
+            </div>
+            <div id="bluebox">
+                <button name="wizard_goto_step" type="submit" value="submit" class="btn btn-info">next step</button>
+            </div>
         </div>
-
-
-        </form>
-
-
-
+    </form>
   </main>
 
+  <script>
+      var sliderH = document.getElementById("sliderH");
+      var outputH = document.getElementById("outputH");
 
+      var sliderM = document.getElementById("sliderM");
+      var outPutM = document.getElementById("outputM");
+
+      outputH.innerHTML = sliderH.value;
+      outputM.innerHTML = sliderM.value;
+
+      sliderH.oninput = function(){
+         outputH.innerHTML = this.value;
+         if (this.value == 0){
+            outputH.innerHTML = this.value + " but be warned the system will round the minutes to 15, 30, 45 or 60";
+         }
+      }
+
+      sliderM.oninput = function(){
+         outputM.innerHTML = this.value;
+      }
+  </script>
 
 
   <footer class="mastfoot mt-auto">
