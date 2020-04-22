@@ -1,6 +1,8 @@
+{% extends "base.html" %}
 <!doctype html>
 <html lang="en">
   <head>
+      {% block head %}
     {% load static %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -112,9 +114,11 @@
 
 
     </style>
-
+{% endblock %}
   </head>
+  {% block content %}
   <body class="text-center">
+
 <!--    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">-->
   <header class="masthead mb-auto">
     <div class="inner">    <!-- h7ot hena el navbar-->
@@ -176,8 +180,9 @@
   </main>
 
 
-  <footer class="mastfoot mt-auto">
-  </footer>
+<!--  <footer class="mastfoot mt-auto">-->
+<!--  </footer>-->
 <!--</div>-->
 </body>
+{% endblock %}
 </html>

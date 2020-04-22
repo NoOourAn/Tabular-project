@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
-
+{% if not user.is_authenticated %}
     <div class="main">
         <div class="container">
             <div class="signup-content">
@@ -60,5 +60,18 @@
     <!-- JS -->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'js/main.js'%}"></script>
+{% else %}
+
+    <body style="color:white" onload="myFunction()">
+        
+    </body>
+
+    <script>
+        function myFunction() {
+          window.location.href=" {%url 'home'%} ";
+        }
+    </script>
+
+{%endif%}
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

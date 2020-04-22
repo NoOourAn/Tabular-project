@@ -1,6 +1,8 @@
+{% extends "base.html" %}
 <!doctype html>
 <html lang="en">
   <head>
+	  {% block head %}
     {% load static %}
 	{% load timetable_filters %}
     <meta charset="utf-8">
@@ -38,8 +40,9 @@
 <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#563d7c">
 
-
+{% endblock %}
   </head>
+  {% block content %}
   <body class="text-center">
 <!--  <header class="masthead mb-auto">-->
 <!--    <div class="inner">    &lt;!&ndash; h7ot hena el navbar&ndash;&gt;-->
@@ -260,8 +263,8 @@
 
 
 
-  <footer class="mastfoot mt-auto">
-  </footer>
+<!--  <footer class="mastfoot mt-auto">-->
+<!--  </footer>-->
 
 
   <!--===============================================================================================-->
@@ -275,4 +278,5 @@
 	<script src="{% static 'js/main.js' %}"></script>
 
 </body>
+{% endblock %}
 </html>
