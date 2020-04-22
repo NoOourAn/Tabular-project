@@ -1,4 +1,4 @@
-from django.shortcuts import render , get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from formtools.wizard.views import SessionWizardView
 from django.core.files.storage import FileSystemStorage
 from .models import Timetables
@@ -7,6 +7,7 @@ from services.utils import render_to_pdf
 import openpyxl
 from services import TimeTable
 from services import dbconvert
+from datetime import datetime, timedelta
 
 to_pdf = []
 startdate = None
@@ -23,12 +24,14 @@ wb = None
 def home(request):
     return render(request, 'services/home.html')
 
+
 def step1(request):
     return render(request, 'services/manual-data.html')
 
+
 def step2(request):
     if request.method == 'POST':
-        global startdate,duedate,noofexams
+        global startdate, duedate, noofexams
         startdate = request.POST['startdate']
         duedate = request.POST['duedate']
         noofexams = request.POST['examsNo']
@@ -38,76 +41,107 @@ def step2(request):
     print(noofexams)
     return render(request, 'services/timeslots.html')
 
+
 def step3(request):
     if request.method == 'POST':
-        global timeslotss
-        global timeslot
 
-        timeslotss=[]
-        timeslot = []
-        no_of_time_slots =None
-        end_date=None
-        second_exam_start_date=None
-        second_exam_end_date=None
-        third_exam_start_date=None
-        third_exam_end_date=None
+        numberofexams = request.POST['numberofexams']
+        numberofexamsperday = request.POST['numberofexamsperday']
 
+        numberofexams = int(numberofexams)
+        numberofexamsperday = int(numberofexamsperday)
 
-        numberofexams =request.POST['numberofexams']
-        numberofexamsperday =request.POST['numberofexamsperday']
-        thefirstexamstartdate =request.POST['thefirstexamstartdate']
-        thegaptimebetweentheexams =request.POST['thegaptimebetweentheexams']
-        # examduration =request.POST['examduration']
-        examduration="03:00 AM"
+        ##########################################
 
-        numberofexams= int(numberofexams)
-        numberofexamsperday =int(numberofexamsperday)
-        print(numberofexams)
-        print(numberofexamsperday)
+        thefirstexamstartdate = request.POST['thefirstexamstartdate']
+        thelastexamstartdate = request.POST['thelastexamstartdate']
+        generalexamstarttime = request.POST['generalexamstarttime']
+        generalexamendtime = request.POST['generalexamendtime']
 
+        examduration_hrs = request.POST['examdurationH']
+        examduration_min = request.POST['examdurationM']
 
-        no_of_time_slots = numberofexams
-        the_first_exam_start_date=thefirstexamstartdate
+        examduration_hrs = int(examduration_hrs)
+        examduration_min = int(examduration_min)
 
-        if numberofexamsperday >= 1:
-            end_date=the_first_exam_start_date+examduration
-            if numberofexamsperday >= 2:
-                second_exam_start_date = end_date + thegaptimebetweentheexams
-                second_exam_end_date = end_date + examduration
-                if numberofexamsperday == 3:
-                    third_exam_start_date = second_exam_end_date + thegaptimebetweentheexams
-                    third_exam_end_date = second_exam_end_date + examduration
+        if examduration_hrs == 0:
 
+            exdurationM_minus_15 = examduration_min - 15
+            exdurationM_minus_30 = examduration_min - 30
+            exdurationM_minus_45 = examduration_min - 45
+            exdurationM_minus_60 = examduration_min - 60
 
-        for x in range(1,no_of_time_slots):
-            if numberofexamsperday == 1:
-                timeslot = []
-                timeslot = [x, the_first_exam_start_date, end_date]
+            if exdurationM_minus_15 < 0:
+                exdurationM_minus_15 *= -1
+            if exdurationM_minus_30 < 0:
+                exdurationM_minus_30 *= -1
+            if exdurationM_minus_45 < 0:
+                exdurationM_minus_45 *= -1
+            if exdurationM_minus_60 < 0:
+                exdurationM_minus_60 *= -1
 
-            if numberofexamsperday == 2:
-                timeslot = []
-                timeslot = [x,the_first_exam_start_date, end_date]
-                timeslotss.append(timeslot)
-                timeslot = []
-                timeslot = [x,second_exam_start_date, second_exam_end_date]
-                timeslotss.append(timeslot)
-
-            if numberofexamsperday == 3:
-                timeslot = []
-                timeslot = [x, the_first_exam_start_date, end_date]
-                timeslotss.append(timeslot)
-                timeslot = []
-                timeslot = [x, second_exam_start_date, second_exam_end_date]
-                timeslotss.append(timeslot)
-                timeslot = []
-                timeslot = [x, third_exam_start_date, third_exam_end_date]
-                timeslotss.append(timeslot)
-        print(timeslotss)
+            if exdurationM_minus_15 < exdurationM_minus_30 and \
+               exdurationM_minus_15 < exdurationM_minus_45 and \
+               exdurationM_minus_15 < exdurationM_minus_60:
+                examduration_min = 15
+                print(15)
+            else:
+                if exdurationM_minus_30 < exdurationM_minus_45 and \
+                   exdurationM_minus_30 < exdurationM_minus_60:
+                    examduration_min = 30
+                    print(30)
+                else:
+                    if exdurationM_minus_45 < exdurationM_minus_60:
+                        examduration_min = 45
+                        print(45)
+                    else:
+                        examduration_min = 60
+                        print(60)
 
 
+        ##########################################
 
+        thefirstexamstartdate = datetime.strptime(thefirstexamstartdate, "%Y-%m-%dT%H:%M")
+        thelastexamstartdate = datetime.strptime(thelastexamstartdate, "%Y-%m-%dT%H:%M")
+        generalexamstarttime = datetime.strptime(generalexamstarttime, "%H:%M")
+        generalexamendtime = datetime.strptime(generalexamendtime, "%H:%M")
 
-    return render(request , 'services/excel-sheet.html')
+        print(thefirstexamstartdate)
+        print(thelastexamstartdate)
+
+        x = 1
+        time_available = []
+
+        while True:
+
+            lastthefirstexamstartdate = thefirstexamstartdate
+            thefirstexamstartdate += timedelta(hours=examduration_hrs, minutes=examduration_min)
+            if thefirstexamstartdate.hour <= generalexamendtime.hour:
+                time_available.append([x,
+                                       lastthefirstexamstartdate.strftime("%H:%M")
+                                       + " - "
+                                       + thefirstexamstartdate.strftime("%H:%M"),
+                                       lastthefirstexamstartdate.strftime("%A").upper(),
+                                       lastthefirstexamstartdate.strftime("%d/%m")
+                                       ])
+                x += 1
+
+            if thefirstexamstartdate.hour >= generalexamendtime.hour:
+                # lw al youm antha 5o4 3la alyoum aly wrah
+                thefirstexamstartdate += timedelta(days=1)
+                thefirstexamstartdate = datetime(year=thefirstexamstartdate.year,
+                                                 month=thefirstexamstartdate.month,
+                                                 day=thefirstexamstartdate.day,
+                                                 hour=generalexamstarttime.hour,
+                                                 minute=generalexamstarttime.minute)
+
+            if thefirstexamstartdate >= thelastexamstartdate:
+                break
+
+        print(time_available)
+
+    return render(request, 'services/excel-sheet.html')
+
 
 # def step3(request, tt_id):
 #     timetable = get_object_or_404(Timetables , accessCode = tt_id)
@@ -115,14 +149,16 @@ def step3(request):
 
 def step4(request):
     if request.method == 'POST':
-        global studentdb,roomdb,subjectdb,wb
+        global studentdb, roomdb, subjectdb, wb
         doc = request.FILES  # returns a dict-like object
         studentdb = openpyxl.load_workbook(doc['st-db'])
         subjectdb = openpyxl.load_workbook(doc['sub-db'])
         roomdb = openpyxl.load_workbook(doc['rm-db'])
     return render(request, 'services/generated-timetable.html')
 
+
 from services import dbconvert
+
 
 # assign = dbconvert.assign_filename()
 
@@ -152,19 +188,33 @@ def boom(request):
             timeslots.append(i[4])
         if i[3] in subjects:
             templist = subjects[i[3]]
-            templist[i[4]] = [i[0],i[1],i[2]]
+            templist[i[4]] = [i[0], i[1], i[2]]
             subjects[i[3]] = templist
         else:
-            templist = {i[4]:[i[0],i[1],i[2]]}
+            templist = {i[4]: [i[0], i[1], i[2]]}
             subjects[i[3]] = templist
-    return render(request, 'services/generated-timetable.html', {'success': 'hahahahahahahahaaaa', 'tt': tt , 'timeslots':timeslots, 'subjects':subjects})
+    return render(request, 'services/generated-timetable.html',
+                  {'success': 'hahahahahahahahaaaa', 'tt': tt, 'timeslots': timeslots, 'subjects': subjects})
+
 
 def create_pdf(request):
     data = {
         'a': 'noura amora',
         'b': to_pdf,
-        'c': 'baba samy <3 ',  #7aga htegi mn el auth
+        'c': 'baba samy <3 ',  # 7aga htegi mn el auth
         'd': 1233434,
     }
     pdf = render_to_pdf('services/pdf.html', data)
     return HttpResponse(pdf, content_type='application/pdf')
+
+# thefirstexamstartdate = datetime.strptime(thefirstexamstartdate, "%H:%M")
+# print(type(thefirstexamstartdate))
+#
+# print("in H: " + str(thefirstexamstartdate.hour))
+# print("in M: " + str(thefirstexamstartdate.minute))
+#
+# print(thefirstexamstartdate)
+# print(thefirstexamstartdate + timedelta(hours=thefirstexamstartdate.hour, minutes=thefirstexamstartdate.minute))
+#
+# thefirstexamstartdate = thefirstexamstartdate.strftime("%H:%M")
+# print(thefirstexamstartdate)

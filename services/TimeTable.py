@@ -96,11 +96,11 @@ class Department:
     def get_Courses(self): return self._Courses
 
 
-class Data:
-    Time_Avilable = [[1, "09:00 - 10:00", "SUNDAY" , "1/1"],
-                     [2, "10:00 - 11:00", "SUNDAY" , "1/1"],
-                     [3 , "11:00 - 12:00", "SUNDAY" , "1/1"],
-                     [4 , "09:00 - 10:00", "SUNDAY" , "8/1"],
+class Data:#[id, "start - end", day, daynum]
+    Time_Avilable = [[1, "09:00 - 10:00", "SUNDAY", "1/1"],
+                     [2, "10:00 - 11:00", "SUNDAY", "1/1"],
+                     [3 , "11:00 - 12:00", "SUNDAY", "1/1"],
+                     [4 , "09:00 - 10:00", "SUNDAY", "8/1"],
                      [5 , "10:00 - 11:00", "SUNDAY" , "8/1"],
                      [6 , "11:00 - 12:00", "SUNDAY" , "8/1"],
                      [7 , "09:00 - 10:00", "SUNDAY" , "15/1"],
