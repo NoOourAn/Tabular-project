@@ -32,64 +32,110 @@
 <meta name="theme-color" content="#563d7c">
 
 
-    <style>
-      .bd-placeholder-img {
+<style>
+    .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    #paddingbox{
-        background-image: url("{% static 'images/labtop-mockup.png' %}");
-        text-align: center;
-
     }
-    .transbox{
-        width: 100%;
-        height: 600px;
-        background: rgba(0,0,0,0.5);
+
+    @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+        }
+    }
+
+    .bgbox{
+        background-image: url("{% static 'images/labtop-mockup.png' %}") ;
+        text-align: center;
+        background-size: cover;
+    }
+
+
+    .box{
+
+
+        background: rgba(0,0,0,0.7);
         font: 30px arial, sans-serif;
-        padding: 160px 100px;
         color: #ffffff;
+        padding: 100px 0px;
         line-height: 1.4;
     }
-    .bgbox{
-        background: url("{% static 'images/labtop-mockup.png' %}") no-repeat;
-        background-size: cover;
-        width: 100%;
+
+    .Signup-header h1{
+        line-height:110px;
+        font-size:80px;
     }
+
 
     .card-2{
         color:black;
     }
 
+    .card-2 .container-2{
+        margin:auto;
+        width:78%;
+    }
+
+    .card-2 .card{
+        background-color:#e1e7e8;
+        border-radius: 50px;
+
+    }
+
+
+    .card-2 button{
+        width:135px;
+        height:40px;
+    }
+
+    .card-body button{
+        font-size: 20px;
+    }
+    .btn_login,.btn_sign_up{
+        color: white;
+        text-decoration:none;
+
+    }
+    .btn_login:hover,.btn_sign_up:hover{
+        color: white;
+        text-decoration:none;
+        cursor: pointer;
+    }
 
 
 
+</style>
 
-    </style>
     <!-- Custom styles for this template -->
     <link href="pricing.css" rel="stylesheet">
       {% endblock %}
   </head>
   {% block content %}
   <body>
-  <div  class="bgbox" id="paddingbox">
-  <div class="transbox">
+  {% if not user.is_authenticated %}
+  <div  class="bgbox" >
+  <div class="box">
+        <div class="Signup-header">
+            <h1>
+              Signup
+            </h1>
+
+            <h4>
+              Create your account to see what we have to offer
+              <br>
+              Sign up today it is for free!
+            </h4>
+        </div>
+      <br>
+
     <div class="card-2">
           <div class="card-deck mb-3 text-center container-2">
 
             <div class="card mb-4 shadow-sm" style="
-            margin-right: 50px;
-            margin-left: 50px;
         ">
               <div class="card-header">
                 <h4 class="my-0 font-weight-normal">Student</h4>
@@ -102,12 +148,15 @@
 
 
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-secondary">Sign up</button>
+                  <a href="{% url  'signupp' %}" class="btn_login">
+                    <button type="button" class="btn btn-sm btn-primary">
+                        Sign Up
+                    </button>
+                  </a>
               </div>
             </div>
             <div class="card mb-4 shadow-sm" style="
-            margin-left: 50px;
-            margin-right: 50px;
+            margin-left: 110px;
         ">
               <div class="card-header">
                 <h4 class="my-0 font-weight-normal">University</h4>
@@ -120,13 +169,31 @@
 
                   <li>Create your timetable easily</li>
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-success">Sign up</button>
+
+                  <a href="{% url  'signupoo' %}" class="btn_sign_up">
+                    <button type="button" class="btn btn-sm btn-success">
+                        Sign Up
+                    </button>
+                  </a>
               </div>
             </div>
           </div>
         </div>
     </div>
   </div>
+  {% else %}
+
+    <body style="color:white" onload="myFunction()">
+
+    </body>
+
+    <script>
+        function myFunction() {
+          window.location.href=" {%url 'home'%} ";
+        }
+    </script>
+
+{%endif%}
 </body>
 {% endblock %}
 </html>

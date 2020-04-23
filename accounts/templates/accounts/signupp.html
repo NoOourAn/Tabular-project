@@ -1,7 +1,9 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    {% block head %}
     {% load staticfiles %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +15,13 @@
 
     <!-- Main css -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    {% endblock %}
 </head>
+{% block content %}
 <body>
-
+{% if not user.is_authenticated %}
     <div class="main">
-        <div class="container">
+<!--        <div class="container">-->
             <div class="signup-content">
                 <div class="signup-img">
                     <img src="{% static 'images/signup-img.jpg' %}" alt="">
@@ -91,12 +95,26 @@
                     </form>
                 </div>
             </div>
-        </div>
+<!--        </div>-->
 
     </div>
+{% else %}
+
+    <body style="color:white" onload="myFunction()">
+
+    </body>
+
+    <script>
+        function myFunction() {
+          window.location.href=" {%url 'home'%} ";
+        }
+    </script>
+
+{%endif%}
 
     <!-- JS -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="js/main.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+{% endblock %}
 </html>
