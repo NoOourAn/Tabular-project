@@ -19,6 +19,8 @@ studentdb = None
 subjectdb = None
 roomdb = None
 wb = None
+numberofexams = None
+check = None
 
 
 def home(request):
@@ -35,6 +37,12 @@ def step2(request):
         startdate = request.POST['startdate']
         duedate = request.POST['duedate']
         noofexams = request.POST['examsNo']
+    else:
+        startdate = None
+        duedate = None
+        noofexams = None
+        return render(request, 'services/manual-data.html')
+
 
     print(startdate)
     print(duedate)
@@ -43,6 +51,7 @@ def step2(request):
 
 
 def step3(request):
+    global numberofexams
     if request.method == 'POST':
 
         numberofexams = request.POST['numberofexams']
@@ -140,6 +149,10 @@ def step3(request):
 
         print(time_available)
 
+    else:
+        numberofexams = None
+        return render(request, 'services/manual-data.html')
+
     return render(request, 'services/excel-sheet.html')
 
 
@@ -148,21 +161,28 @@ def step3(request):
 #     return render(request, 'services/generated-timetable.html' ,{'tt':timetable})
 
 def step4(request):
+
     if request.method == 'POST':
         global studentdb, roomdb, subjectdb, wb
         doc = request.FILES  # returns a dict-like object
         studentdb = openpyxl.load_workbook(doc['st-db'])
         subjectdb = openpyxl.load_workbook(doc['sub-db'])
         roomdb = openpyxl.load_workbook(doc['rm-db'])
-    return render(request, 'services/generated-timetable.html')
+    else:
+        return render(request, 'services/manual-data.html')
+
+    return render(request, 'services/generated-timetable.html', {'wait': 'Please wait until your timetable generates'})
 
 
 from services import dbconvert
 
-
 # assign = dbconvert.assign_filename()
 
 def boom(request):
+
+    if startdate is None or numberofexams is None or studentdb is None:
+        return render(request, 'services/manual-data.html')
+
     dbconvert.fetch_data.assign.set_StudentsFilename(studentdb)
     dbconvert.fetch_data.assign.set_SubjectsFilename(subjectdb)
     dbconvert.fetch_data.assign.set_RoomsFilename(roomdb)
@@ -194,7 +214,7 @@ def boom(request):
             templist = {i[4]: [i[0], i[1], i[2]]}
             subjects[i[3]] = templist
     return render(request, 'services/generated-timetable.html',
-                  {'success': 'hahahahahahahahaaaa', 'tt': tt, 'timeslots': timeslots, 'subjects': subjects})
+                  {'success': 'Your timetable has been successfully generated', 'tt': tt, 'timeslots': timeslots, 'subjects': subjects})
 
 
 def create_pdf(request):

@@ -1,14 +1,10 @@
+{% extends "base.html" %}
 <!doctype html>
 <html lang="en">
   <head>
     {% load static %}
-<!--    {% load i18n %}-->
-<!--    {% block head %}-->
-<!--    {{ wizard.form.media }}-->
-<!--    {% endblock %}-->
 
-
-
+    {% block head %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -23,11 +19,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
-<meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
-<meta name="theme-color" content="#563d7c">
+    <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#563d7c">
 
+    <style>
+        #bluebox{
+            background: #138496;
+        }
 
+        .btn-info{
+            transition:1.2s !important;
+        }
+
+        .btn-info:hover{
+          background-color: #17a2b8 !important;
+          transform: scale(1.2);
+        }
+
+      .services{
+        color:white !important;
+      }
+    </style>
+
+    {% endblock %}
   </head>
+
+  {% block content %}
   <body class="text-center">
 
   <main role="main" >
@@ -50,15 +67,6 @@
             </ul>
   </div>
 
-<!--    {% block content %}-->
-<!--      {% for field in form %}-->
-<!--        {% if field.error %}-->
-<!--      <div class="alert alert-danger" role="alert">-->
-<!--        {{ field.error }}-->
-<!--        </div>-->
-<!--        {% endif %}-->
-<!--      {% endfor %}-->
-<!--                  {% endblock %}-->
 
     <form enctype="multipart/form-data" action="{%url 'excelsheet'%}" method="post">
         {% csrf_token %}
@@ -91,7 +99,7 @@
                     <br/>
 
                     <div class="row" >
-                        <label>general exam start time</label>
+                        <label>general exam end time</label>
                         <input type="time"  name="generalexamendtime" required>
                     </div>
                     <br/>
@@ -125,9 +133,9 @@
                     <br/>
                 </div>
             </div>
-            <div id="bluebox">
-                <button name="wizard_goto_step" type="submit" value="submit" class="btn btn-info">next step</button>
-            </div>
+        </div>
+        <div id="bluebox">
+            <button name="wizard_goto_step" type="submit" value="submit" class="btn btn-info">next step</button>
         </div>
     </form>
   </main>
@@ -154,8 +162,7 @@
       }
   </script>
 
-
-  <footer class="mastfoot mt-auto">
-  </footer>
 </body>
+
+{% endblock %}
 </html>

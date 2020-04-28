@@ -3,7 +3,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    {% load static %}
 
 
 
@@ -11,6 +10,25 @@
 
 
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+      <style>
+
+          #bluebox{
+            background: #138496;
+          }
+
+          .btn-info{
+            transition:1.2s !important;
+          }
+
+          .btn-info:hover{
+            background-color: #17a2b8 !important;
+            transform: scale(1.2);
+          }
+
+      .services{
+        color:white !important;
+      }
+      </style>
 
     {% endblock %}
 

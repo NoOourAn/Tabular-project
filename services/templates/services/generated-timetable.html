@@ -40,6 +40,36 @@
 <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#563d7c">
 
+
+	  <style>
+
+	  	  *{
+            overflow:unset !important;
+          }
+
+	  	  body{
+	  	  	overflow:
+	  	  }
+		  .Blue{
+		  	background: #138496;
+		  	text-align: center;
+		  	padding: 35px;
+		  }
+		  .btn-info{
+            transition:1.2s !important;
+          }
+
+          .btn-info:hover{
+            background-color: #17a2b8 !important;
+            transform: scale(1.2);
+          }
+
+      .services{
+        color:white !important;
+      }
+
+	  </style>
+
 {% endblock %}
   </head>
   {% block content %}
@@ -103,6 +133,7 @@
 			  <div class="alert alert-primary" role="alert">
 				{{ wait }}
 			  </div>
+			<body onload="LoadTT()">ttttttttttttttttttttttttttttttttttttttttttttttttt</body>
 		{% endif %}
 
 		{% if success %}
@@ -111,10 +142,11 @@
 			  </div>
 		{% endif %}
 
-
-			<form method="get"> <!--style="display:none;"-->
-		  		<a href="{% url 'boom' %}">boom</a>
-			</form>
+			<script>
+				function LoadTT() {
+					location.replace("{% url 'boom' %}");
+				}
+			</script>
 
 
 			{% if tt %}
@@ -254,7 +286,7 @@
 
 <!--#################################################################################-->
     <form action="{% url 'pdf' %}" method="get">
-      <div id="blackbox">
+      <div class="Blue">
 		  <button type="submit" value="submit" class="btn btn-info btn-lg">Create Pdf</button>
       </div>
     </form>
@@ -271,7 +303,7 @@
 	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <!--===============================================================================================-->
 	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
-	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>-->
 <!--===============================================================================================-->
 	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
 <!--===============================================================================================-->

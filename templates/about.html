@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 <!--<head>-->
 <!--    <title>Contact us</title>-->
 <!--    <meta charset="utf-8">-->
@@ -9,48 +10,83 @@
 <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
 <!--</head>-->
 
+{% block head %}
+<style>
+    .background-img{
+        background-image: url("{% static 'images/Backgrounds/about2.jpg' %}");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+    }
+    .bg-opacity{
+        background: rgba(0,0,0,0.5);
+        padding:50px;
+    }
+    .white{
+        color:white;
+    }
+
+    .about{
+        color:white !important;
+    }
+    .my-cont{
+        padding-top: 50px;
+    }
+    .inner-txt{
+        text-shadow: 2px 2px 5px red;
+    }
+    .row{
+        border-radius:40px;
+    }
+
+
+</style>
+{% endblock %}
 
 {% block content %}
 {% load static %}
-<div class="container text-center" style="height:2000px;">
+<div class="background-img">
+    <div class="bg-opacity">
+        <div class="container text-center my-cont">
+            <div class="row" style="background-color: #bfded3;">
 
-    <div>
-        <h2 class="text-primary">We provide elegant solutions to complex schedule problems in universities.</h2>
-        <br>
-        <h4 style="width:70%;margin:auto;">
-            For any large-sale, complex organisation have a problem relate to the vastly interactive range of event planning, space planning, resource management, timetabling and scheduling activities that will always occur with varying degrees of waste and inefficiency.
-            OURPROJNAME extensive experience, research-based tools and workplace solutions provide a proven approach to optimising these activities in a way that can save vast amounts of money and time – which can easily run into tens of millions of pounds of annual savings within extremely large organisations.
-        </h4>
+                <div class="col-6" style="margin:auto;">
+                    <h2 class="text-primary">We provide elegant solutions to complex schedule problems in universities.</h2>
+                    <h4>
+                        For any large-sale, complex organisation have a problem relate to the vastly interactive range of event planning, space planning, resource management, timetabling and scheduling activities that will always occur with varying degrees of waste and inefficiency. OURPROJNAME extensive experience, research-based tools and workplace solutions provide a proven approach to optimising these activities in a way that can save vast amounts of money and time – which can easily run into tens of millions of pounds of annual savings within extremely large organisations.
+                    </h4>
+                </div>
+                <div class="col-6"> <img src="{% static 'images/home/SolvedProblem 1.png' %}"> </div>
+            </div>
+        <hr style="border: 1px black solid">
+
+            <div class="row" style="background-color: #95bfac;">
+
+                <div class="col-6"> <h2 class="text-primary" style="border-left:solid; margin: 0;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"> We ensure to make your data secure </h2> <img src="{% static 'images/secure.png' %}"> </div>
+                <div class="col-6" style="margin:auto;"> <h4> The security of your data is our responsibility we will never disclosure any sort of any information provided in addition to using security algorithms to ensure your data safety. </h4> </div>
+
+            </div>
+        <hr style="border: 1px black solid">
+            <div class="row" style="background-color: #bfded3;">
+
+                <div class="col-6" style="margin:auto;"> <h4> We take a good care of our customers; every step taken will send you an email and notifications about our variant offers. </h4> </div>
+                <div class="col-6"> <h2 class="text-primary" style="margin: 0;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"> We will notify you </h2> <img src="{% static 'images/notification.png' %}" width="400px" height="400px"> </div>
+
+            </div>
+
+            <br>
+
+            <div class="white">
+
+                <h3 class="fwzy" style="">
+                    We pride ourselves on providing outstanding service and offering easy schedule solutions to our customers.
+                    <a href="../accounts/login/"> Try Tabular now and see it your self </a>
+                </h3>
+
+            </div>
+        </div>
     </div>
-<hr style="border: 1px black solid">
-    <div class="row" style="background-color: #dcdcdc;">
-
-        <div class="col-6"> <h2 class="text-primary" style="border-left:solid; margin: 0;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"> We ensure to make your data secure </h2> <img src="{% static 'images/secure.png' %}"> </div>
-        <div class="col-6" style="margin:auto;"> <h4> The security of your data is our responsibility we will never disclosure any sort of any information provided in addition to using security algorithms to ensure your data safety. </h4> </div>
-
-    </div>
-<hr style="border: 1px black solid">
-    <div class="row" style="background-color: #f5f5dc;">
-
-        <div class="col-6" style="margin:auto;"> <h4> We take a good care of our customers; every step taken will send you an email and notifications about our variant offers. </h4> </div>
-        <div class="col-6"> <h2 style="margin: 0;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"> We will notify you </h2> <img src="{% static 'images/notification.png' %}" width="400px" height="400px"> </div>
-
-    </div>
-
-    <br>
-
-    <div style="border: 1px black solid; background: white url({% static 'images/businessman.jpg' %}) no-repeat center; background-size: 100%; background-attachment: fixed; height:200px;position:relative;">
-
-        <h3  style="position:absolute;top:30%;">
-            We pride ourselves on providing outstanding service and offering easy schedule solutions to our customers.
-        </h3>
-
-    </div>
-    <h2 class="text-primary">
-        <a href="../accounts/login/"> Try us now and see it your self </a>
-    </h2>
-
 </div>
-
 
 {% endblock %}

@@ -81,7 +81,7 @@
   <!-- Main jumbotron for a primary marketing message or call to action -->
 
 
-
+{% if user.is_S %}
   <div  class="bgbox" id="paddingbox">
     <div class="transbox">
       <h1 class="display-3 ">Search</h1>
@@ -115,7 +115,11 @@
         {% endif %}
     </div>
 
+{% else %}
 
+    <meta http-equiv="REFRESH" content="0;url={% url 'home' %}">
+
+{% endif %}
 </main>
 
 {% endblock %}
