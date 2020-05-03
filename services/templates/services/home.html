@@ -1,6 +1,8 @@
+{% extends "base.html" %}
 <!doctype html>
 <html lang="en">
   <head>
+      {% block head %}
     {% load static %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,7 +39,6 @@
       .milkybox {
       width: 100%;
       height: 700px;
-      background: #E9ECEF;
       text-align: center;
       }
       .centeredbox{
@@ -50,12 +51,12 @@
       text-align: center;
       }
       .bluebox p{
-      font: 30px arial, sans-serif;
+      font: 60px arial, sans-serif;
       padding: 100px 300px 0px 300px;
       color: #ffffff;
       }
       .bluebox h3{
-      font: 16px arial, sans-serif;
+      font: 25px arial, sans-serif;
       padding: 0px 300px 100px 300px;
       color: #ffffff;
       letter-spacing: 1px;
@@ -63,9 +64,9 @@
       }
       .whitebox{
       width: 100%;
-      height: 1300px;
       background: #ffffff;
-      padding: 450px 0px;
+      padding-top: 260px;
+      padding-bottom: 100px;
       }
       .imgbox{
       width:800px;
@@ -77,6 +78,10 @@
       .whitebox p{
       font: 30px arial, sans-serif;
       color: #265B7E;
+      }
+      .whitebox .text-muted{
+        font: 30px arial, sans-serif;
+        color: #265B7E;
       }
       .whitebox h3{
       font: 16px arial, sans-serif;
@@ -93,28 +98,46 @@
       max-width: 1150px;
       margin: 100px auto;
       }
-      .transbox{
+      .trans{
       width: 100%;
-      height: 400px;
+      height: 350px !important;
       background: rgba(0,0,0,0.5);
       }
+
+      .trans1{
+          width: 100%;
+          background: rgba(0,0,0,0.5);
+          color:white;
+      }
+
       .bgbox{
       background: url("{% static 'images/labtop-mockup.png' %}") center center fixed no-repeat;
       background-size: cover;
       width: 100%;
       }
-      .transbox p{
+      .trans p{
       font: 30px arial, sans-serif;
-      padding: 120px 100px;
+      padding-top: 90px;
       color: #ffffff;
       line-height: 1.4;
+      }
+      .trans label{
+        color:white;
+      }
+      .container .row{
+        margin-top: 40px;
+      }
+      .services{
+        color:white !important;
       }
 
 
     </style>
-
+{% endblock %}
   </head>
+  {% block content %}
   <body class="text-center">
+
 <!--    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">-->
   <header class="masthead mb-auto">
     <div class="inner">    <!-- h7ot hena el navbar-->
@@ -123,61 +146,105 @@
 
 
   <main role="main" >
-  <div class="milkybox">
-    <div class="centeredbox">
-    <h1 class="display-4">Services Home</h1>
-    <p class="lead">Exams Auto Scheduling</p>
-    <!--      <img src="{% static 'bg1.jpg' %}">-->
-      <a href="{% url 'manualdata' %}" class="btn btn-lg btn-info" style="margin:100px;">Create Your Timetable</a>
+{% if user.is_U %}
+  <div class="bgbox">
+      <div class="trans1">
+          <div class="milkybox">
+            <div class="centeredbox">
+                <h1 class="display-4">Services Home</h1>
+                <p class="lead">Exams Auto Scheduling</p>
+                <!--      <img src="{% static 'bg1.jpg' %}">-->
+                <a href="#read-first" class="btn btn-lg btn-outline-success" style="margin:auto; ">Read first</a>
+
+              </div>
+          </div>
       </div>
+  </div>
+
 </div>
-    <div class="bluebox">
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-      <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</h3>
+    <div class="bluebox" id="read-first">
+      <p>Read carefully .. important!</p>
+      <h3>The first step to create your timetable is to prepare three excel files in a certain format ,so here's the format you should follow while making the three files before uploading, to make the process faster and more efficient</h3>
       <img src="{% static 'images/labtop-mockup.png' %}" class="imgbox">
   </div>
+
     <div class="whitebox">
       <div class="container">
       <div class="row">
         <div class="col">
-      <img src="{% static 'images/labtop-mockup.png' %}" class="sideimgbox">
+      <img src="{% static 'images/excel/students.jpg' %}" class="sideimgbox">
           </div>
 
       <div class="col">
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-      <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h3>
+      <p>The first excel-sheet <span class="text-muted">"Student database":</span></p>
+      <h3>Must contain your students data .. the first column should contain the courses names and the followed columns should contain the students IDs who registered this course .</h3>
+
   </div>
         </div>
+
       <hr>
+
       <div class="row">
       <div class="col">
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-      <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h3>
+      <p>The second excel-sheet <span class="text-muted">"Subjects database":</span></p>
+      <h3>Must contain your courses data ..<br>
+          1st column : should contain the courses code.<br>
+          2nd column : should contain the courses names.<br>
+          3rd column : should contain the course professors names.<br>
+          4th column : should contain the courses department.<br>
+          5th column : should contain number of student registered at this course.<br>
+      </h3>
         </div>
        <div class="col">
-      <img src="{% static 'images/labtop-mockup.png' %}"  class="col">
+      <img src="{% static 'images/excel/subjects.jpg' %}"  class="col">
         </div>
+        </div>
+
+       <hr>
+
+      <div class="row">
+        <div class="col">
+      <img src="{% static 'images/excel/rooms.jpg' %}" class="sideimgbox">
+          </div>
+
+      <div class="col">
+      <p>The third excel-sheet <span class="text-muted">"Rooms database":</span></p>
+      <h3>Must contain your rooms data .. rooms name at the first column followed by each room capacity at the second column. </h3>
+  </div>
         </div>
 
         </div>
       </div>
 
     <div class="bgbox">
-      <div class="transbox">
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+      <div class="trans">
+        <p>Hope you find this steps easy and simple, and now you can proceed creating your timetable by pressing this button below.</p>
+          <form method="POST" action="{%url 'manualdata'%}">
+              {% csrf_token %}
+            <input type="checkbox" name="check" required>
+            <label>I have read the instructions above.</label>
+            <br>
+            <input type="submit" class="btn btn-lg btn-info" value="Create Your Timetable" style="background-color:#28a745; border-color:#28a745;">
+          </form>
+
       </div>
         </div>
 
 
+{% else %}
 
+    <meta http-equiv="REFRESH" content="0;url={% url 'home' %}">
+
+{% endif %}
 
 
 
   </main>
 
 
-  <footer class="mastfoot mt-auto">
-  </footer>
+<!--  <footer class="mastfoot mt-auto">-->
+<!--  </footer>-->
 <!--</div>-->
 </body>
+{% endblock %}
 </html>

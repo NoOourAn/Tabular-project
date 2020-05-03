@@ -1,28 +1,51 @@
+{% extends "base.html" %}
 <!doctype html>
 <html lang="en">
   <head>
     {% load static%}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.6">
-    <title>Manual Data</title>
+      {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Jekyll v3.8.6">
+        <title>Manual Data</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/cover/">
-    <script src="https://kit.fontawesome.com/24c48f9758.js" crossorigin="anonymous"></script>
-
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-
-<meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
-<meta name="theme-color" content="#563d7c">
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/cover/">
+        <script src="https://kit.fontawesome.com/24c48f9758.js" crossorigin="anonymous"></script>
 
 
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+        <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+        <meta name="theme-color" content="#563d7c">
+
+      <style>
+        #bluebox{
+            background: #138496;
+        }
+
+        .btn-info{
+            transition:1.2s !important;
+        }
+
+        .btn-info:hover{
+          background-color: #17a2b8 !important;
+          transform: scale(1.2);
+        }
+
+      .services{
+        color:white !important;
+      }
+
+      </style>
+{% endblock %}
 
   </head>
+  {% block content %}
   <body class="text-center">
 <!--  <header class="masthead mb-auto">-->
 <!--    <div class="inner">    &lt;!&ndash; h7ot hena el navbar&ndash;&gt;-->
@@ -56,7 +79,7 @@
 
         <div>
                 <label>student database</label>
-              <p>Please upload students data by the following format : mennenenmneemi</p>
+              <p>Please upload students data by the pre-explained format</p>
             <div class="custom-file" id="whitebox">
             <input type="file" class="custom-file-input" id="validatedCustomFile1" name="st-db" required>
             <label class="custom-file-label" for="validatedCustomFile1">Choose file...</label>
@@ -67,7 +90,7 @@
 
         <div>
                 <label>subjects database</label>
-              <p>Please upload students data by the following format : mennenenmneemi</p>
+              <p>Please upload subjects data by the the pre-explained format</p>
             <div class="custom-file" id="whitebox">
             <input type="file" class="custom-file-input" id="validatedCustomFile2" name="sub-db" required>
             <label class="custom-file-label" for="validatedCustomFile2">Choose file...</label>
@@ -78,7 +101,7 @@
 
         <div>
              <label>rooms database</label>
-              <p>Please upload students data by the following format : mennenenmneemi</p>
+              <p>Please upload rooms data by the pre-explained format</p>
             <div class="custom-file" id="whitebox">
             <input name="rm-db" type="file" class="custom-file-input" id="validatedCustomFile3" required>
             <label class="custom-file-label" for="validatedCustomFile3">Choose file...</label>
@@ -96,7 +119,8 @@
 
 
 
-  <footer class="mastfoot mt-auto">
-  </footer>
+<!--  <footer class="mastfoot mt-auto">-->
+<!--  </footer>-->
 </body>
+{% endblock %}
 </html>

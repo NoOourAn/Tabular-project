@@ -1,10 +1,11 @@
-
+{% extends "base.html" %}
 <!DOCTYPE html>
     {% load static %}
 
 <html lang="en">
 
 <head>
+    {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -15,9 +16,35 @@
 
     <!-- Main css -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
-<body>
 
+
+    <style>
+        .signup-img{
+            margin:auto;
+        }
+        #submit{
+            background-color: #28a745;
+        }
+        #submit:hover{
+            background-color: #28a745;
+        }
+
+        #reset, #submit{
+            border-radius: 20px;
+        }
+        #reset:hover{
+            background-color: #6c757d;
+        }
+        .form-group input:focus{
+            border-color: #6c757d;
+        }
+
+    </style>
+    {% endblock %}
+</head>
+{% block content %}
+<body>
+{% if not user.is_authenticated %}
     <div class="main">
         <div class="container">
             <div class="signup-content">
@@ -80,9 +107,23 @@
         </div>
 
     </div>
+    {% else %}
+
+    <body style="color:white" onload="myFunction()">
+
+    </body>
+
+    <script>
+        function myFunction() {
+          window.location.href=" {%url 'home'%} ";
+        }
+    </script>
+
+{%endif%}
 
     <!-- JS -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="js/main.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+{% endblock %}
 </html>

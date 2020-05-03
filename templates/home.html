@@ -1,6 +1,78 @@
 {% extends "base.html" %}
 
+{% block head %}
+  <style>
+      .bgbox button{
+        transition: 1s;
+        margin:7px;
+        border: 0.5px solid black;
+        font-size: 20px;
+      }
+
+      .bgbox button:hover{
+        transform: scale(1.2,1.2);
+        border: 0.5px solid black;
+        color: black;
+      }
+
+      .buttonR{
+        border-radius: 0px 15px 15px 0px !important;
+      }
+      .buttonL{
+        border-radius: 15px 0px 0px 15px !important;
+      }
+      .buttonM{
+        border-radius: 0px 0px 0px 0px !important;
+      }
+
+      .row .btn{
+        transition: 1s;
+        color:white;
+        border: 1px solid black;
+      }
+
+      .row .btn:hover{
+        transform: scale(1.1,1.1);
+        border: 1px solid black;
+      }
+
+      button{
+        color:white;
+      }
+
+      .row{
+        margin-top:55px;
+        text-align: center;
+      }
+      .row .benefit-img{
+        border-radius: 8px;
+        width: 250px;
+        height: 200px;
+        margin-bottom: 30px;
+      }
+
+      .more{
+        display: none;
+        }
+      .mo7sn{
+        transition: 1s;
+        border-radius: 30px;
+      }
+      .mo7sn:hover{
+        transform: scale(1.1,1.1);
+
+      }
+      .home{
+        color:white !important;
+      }
+
+
+  </style>
+{% endblock %}
+
 {% block content %}
+
+
 <main role="main">
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -10,12 +82,23 @@
   <div  class="bgbox" id="paddingbox">
     <div class="transbox">
       <h1 class="display-3 ">Tabular</h1>
-      <p>This is a web-application for exam scheduling.This is a web-application for exam scheduling.This is a web-application for exam scheduling.
-      This is a web-application for exam scheduling.This is a web-application for exam scheduling.</p>
+      <p>
+          Welcome to our website, <br>
+          Tabular enable any organisation to generate different exam timetables and make schedules.
+          It is very easy and fast you can know more by pressing the features or benefits button to know more about Tabular.<br>
+      </p>
 <!--      <p><a class="btn btn-primary btn-sm" href="#" role="button">Learn more &raquo;</a></p>-->
       <p><div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-secondary">features</button>
-          <button type="button" class="btn btn-secondary">benefits</button>
+
+      <a href="#benefits">
+          <button type="button" class="btn btn-secondary buttonL">
+            Benefits
+          </button>
+      </a>
+
+      <a href="#features">
+          <button type="button" class="btn btn-secondary buttonR">Features</button>
+      </a>
 
         </div>
       </p>
@@ -30,29 +113,52 @@
    <!-- Marketing messaging and featurettes
   ================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
-
+{% load static %}
+{% load staticfiles %}
   <div class="container marketing">
-
+<!--    <hr class="featurette-divider">-->
     <!-- Three columns of text below the carousel -->
     <div class="row">
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+      <div class="col-lg-4" id="benefits">
+        <img class="benefit-img" src="{% static 'images/home/easytouse.png' %}" alt="Smiley face" width="140px" height="140px">
+        <h2>Ease Of Use</h2>
+        <p>Tabluar is easy to use if you are an organization. All you have to do after registering <span id="dot1">...</span><span id="more1" class="more">or logining in is following the steps that tabular will tell you to .. There is nothing easier than that and if you are a student you can just search for it.</span></p>
+        <p><a class="btn btn-secondary buttonL" role="button" onclick="myFunction('dot1','more1','myBtn1')" id="myBtn1">Read more &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-        <h2>Heading</h2>
-        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        <img class="benefit-img" src="{% static 'images/home/SolvedProblem 1.png' %}" alt="Smiley face" width="140px" height="140px">
+        <h2>Problem Tabular solved</h2>
+        <p>Creating a timetable for any educational organization is not simple and if  <span id="dot2">...</span><span id="more2" class="more">this organization using a credit hours system that make the problem more complicated, here Tabular came and solved these two problems, just like that 💡.</span></p>
+        <p><a class="btn btn-secondary buttonM" role="button" onclick="myFunction('dot2','more2','myBtn2')" id="myBtn2">Read more &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+          <img class="benefit-img" src="{% static 'images/home/Developer.png' %}" alt="Smiley face" width="140px" height="140px">
+        <h2>Developers</h2>
+        <p>If you want to join or contact our developers team or if you have any <span id="dot3">...</span><span id="more3" class="more">suggestions to make Tabular better please let us know <a href="{% url 'index' %}" style="text-decoration:none;">Contact-Us</a> .</span></p>
+        <p><a class="btn btn-secondary buttonR"  role="button" onclick="myFunction('dot3','more3','myBtn3')" id="myBtn3">Read more &raquo;</a></p>
+
       </div><!-- /.col-lg-4 -->
+
+
+      <script>
+        function myFunction(dot,more,mybtn) {
+          var dots = document.getElementById(dot);
+          var moreText = document.getElementById(more);
+          var btnText = document.getElementById(mybtn);
+
+          if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more &raquo;";
+            moreText.style.display = "none";
+          } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "&laquo; Read less ";
+            moreText.style.display = "inline";
+          }
+        }
+      </script>
+
+
     </div><!-- /.row -->
 
 
@@ -60,39 +166,43 @@
 
     <hr class="featurette-divider">
 
-    <div class="row featurette">
+    <div class="row featurette" id="features">
       <div class="col-md-7">
-        <h2 class="featurette-heading">First featurette . <span class="text-muted">It’ll blow your mind.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <h2 class="featurette-heading">Tabular <span class="text-muted">overview.</span></h2>
+        <p class="lead">Tabular is a simple website that help you to generate an exam timetable easily in a short time with low cost.
+            <br>If you are an organization and get the access code which you will give to your students to access their exams timetable  .</p>
       </div>
       <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+        <img class="mo7sn img-thumbnail" src="{% static 'images/home/Table.png' %}" alt="Smiley face" width="450px" height="450px">
       </div>
     </div>
+    <br>
 
     <hr class="featurette-divider">
 
     <div class="row featurette">
       <div class="col-md-7 order-md-2">
-        <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <h2 class="featurette-heading">As an organization. <span class="text-muted">You can:</span></h2>
+        <p class="lead">Create your account on Tabular with low cost to enjoy our services which requires you to upload specified data in a certain format , so you can create the exam timetables you want.</p>
       </div>
       <div class="col-md-5 order-md-1">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+        <img class="mo7sn img-thumbnail" src="{% static 'images/home/Organization.jpg' %}" alt="Smiley face" width="450px" height="450px">
       </div>
     </div>
+    <br>
 
     <hr class="featurette-divider">
 
     <div class="row featurette">
       <div class="col-md-7">
-        <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <h2 class="featurette-heading">As a Student. <span class="text-muted">All you have to do is:</span></h2>
+        <p class="lead">Create your account on Tabular for free or log-in if you already have one ,then use the access code that was given to you by your organization to search for your exams timetable.</p>
       </div>
       <div class="col-md-5">
-        <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+        <img class="mo7sn img-thumbnail" src="{% static 'images/home/Student.jpg' %}" alt="Smiley face" >
       </div>
     </div>
+    <br>
 
     <hr class="featurette-divider">
 

@@ -70,6 +70,9 @@ def logout(request):
 def reg(request):
    return render(request,'accounts/reg.html')
 
+def reg2(request):
+   return render(request, 'accounts/reg2.html')
+
 def o(request):
    return render(request,'accounts/osignup.html')
 
