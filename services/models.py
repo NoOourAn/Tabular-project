@@ -36,6 +36,10 @@ class Timetables(models.Model):
             rooms.append(exam.split(',')[1])
         return rooms
 
+    def fetch_data(code):
+        table = Timetables(accessCode=code)
+        return table.objects
+
 
 
 
@@ -44,7 +48,7 @@ class Timetables(models.Model):
     startDate = models.DateField(default=date.today)  #editable=False
     dueDate = models.DateField(default=return_date_time)   #editable=False
     exams = models.TextField(default='' )  #exam[dept,course,room,instructor-id,timeslot-id,no of students]  / #editable=False
-    accessCode = models.TextField(default='')  #editable=False
+    accessCode = models.TextField(default='' , primary_key=True)  #editable=False
     orgId = models.IntegerField(default=0)   #forign key mn table el accounts(organisations)/one(org) to many(timetables)/one(timetable) to one(org) / editable = False
 
     def __str__(self):

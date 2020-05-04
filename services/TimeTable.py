@@ -48,7 +48,7 @@ class Room:
     def get_seatingCapacity(self): return self._seatingCapacity
 
 
-class TimeAvilable:
+class slots:
     def __init__(self, id, time, day, date):
         self.id = id
         self.time = time
@@ -97,66 +97,66 @@ class Department:
 
 
 class Data:#[id, "start - end", day, daynum]
-    Time_Avilable = [[1, "09:00 - 10:00", "SUNDAY", "1/1"],
-                     [2, "10:00 - 11:00", "SUNDAY", "1/1"],
-                     [3 , "11:00 - 12:00", "SUNDAY", "1/1"],
-                     [4 , "09:00 - 10:00", "SUNDAY", "8/1"],
-                     [5 , "10:00 - 11:00", "SUNDAY" , "8/1"],
-                     [6 , "11:00 - 12:00", "SUNDAY" , "8/1"],
-                     [7 , "09:00 - 10:00", "SUNDAY" , "15/1"],
-                     [8 , "10:00 - 11:00", "SUNDAY" , "15/1"],
-                     [9 , "11:00 - 12:00", "SUNDAY" , "15/1"],
-                     [10 , "09:00 - 10:00", "SUNDAY" , "22/1"],
-                     [11 , "10:00 - 11:00", "SUNDAY" , "22/1"],
-                     [12 , "11:00 - 12:00", "SUNDAY" , "22/1"],
-                     [13 , "09:00 - 10:00", "MONDAY" , "2/1"],
-                     [14 , "10:00 - 11:00", "MONDAY" , "2/1"],
-                     [15 , "11:00 - 12:00", "MONDAY" , "2/1"],
-                     [16 , "09:00 - 10:00", "MONDAY" , "9/1"],
-                     [17 , "10:00 - 11:00", "MONDAY" , "9/1"],
-                     [18 , "11:00 - 12:00", "MONDAY" , "9/1"],
-                     [19 , "09:00 - 10:00", "MONDAY" , "16/1"],
-                     [20 , "10:00 - 11:00", "MONDAY" , "16/1"],
-                     [21 , "11:00 - 12:00", "MONDAY" , "16/1"],
-                     [22 , "09:00 - 10:00", "MONDAY" , "23/1"],
-                     [23 , "10:00 - 11:00", "MONDAY" , "23/1"],
-                     [24 , "11:00 - 12:00", "MONDAY" , "23/1"],
-                     [25 , "09:00 - 10:00", "TUESDAY" , "3/1"],
-                     [26 , "10:00 - 11:00", "TUESDAY" , "3/1"],
-                     [27 , "11:00 - 12:00", "TUESDAY" , "3/1"],
-                     [28 , "09:00 - 10:00", "TUESDAY" , "10/1"],
-                     [29 , "10:00 - 11:00", "TUESDAY" , "10/1"],
-                     [30 , "11:00 - 12:00", "TUESDAY" , "10/1"],
-                     [31 , "09:00 - 10:00", "TUESDAY" , "17/1"],
-                     [32 , "10:00 - 11:00", "TUESDAY" , "17/1"],
-                     [33 , "11:00 - 12:00", "TUESDAY" , "17/1"],
-                     [34 , "09:00 - 10:00", "TUESDAY" , "24/1"],
-                     [35 , "10:00 - 11:00", "TUESDAY" , "24/1"],
-                     [36 , "11:00 - 12:00", "TUESDAY" , "24/1"],
-                     [37 , "09:00 - 10:00", "WEDNSDAY" , "4/1"],
-                     [38 , "10:00 - 11:00", "WEDNSDAY" , "4/1"],
-                     [39 , "11:00 - 12:00", "WEDNSDAY" , "4/1"],
-                     [40 , "09:00 - 10:00", "WEDNSDAY" , "11/1"],
-                     [41 , "10:00 - 11:00", "WEDNSDAY" , "11/1"],
-                     [42 , "11:00 - 12:00", "WEDNSDAY" , "11/1"],
-                     [43 , "09:00 - 10:00", "WEDNSDAY" , "18/1"],
-                     [44 , "10:00 - 11:00", "WEDNSDAY" , "18/1"],
-                     [45 , "11:00 - 12:00", "WEDNSDAY" , "18/1"],
-                     [46 , "09:00 - 10:00", "WEDNSDAY" , "25/1"],
-                     [47 , "10:00 - 11:00", "WEDNSDAY" , "25/1"],
-                     [48 , "11:00 - 12:00", "WEDNSDAY" , "25/1"],
-                     [49 , "09:00 - 10:00", "THURSDAY" , "5/1"],
-                     [50 , "10:00 - 11:00", "THURSDAY" , "5/1"],
-                     [51 , "11:00 - 12:00", "THURSDAY" , "5/1"],
-                     [52 , "09:00 - 10:00", "THURSDAY" , "12/1"],
-                     [53 , "10:00 - 11:00", "THURSDAY" , "12/1"],
-                     [54 , "11:00 - 12:00", "THURSDAY" , "12/1"],
-                     [55 , "09:00 - 10:00", "THURSDAY" , "19/1"],
-                     [56 , "10:00 - 11:00", "THURSDAY" , "19/1"],
-                     [57 , "11:00 - 12:00", "THURSDAY" , "19/1"],
-                     [58 , "09:00 - 10:00", "THURSDAY" , "26/1"],
-                     [59 , "10:00 - 11:00", "THURSDAY" , "26/1"],
-                     [60 , "11:00 - 12:00", "THURSDAY" , "26/1"]]
+    # timeslots = [[1, "09:00 - 10:00", "SUNDAY", "1/1"],
+    #                  [2, "10:00 - 11:00", "SUNDAY", "1/1"],
+    #                  [3 , "11:00 - 12:00", "SUNDAY", "1/1"],
+    #                  [4 , "09:00 - 10:00", "SUNDAY", "8/1"],
+    #                  [5 , "10:00 - 11:00", "SUNDAY" , "8/1"],
+    #                  [6 , "11:00 - 12:00", "SUNDAY" , "8/1"],
+    #                  [7 , "09:00 - 10:00", "SUNDAY" , "15/1"],
+    #                  [8 , "10:00 - 11:00", "SUNDAY" , "15/1"],
+    #                  [9 , "11:00 - 12:00", "SUNDAY" , "15/1"],
+    #                  [10 , "09:00 - 10:00", "SUNDAY" , "22/1"],
+    #                  [11 , "10:00 - 11:00", "SUNDAY" , "22/1"],
+    #                  [12 , "11:00 - 12:00", "SUNDAY" , "22/1"],
+    #                  [13 , "09:00 - 10:00", "MONDAY" , "2/1"],
+    #                  [14 , "10:00 - 11:00", "MONDAY" , "2/1"],
+    #                  [15 , "11:00 - 12:00", "MONDAY" , "2/1"],
+    #                  [16 , "09:00 - 10:00", "MONDAY" , "9/1"],
+    #                  [17 , "10:00 - 11:00", "MONDAY" , "9/1"],
+    #                  [18 , "11:00 - 12:00", "MONDAY" , "9/1"],
+    #                  [19 , "09:00 - 10:00", "MONDAY" , "16/1"],
+    #                  [20 , "10:00 - 11:00", "MONDAY" , "16/1"],
+    #                  [21 , "11:00 - 12:00", "MONDAY" , "16/1"],
+    #                  [22 , "09:00 - 10:00", "MONDAY" , "23/1"],
+    #                  [23 , "10:00 - 11:00", "MONDAY" , "23/1"],
+    #                  [24 , "11:00 - 12:00", "MONDAY" , "23/1"],
+    #                  [25 , "09:00 - 10:00", "TUESDAY" , "3/1"],
+    #                  [26 , "10:00 - 11:00", "TUESDAY" , "3/1"],
+    #                  [27 , "11:00 - 12:00", "TUESDAY" , "3/1"],
+    #                  [28 , "09:00 - 10:00", "TUESDAY" , "10/1"],
+    #                  [29 , "10:00 - 11:00", "TUESDAY" , "10/1"],
+    #                  [30 , "11:00 - 12:00", "TUESDAY" , "10/1"],
+    #                  [31 , "09:00 - 10:00", "TUESDAY" , "17/1"],
+    #                  [32 , "10:00 - 11:00", "TUESDAY" , "17/1"],
+    #                  [33 , "11:00 - 12:00", "TUESDAY" , "17/1"],
+    #                  [34 , "09:00 - 10:00", "TUESDAY" , "24/1"],
+    #                  [35 , "10:00 - 11:00", "TUESDAY" , "24/1"],
+    #                  [36 , "11:00 - 12:00", "TUESDAY" , "24/1"],
+    #                  [37 , "09:00 - 10:00", "WEDNSDAY" , "4/1"],
+    #                  [38 , "10:00 - 11:00", "WEDNSDAY" , "4/1"],
+    #                  [39 , "11:00 - 12:00", "WEDNSDAY" , "4/1"],
+    #                  [40 , "09:00 - 10:00", "WEDNSDAY" , "11/1"],
+    #                  [41 , "10:00 - 11:00", "WEDNSDAY" , "11/1"],
+    #                  [42 , "11:00 - 12:00", "WEDNSDAY" , "11/1"],
+    #                  [43 , "09:00 - 10:00", "WEDNSDAY" , "18/1"],
+    #                  [44 , "10:00 - 11:00", "WEDNSDAY" , "18/1"],
+    #                  [45 , "11:00 - 12:00", "WEDNSDAY" , "18/1"],
+    #                  [46 , "09:00 - 10:00", "WEDNSDAY" , "25/1"],
+    #                  [47 , "10:00 - 11:00", "WEDNSDAY" , "25/1"],
+    #                  [48 , "11:00 - 12:00", "WEDNSDAY" , "25/1"],
+    #                  [49 , "09:00 - 10:00", "THURSDAY" , "5/1"],
+    #                  [50 , "10:00 - 11:00", "THURSDAY" , "5/1"],
+    #                  [51 , "11:00 - 12:00", "THURSDAY" , "5/1"],
+    #                  [52 , "09:00 - 10:00", "THURSDAY" , "12/1"],
+    #                  [53 , "10:00 - 11:00", "THURSDAY" , "12/1"],
+    #                  [54 , "11:00 - 12:00", "THURSDAY" , "12/1"],
+    #                  [55 , "09:00 - 10:00", "THURSDAY" , "19/1"],
+    #                  [56 , "10:00 - 11:00", "THURSDAY" , "19/1"],
+    #                  [57 , "11:00 - 12:00", "THURSDAY" , "19/1"],
+    #                  [58 , "09:00 - 10:00", "THURSDAY" , "26/1"],
+    #                  [59 , "10:00 - 11:00", "THURSDAY" , "26/1"],
+    #                  [60 , "11:00 - 12:00", "THURSDAY" , "26/1"]]
 
     print("dat")
     def __init__(self):
@@ -167,15 +167,16 @@ class Data:#[id, "start - end", day, daynum]
         self.cat = excel.fetch_students_data()    # course:course-info (name-ins-....)
         self.co =excel.fetch_subjects_data()    # course:students
         self.d = excel.fetch_dept_data()
+        self.timeslots = excel.fetch_time_data()
         self._rooms = []
-        self._TimeAvilable = []
+        self._slots = []
         self._instructors = []
         self._students = []
 
         for i in range(0, len(self.ROOMS)):
             self._rooms.append(Room(self.ROOMS[i][0], self.ROOMS[i][1]))
-        for i in range(0, len(self.Time_Avilable)):
-            self._TimeAvilable.append(TimeAvilable(self.Time_Avilable[i][0], self.Time_Avilable[i][1], self.Time_Avilable[i][2] ,self.Time_Avilable[i][3]))
+        for i in range(0, len(self.timeslots)):
+            self._slots.append(slots(self.timeslots[i][0], self.timeslots[i][1], self.timeslots[i][2] ,self.timeslots[i][3]))
         # for i in range(0, len(self.INSTRUCTORS)):
         #     self._instructors.append(Instructor(self.INSTRUCTORS[i][0], self.INSTRUCTORS[i][1]))
         # for i in range(0, len(self.STUDENT)):
@@ -226,8 +227,8 @@ class Data:#[id, "start - end", day, daynum]
     def get_depts(self):
         return self.depts
 
-    def get_TimeAvilable(self):
-        return self._TimeAvilable
+    def get_slots(self):
+        return self._slots
 
     def get_numberOfClasses(self):
         return self.numberOfClasses
@@ -242,7 +243,7 @@ class Exam:
         self._students = students
         # the rest will be assigned random
         self._instructor = None
-        self._TimeAvilable = None
+        self._slots = None
         self._room = None
 
     def get_id(self): return self._id
@@ -255,21 +256,21 @@ class Exam:
 
     def get_instructor(self): return self._instructor
 
-    def get_TimeAvilable(self): return self._TimeAvilable
+    def get_slots(self): return self._slots
 
     def get_room(self): return self._room
 
     # to be set random
     def set_instructor(self, instructor): self._instructor = instructor
 
-    def set_TimeAvilable(self, TimeAvilable): self._TimeAvilable = TimeAvilable
+    def set_slots(self, slots): self._slots = slots
 
     def set_room(self, room): self._room = room
 
     def __str__(self):  # used in display class
         return "{" + str(self._dept.get_name()) + "," + str(self._course.get_number()) + "," + \
                str(self._room.get_number()) + "," + str(self._instructor.get_id()) + "," + str(
-            self._TimeAvilable.get_id()) + "," + str(len(self._students)) + "}"
+            self._slots.get_id()) + "," + str(len(self._students)) + "}"
 
 
 class schedule:
@@ -288,7 +289,7 @@ class schedule:
             for j in range(0, len(courses)):
                 new_exam = Exam(self.examcounter, depts[i], courses[j], courses[j].get_students())
                 self.examcounter += 1
-                new_exam.set_TimeAvilable(self.data.get_TimeAvilable()[randint(0, len(self.data.get_TimeAvilable()) - 1)])
+                new_exam.set_slots(self.data.get_slots()[randint(0, len(self.data.get_slots()) - 1)])
                 new_exam.set_room(self.data.get_rooms()[randint(0, len(self.data.get_rooms()) - 1)])
                 new_exam.set_instructor(courses[j].get_instructors()[randint(0, len(courses[j].get_instructors()) - 1)])
                 self.exams.append(new_exam)
@@ -310,7 +311,7 @@ class schedule:
                 self.num_of_conflict += 1
             for j in range(0, len(exams)):
                 if (j >= i):
-                    if (exams[i].get_TimeAvilable() == exams[j].get_TimeAvilable() and exams[i].get_id() != exams[
+                    if (exams[i].get_slots() == exams[j].get_slots() and exams[i].get_id() != exams[
                         j].get_id()):
                         if (exams[i].get_room() == exams[j].get_room()): self.num_of_conflict += 1
                         # if (exams[i].get_instructor() == exams[j].get_instructor()): self.num_of_conflict += 1
@@ -408,7 +409,7 @@ class Display:
         self.print_course()
         self.print_room()
         self.print_instructor()
-        self.print_Time_Avilable()
+        self.print_timeslots()
 
     def print_dept(self):
         depts = self.data.get_depts()
@@ -453,16 +454,16 @@ class Display:
             availableRoomsTable.add_row([str(rooms[i].get_number()), str(rooms[i].get_seatingCapacity())])
         print(availableRoomsTable)
 
-    def print_Time_Avilable(self):
-        availableTimeAvilableTable = prettytable.PrettyTable(['id', 'Time', 'day', 'date'])
-        timeAvilable = self.data.get_TimeAvilable()
+    def print_timeslots(self):
+        availableslotsTable = prettytable.PrettyTable(['id', 'Time', 'day', 'date'])
+        timeAvilable = self.data.get_slots()
         for i in range(0, len(timeAvilable)):
-            availableTimeAvilableTable.add_row([timeAvilable[i].get_id(), timeAvilable[i].get_time(), timeAvilable[i].get_day() , timeAvilable[i].get_date()])
-        print(availableTimeAvilableTable)
+            availableslotsTable.add_row([timeAvilable[i].get_id(), timeAvilable[i].get_time(), timeAvilable[i].get_day() , timeAvilable[i].get_date()])
+        print(availableslotsTable)
 
     def get_Time_slots(self):
         timeslots = []
-        timeAvilable = self.data.get_TimeAvilable()
+        timeAvilable = self.data.get_slots()
         for i in range(0, len(timeAvilable)):
             if timeAvilable[i].get_time() not in timeslots:
                 timeslots.append(timeAvilable[i].get_time())
@@ -480,7 +481,7 @@ class Display:
     def print_schedule_as_table(self, schedule):
         classes = schedule.get_exams()
         table = prettytable.PrettyTable(
-            ['Exam #', 'Dept', 'Course(number , max # of students)', 'Room (Capacity)', 'Instructor', 'TimeAvilable'])
+            ['Exam #', 'Dept', 'Course(number , max # of students)', 'Room (Capacity)', 'Instructor', 'slots'])
         for i in range(0, len(classes)):
             table.add_row([
                 str(i), classes[i].get_dept().get_name(), classes[i].get_course().get_name() + " (" +
@@ -490,10 +491,10 @@ class Display:
                                classes[i].get_room().get_seatingCapacity()) + ")",
                            classes[i].get_instructor().get_name() + " (" + str(
                                classes[i].get_instructor().get_id()) + ")",
-                           classes[i].get_TimeAvilable().get_time() + " (" + str(
-                               classes[i].get_TimeAvilable().get_id()) + ")" + " " +
-                           classes[i].get_TimeAvilable().get_day() + " " +
-                           classes[i].get_TimeAvilable().get_date()
+                           classes[i].get_slots().get_time() + " (" + str(
+                               classes[i].get_slots().get_id()) + ")" + " " +
+                           classes[i].get_slots().get_day() + " " +
+                           classes[i].get_slots().get_date()
                           ])
         print(table)
 
@@ -501,7 +502,7 @@ class Display:
         exams = []
         classes = schedule.get_exams()
         for i in range(0, len(classes)):
-            exams.append([classes[i].get_course().get_name(), classes[i].get_room().get_number(),  classes[i].get_TimeAvilable().get_day() ,  classes[i].get_TimeAvilable().get_date(),  classes[i].get_TimeAvilable().get_time()])
+            exams.append([classes[i].get_course().get_name(), classes[i].get_room().get_number(),  classes[i].get_slots().get_day() ,  classes[i].get_slots().get_date(),  classes[i].get_slots().get_time()])
         # exams.sort(key=sort_by_id)
         exams.sort(key=sort_by_id)
         return exams

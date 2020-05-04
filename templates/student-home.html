@@ -58,14 +58,9 @@
       font-style: italic;
 
       }
-
-
-
-
-
       .tablebox{
       width: 100%;
-      height: 500px;
+      height: 300px;
       padding: 150px;
       background-color: #ffffff;
       }
@@ -85,35 +80,83 @@
   <div  class="bgbox" id="paddingbox">
     <div class="transbox">
       <h1 class="display-3 ">Search</h1>
-      <p>search for your schedual using your organization.</p>
+      <p>Search for your Schedule by Access code.</p>
 
 
 
 <!--      <p><a class="btn btn-primary btn-sm" href="#" role="button">Learn more &raquo;</a></p>-->
       <div class="btn-group" role="group" aria-label="Basic example">
-          <form method="post" action="{% url 'student' %}" class="form-inline mt-2 mt-md-0" >{% csrf_token %}
+          <form method="post" action="{% url 'search' %}" class="form-inline mt-2 mt-md-0" >{% csrf_token %}
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
         </div>
-
     </div>
   </div>
 
-    <div class="tablebox">
         {% if code %}
+    <div class="tablebox">
         <div class="alert alert-success" role="alert">
             Found it!
         </div>
-        <a href="{% url 'timetable' %}">{{ code }}</a>
-
+        <a href="{% url 'fetchtimetable' %}">{{ code }}</a>
+            </div>
         {% endif %}
+
+
+    			{% if tt %}
+				<div class="table100 ver2 m-b-110">
+					<table data-vertable="ver2">
+						<thead>
+
+							<tr class="row100 head">
+								<th class="column100 column1" data-column="column1"></th>
+
+								{% for i in timeslots %}
+								<th class="column100 column2" data-column="column2">{{ i }}</th>
+								{% endfor %}
+
+							</tr>
+
+						</thead>
+						<tbody>
+
+							{% for key, value in subjects.items %}
+								<tr class="row100">
+									<td class="column100 column1" data-column="column1">{{ key }}</td>
+										{% for j in timeslots %}
+											{% if j not in value %}
+												<td class="column2">...</td>
+											{% else %}
+											{% endif %}
+										{% endfor %}
+								</tr>
+							{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+
+			{% endif %}
+
+
+
+
+<!--            {% if table %}-->
+<!--    <div class="tablebox">-->
+
+<!--        <a href="{% url 'fetchtimetable' %}">{{ table }}</a>-->
+<!--            </div>-->
+<!--        {% endif %}-->
+
         {% if error %}
-        <div class="alert alert-warning" role="alert">
-            {{ error }}
+            <div class="container" style="margin:100px;">
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
         </div>
         {% endif %}
-    </div>
+
 
 {% else %}
 
@@ -123,228 +166,3 @@
 </main>
 
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<!doctype html>-->
-
-<!--<html lang="en">-->
-<!--  <head>-->
-<!--      {% load static %}-->
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
-<!--    <meta name="description" content="">-->
-<!--    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">-->
-<!--    <meta name="generator" content="Jekyll v3.8.6">-->
-<!--    <title>Jumbotron Template · Bootstrap</title>-->
-
-<!--    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/jumbotron/">-->
-
-<!--    &lt;!&ndash; Bootstrap core CSS &ndash;&gt;-->
-<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
-
-<!--    &lt;!&ndash; Favicons &ndash;&gt;-->
-<!--<link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">-->
-<!--<link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">-->
-<!--<link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">-->
-<!--<link rel="manifest" href="/docs/4.4/assets/img/favicons/manifest.json">-->
-<!--<link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">-->
-<!--<link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">-->
-<!--<meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">-->
-<!--<meta name="theme-color" content="#563d7c">-->
-
-
-<!--    <style>-->
-<!--      .bd-placeholder-img {-->
-<!--        font-size: 1.125rem;-->
-<!--        text-anchor: middle;-->
-<!--        -webkit-user-select: none;-->
-<!--        -moz-user-select: none;-->
-<!--        -ms-user-select: none;-->
-<!--        user-select: none;-->
-<!--      }-->
-
-<!--      @media (min-width: 768px) {-->
-<!--        .bd-placeholder-img-lg {-->
-<!--          font-size: 3.5rem;-->
-<!--        }-->
-<!--      }-->
-<!--      #paddingbox{-->
-<!--      background-image: url("{% static 'images/labtop-mockup.png' %}");-->
-<!--      text-align: center;-->
-
-<!--      }-->
-<!--      .transbox{-->
-<!--      width: 100%;-->
-<!--      height: 600px;-->
-<!--      background: rgba(0,0,0,0.5);-->
-<!--      font: 30px arial, sans-serif;-->
-<!--      padding: 160px 100px;-->
-<!--      color: #ffffff;-->
-<!--      line-height: 1.4;-->
-<!--      }-->
-<!--      .bgbox{-->
-<!--      background: url("{% static 'images/labtop-mockup.png' %}") center center fixed no-repeat;-->
-<!--      background-size: cover;-->
-<!--      width: 100%;-->
-<!--      }-->
-
-<!--       .footer-container{-->
-<!--      height: 56px;-->
-<!--      width: 100% ;-->
-<!--      background-color:#343a40;-->
-<!--      padding-top: 16px;-->
-<!--      padding-left: 80px;-->
-<!--      padding-right: 80px;-->
-<!--      }-->
-<!--      .footer-container p{-->
-<!--      color:rgba(255,255,255,.5);-->
-<!--      }-->
-<!--      .footer-container a{-->
-<!--      color:#28a745;-->
-<!--      text-decoration: none;-->
-<!--      }-->
-<!--      #logo {-->
-<!--      color: rgba(255,255,255,.5);-->
-<!--      font-size: x-large;-->
-<!--      font-family: cursive;-->
-<!--      font-style: italic;-->
-
-<!--      }-->
-
-
-
-
-
-<!--      .tablebox{-->
-<!--      width: 100%;-->
-<!--      height: 500px;-->
-<!--      padding: 150px;-->
-<!--      background-color: #ffffff;-->
-<!--      }-->
-
-
-
-<!--    </style>-->
-<!--    &lt;!&ndash; Custom styles for this template &ndash;&gt;-->
-<!--    <link href="jumbotron.css" rel="stylesheet">-->
-<!--  </head>-->
-<!--  <body>-->
-
-
-<!--  <div class="all">-->
-<!--    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">-->
-<!--  <a class="nav-link" id="logo" href="#">Tabular</a>-->
-<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--    <span class="navbar-toggler-icon"></span>-->
-<!--  </button>-->
-
-<!--  <div class="collapse navbar-collapse" id="navbarsExampleDefault">-->
-<!--    <ul class="navbar-nav ml-auto">-->
-<!--      <li class="nav-item active">-->
-<!--        <a class="nav-link" href="#">Exam-Schedul<span class="sr-only">(current)</span></a>-->
-<!--      </li>-->
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link" href="#">Contact-Us</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item">-->
-<!--        <a class="nav-link" href="#">About</a>-->
-<!--      </li>-->
-<!--      <li class="nav-item dropdown">-->
-<!--        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Student-name</a>-->
-<!--        <div class="dropdown-menu" aria-labelledby="dropdown01">-->
-<!--          <a class="dropdown-item" href="#">Log-Out</a>-->
-<!--        </div>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--  </div>-->
-<!--</nav>-->
-
-<!--<main role="main">-->
-
-<!--  &lt;!&ndash; Main jumbotron for a primary marketing message or call to action &ndash;&gt;-->
-
-
-
-<!--  <div  class="bgbox" id="paddingbox">-->
-<!--    <div class="transbox">-->
-<!--      <h1 class="display-3 ">Search</h1>-->
-<!--      <p>search for your schedual using your organization.</p>-->
-
-
-
-<!--&lt;!&ndash;      <p><a class="btn btn-primary btn-sm" href="#" role="button">Learn more &raquo;</a></p>&ndash;&gt;-->
-<!--      <div class="btn-group" role="group" aria-label="Basic example">-->
-<!--          <form method="post" action="{% url 'student' %}" class="form-inline mt-2 mt-md-0" >{% csrf_token %}-->
-<!--            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">-->
-<!--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-<!--          </form>-->
-<!--        </div>-->
-
-<!--    </div>-->
-<!--  </div>-->
-
-<!--    <div class="tablebox">-->
-<!--        {% if code %}-->
-<!--        <div class="alert alert-success" role="alert">-->
-<!--            Found it!-->
-<!--        </div>-->
-<!--        <a href="{% url 'timetable' %}">{{ code }}</a>-->
-
-<!--        {% endif %}-->
-<!--        {% if error %}-->
-<!--        <div class="alert alert-warning" role="alert">-->
-<!--            {{ error }}-->
-<!--        </div>-->
-<!--        {% endif %}-->
-<!--    </div>-->
-
-
-<!--</main>-->
-
-
-
-<!--   &lt;!&ndash; Marketing messaging and featurettes-->
-<!--  ================================================== &ndash;&gt;-->
-<!--  &lt;!&ndash; Wrap the rest of the page in another container to center all the content. &ndash;&gt;-->
-
-<!--  &lt;!&ndash; FOOTER &ndash;&gt;-->
-<!--  <footer class="footer-container" ">-->
-<!--    <p class="float-right"><a href="#">Back to top</a></p>-->
-<!--    <p>&copy;{% now "Y" %} Copyright <a class="dark-grey-text" href="#">Tabular</a> </p>-->
-<!--  </footer>-->
-<!--</div>-->
-
-
-
-
-
-
-
-<!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>-->
-<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>-->
-<!--  </div>-->
-<!--  </body>-->
-<!--</html>-->

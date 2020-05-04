@@ -12,15 +12,16 @@ from datetime import datetime, timedelta
 to_pdf = []
 startdate = None
 duedate = None
-noofexams = None
-timeslotss = None
-timeslot = None
+accesscode = None
+# timeslotss = None
+# timeslot = None
 studentdb = None
 subjectdb = None
 roomdb = None
 wb = None
 numberofexams = None
 check = None
+time_available = []
 
 
 def home(request):
@@ -33,25 +34,25 @@ def step1(request):
 
 def step2(request):
     if request.method == 'POST':
-        global startdate, duedate, noofexams
+        global startdate, duedate, accesscode
         startdate = request.POST['startdate']
         duedate = request.POST['duedate']
-        noofexams = request.POST['examsNo']
+        accesscode = request.POST['accesscode']
     else:
         startdate = None
         duedate = None
-        noofexams = None
+        accesscode = None
         return render(request, 'services/manual-data.html')
 
 
     print(startdate)
     print(duedate)
-    print(noofexams)
+    print(accesscode)
     return render(request, 'services/timeslots.html')
 
 
 def step3(request):
-    global numberofexams
+    global numberofexams,startdate,duedate
     if request.method == 'POST':
 
         numberofexams = request.POST['numberofexams']
@@ -62,8 +63,8 @@ def step3(request):
 
         ##########################################
 
-        thefirstexamstartdate = request.POST['thefirstexamstartdate']
-        thelastexamstartdate = request.POST['thelastexamstartdate']
+        # startdate = request.POST['startdate']
+        # duedate = request.POST['duedate']
         generalexamstarttime = request.POST['generalexamstarttime']
         generalexamendtime = request.POST['generalexamendtime']
 
@@ -110,41 +111,41 @@ def step3(request):
 
         ##########################################
 
-        thefirstexamstartdate = datetime.strptime(thefirstexamstartdate, "%Y-%m-%dT%H:%M")
-        thelastexamstartdate = datetime.strptime(thelastexamstartdate, "%Y-%m-%dT%H:%M")
+        startdate = datetime.strptime(startdate, "%Y-%m-%dT%H:%M")
+        duedate = datetime.strptime(duedate, "%Y-%m-%dT%H:%M")
         generalexamstarttime = datetime.strptime(generalexamstarttime, "%H:%M")
         generalexamendtime = datetime.strptime(generalexamendtime, "%H:%M")
 
-        print(thefirstexamstartdate)
-        print(thelastexamstartdate)
+        print(startdate)
+        print(duedate)
 
         x = 1
-        time_available = []
+        global time_available
 
         while True:
 
-            lastthefirstexamstartdate = thefirstexamstartdate
-            thefirstexamstartdate += timedelta(hours=examduration_hrs, minutes=examduration_min)
-            if thefirstexamstartdate.hour <= generalexamendtime.hour:
+            laststartdate = startdate
+            startdate += timedelta(hours=examduration_hrs, minutes=examduration_min)
+            if startdate.hour <= generalexamendtime.hour:
                 time_available.append([x,
-                                       lastthefirstexamstartdate.strftime("%H:%M")
+                                       laststartdate.strftime("%H:%M")
                                        + " - "
-                                       + thefirstexamstartdate.strftime("%H:%M"),
-                                       lastthefirstexamstartdate.strftime("%A").upper(),
-                                       lastthefirstexamstartdate.strftime("%d/%m")
+                                       + startdate.strftime("%H:%M"),
+                                       laststartdate.strftime("%A").upper(),
+                                       laststartdate.strftime("%d/%m")
                                        ])
                 x += 1
 
-            if thefirstexamstartdate.hour >= generalexamendtime.hour:
+            if startdate.hour >= generalexamendtime.hour:
                 # lw al youm antha 5o4 3la alyoum aly wrah
-                thefirstexamstartdate += timedelta(days=1)
-                thefirstexamstartdate = datetime(year=thefirstexamstartdate.year,
-                                                 month=thefirstexamstartdate.month,
-                                                 day=thefirstexamstartdate.day,
+                startdate += timedelta(days=1)
+                startdate = datetime(year=startdate.year,
+                                                 month=startdate.month,
+                                                 day=startdate.day,
                                                  hour=generalexamstarttime.hour,
                                                  minute=generalexamstarttime.minute)
 
-            if thefirstexamstartdate >= thelastexamstartdate:
+            if startdate >= duedate:
                 break
 
         print(time_available)
@@ -183,19 +184,21 @@ def boom(request):
     if startdate is None or numberofexams is None or studentdb is None:
         return render(request, 'services/manual-data.html')
 
-    dbconvert.fetch_data.assign.set_StudentsFilename(studentdb)
-    dbconvert.fetch_data.assign.set_SubjectsFilename(subjectdb)
-    dbconvert.fetch_data.assign.set_RoomsFilename(roomdb)
+    dbconvert.fetch_data.assign.set_StudentsFile(studentdb)
+    dbconvert.fetch_data.assign.set_SubjectsFile(subjectdb)
+    dbconvert.fetch_data.assign.set_RoomsFile(roomdb)
+    dbconvert.fetch_data.assign.set_TimeSlots(time_available)
     print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
-    print(dbconvert.fetch_data.assign.get_SubjectsFilename())
-    print(dbconvert.fetch_data.assign.get_StudentsFilename())
-    print(dbconvert.fetch_data.assign.get_RoomsFilename())
+    print(dbconvert.fetch_data.assign.get_SubjectsFile())
+    print(dbconvert.fetch_data.assign.get_StudentsFile())
+    print(dbconvert.fetch_data.assign.get_RoomsFile())
     tt = TimeTable.generateTT()
     global to_pdf
     to_pdf = tt
     TT = Timetables()
     TT.startDate = startdate
     TT.dueDate = duedate
+    TT.accessCode = accesscode
     # TT.orgId = "boom"
     # TT.accessCode = 1
     TT.exams = tt
@@ -216,6 +219,8 @@ def boom(request):
     return render(request, 'services/generated-timetable.html',
                   {'success': 'Your timetable has been successfully generated', 'tt': tt, 'timeslots': timeslots, 'subjects': subjects})
 
+def search():
+    return render('services/timeslots.html')
 
 def create_pdf(request):
     data = {
@@ -227,14 +232,14 @@ def create_pdf(request):
     pdf = render_to_pdf('services/pdf.html', data)
     return HttpResponse(pdf, content_type='application/pdf')
 
-# thefirstexamstartdate = datetime.strptime(thefirstexamstartdate, "%H:%M")
-# print(type(thefirstexamstartdate))
+# startdate = datetime.strptime(startdate, "%H:%M")
+# print(type(startdate))
 #
-# print("in H: " + str(thefirstexamstartdate.hour))
-# print("in M: " + str(thefirstexamstartdate.minute))
+# print("in H: " + str(startdate.hour))
+# print("in M: " + str(startdate.minute))
 #
-# print(thefirstexamstartdate)
-# print(thefirstexamstartdate + timedelta(hours=thefirstexamstartdate.hour, minutes=thefirstexamstartdate.minute))
+# print(startdate)
+# print(startdate + timedelta(hours=startdate.hour, minutes=startdate.minute))
 #
-# thefirstexamstartdate = thefirstexamstartdate.strftime("%H:%M")
-# print(thefirstexamstartdate)
+# startdate = startdate.strftime("%H:%M")
+# print(startdate)
