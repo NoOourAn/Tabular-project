@@ -1,6 +1,6 @@
 from django.shortcuts import render ,get_object_or_404
 from services.models import Timetables
-
+import ast
 
 
 def home(request):
@@ -29,9 +29,16 @@ def search(request):
             timeslots = TimeTable.get_timeslots()
             timeslots.sort
             tt = table.exams
-            print(tt)
+            print(tt) #as a string
+
+            # Converting string to list
+            res = ast.literal_eval(tt)
+
+            # printing final result and its type
+            print("final list", res)
+            print(type(res))
             subjects = {}
-            for i in tt:
+            for i in res:
                 if i[4] not in timeslots:
                     timeslots.append(i[4])
                 if i[3] in subjects:
@@ -42,13 +49,15 @@ def search(request):
                     templist = {i[4]: [i[0], i[1], i[2]]}
                     subjects[i[3]] = templist
             return render(request, 'student-home.html',
-                          {'code':code, 'tt': tt,'timeslots': timeslots, 'subjects': subjects})
+                          {'code':code, 'tt': res,'timeslots': timeslots, 'subjects': subjects})
+
+
 
             # if table is not None:
             # return render(request,'student-home.html',{'code':code , 'table':table})
         except Timetables.DoesNotExist:
             # elif table.DoesNotExist:
-            return render(request, 'student-home.html',{'error':'not valid'})
+            return render(request, 'student-home.html',{'error':'Please enter valid Access code ya 7ewaaan'})
     else:
         return render(request, 'student-home.html')
 

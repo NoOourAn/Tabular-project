@@ -1,110 +1,117 @@
-{% extends "base.html" %}
-{% load static %}
-{% block head %}
- <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+<!doctype html>
+<html lang="en">
+  <head>
+      {% extends "base.html" %}
+	  {% block head %}
+    {% load static %}
+	{% load timetable_filters %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.6">
+    <title>Manual Data</title>
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-      #paddingbox{
-      background-image: url("{% static 'images/labtop-mockup.png' %}");
-      text-align: center;
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/cover/">
+    <script src="https://kit.fontawesome.com/24c48f9758.js" crossorigin="anonymous"></script>
 
-      }
-      .transbox{
-      width: 100%;
-      height: 600px;
-      background: rgba(0,0,0,0.5);
-      font: 30px arial, sans-serif;
-      padding: 160px 100px;
-      color: #ffffff;
-      line-height: 1.4;
-      }
-      .bgbox{
-      background: url("{% static 'images/labtop-mockup.png' %}") center center fixed no-repeat;
-      background-size: cover;
-      width: 100%;
-      }
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
-       .footer-container{
-      height: 56px;
-      width: 100% ;
-      background-color:#343a40;
-      padding-top: 16px;
-      padding-left: 80px;
-      padding-right: 80px;
-      }
-      .footer-container p{
-      color:rgba(255,255,255,.5);
-      }
-      .footer-container a{
-      color:#28a745;
-      text-decoration: none;
-      }
-      #logo {
-      color: rgba(255,255,255,.5);
-      font-size: x-large;
-      font-family: cursive;
-      font-style: italic;
-
-      }
-      .tablebox{
-      width: 100%;
-      height: 300px;
-      padding: 150px;
-      background-color: #ffffff;
-      }
+    <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
+<meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#563d7c">
 
-    </style>
+
+	  <style>
+
+	  	  *{
+            overflow:unset !important;
+          }
+
+	  	  body{
+	  	  	overflow:
+	  	  }
+		  .Blue{
+		  	background: #138496;
+		  	text-align: center;
+		  	padding: 35px;
+		  }
+		  .btn-info{
+            transition:1.2s !important;
+          }
+
+          .btn-info:hover{
+            background-color: #17a2b8 !important;
+            transform: scale(1.2);
+          }
+
+      .services{
+        color:white !important;
+      }
+
+	  </style>
+
 {% endblock %}
+  </head>
 
 {% block content %}
 <main role="main">
-
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-
-
-{% if user.is_S %}
-  <div  class="bgbox" id="paddingbox">
-    <div class="transbox">
-      <h1 class="display-3 ">Search</h1>
-      <p>Search for your Schedule by Access code.</p>
+    {% if user.is_S %}
+      <div  class="bgbox" id="paddingbox">
+        <div class="transbox">
+          <h1 class="display-3 ">Search</h1>
+          <p>Search for your Schedule by Access code.</p>
 
 
 
-<!--      <p><a class="btn btn-primary btn-sm" href="#" role="button">Learn more &raquo;</a></p>-->
-      <div class="btn-group" role="group" aria-label="Basic example">
-          <form method="post" action="{% url 'search' %}" class="form-inline mt-2 mt-md-0" >{% csrf_token %}
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+    <!--      <p><a class="btn btn-primary btn-sm" href="#" role="button">Learn more &raquo;</a></p>-->
+          <div class="btn-group" role="group" aria-label="Basic example">
+              <form method="post" action="{% url 'search' %}" class="form-inline mt-2 mt-md-0" >{% csrf_token %}
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
         </div>
-    </div>
-  </div>
+      </div>
 
-        {% if code %}
-    <div class="tablebox">
+
+	<div class="limiter">
+		<div class="container">
+
+<br>
+       {% if code %}
         <div class="alert alert-success" role="alert">
             Found it!
         </div>
-        <a href="{% url 'fetchtimetable' %}">{{ code }}</a>
-            </div>
+<!--        <a href="{% url 'fetchtimetable' %}">{{ code }}<a href="{% url 'fetchtimetable' %}">-->
         {% endif %}
 
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
 
-    			{% if tt %}
+        			{% if tt %}
 				<div class="table100 ver2 m-b-110">
 					<table data-vertable="ver2">
 						<thead>
@@ -121,6 +128,7 @@
 						</thead>
 						<tbody>
 
+
 							{% for key, value in subjects.items %}
 								<tr class="row100">
 									<td class="column100 column1" data-column="column1">{{ key }}</td>
@@ -128,6 +136,7 @@
 											{% if j not in value %}
 												<td class="column2">...</td>
 											{% else %}
+												<td class="column2">{{ value|get_subject:j }} <br> {{ value|get_room:j }}</td>
 											{% endif %}
 										{% endfor %}
 								</tr>
@@ -138,31 +147,29 @@
 				</div>
 
 			{% endif %}
+            {% endif %}
 
 
 
-
-<!--            {% if table %}-->
-<!--    <div class="tablebox">-->
-
-<!--        <a href="{% url 'fetchtimetable' %}">{{ table }}</a>-->
-<!--            </div>-->
-<!--        {% endif %}-->
-
-        {% if error %}
-            <div class="container" style="margin:100px;">
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
-            </div>
         </div>
-        {% endif %}
+    </div>
 
 
-{% else %}
-
-    <meta http-equiv="REFRESH" content="0;url={% url 'home' %}">
-
-{% endif %}
 </main>
 
+    <!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+<!--	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>-->
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+
 {% endblock %}
+
+
+
+</html>
+
