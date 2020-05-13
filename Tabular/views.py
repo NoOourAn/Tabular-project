@@ -50,11 +50,6 @@ def search(request):
                     subjects[i[3]] = templist
             return render(request, 'student-home.html',
                           {'code':code, 'tt': res,'timeslots': timeslots, 'subjects': subjects})
-
-
-
-            # if table is not None:
-            # return render(request,'student-home.html',{'code':code , 'table':table})
         except Timetables.DoesNotExist:
             # elif table.DoesNotExist:
             return render(request, 'student-home.html',{'error':'Please enter valid Access code ya 7ewaaan'})

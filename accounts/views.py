@@ -36,7 +36,7 @@ def osignup (request):
             except Account.DoesNotExist:
                 user =  Account.objects.create_user(username= request.POST['username'],email=request.POST['email'], password=request.POST['password'], cc=request.POST['cc'],univ=request.POST['univ'],faculty=request.POST['faculty'],gender='x',age='0',level='0',is_S=False,is_U=True)
                 auth.login(request,user)
-                return redirect('manualdata')
+                return redirect('serviceshome')
         else:
             return render(request, 'accounts/signupoo.html', {'error': 'PASSWORD MUST MATCH '})
 
@@ -53,7 +53,7 @@ def login(request):
         if user is not None:
             loogin(request,user)
             if request.user.is_U:
-                return redirect('manualdata')
+                return redirect('serviceshome')
             else:
                 return redirect('student')
         else:

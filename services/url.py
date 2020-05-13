@@ -16,7 +16,7 @@ urlpatterns = [
 
     path('excel-sheet', views.step3, name='excelsheet'),
     path('timetable', views.step4, name='timetable'),
-    path('menimeni', views.search, name='fetchtimetable'),
+    path('dashboard', views.fetchTT, name='dashboard'),
 
     path('boom', views.boom, name='boom'),
 

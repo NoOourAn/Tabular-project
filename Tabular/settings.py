@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'contact',
     'formtools',
-    'accounts.apps.AccountsConfig',
     'services.apps.ServicesConfig',
 ]
 
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = 'accounts.Account'
+AUTH_USER_MODEL = 'accounts.Account'   #app-label.model-name
 
 WSGI_APPLICATION = 'Tabular.wsgi.application'
 

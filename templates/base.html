@@ -166,6 +166,14 @@
             <input type="hidden">
           </form>
 
+            {% if user.is_U %}
+              <a class="dropdown-item" href="JavaScript:{document.getElementById('fetch').submit()}">Your Dashboard</a>
+                  <form id="fetch" method="POST" action="{% url 'dashboard' %}">
+                            {%csrf_token%}
+                    <input type="hidden">
+                  </form>
+            {%endif%}
+
           {%else%}
           <a class="dropdown-item" href="{% url 'reg' %}">Sign-Up</a>
           <a class="dropdown-item" href="{% url 'login' %}">log-in</a>

@@ -517,13 +517,13 @@ def sort_by_id(exams):
 def generateTT():
     POPULATION_SIZE = 10
     display = Display()
-    display.print_available_data()
+    # display.print_available_data()
     genrationNumber = 0
     print("\n> Generation # " + str(genrationNumber))
     population = Population(POPULATION_SIZE)  # awl random generation  --- awl nadha LL data
 
     population.get_schedules().sort(key=get_sort_key, reverse=True)  # higher fitness & less no. of conflicts foooooo2
-    display.print_generation(population)
+    # display.print_generation(population)
     genatic = genatic_algorithm()
 
     while (population.get_schedules()[0].get_fitness() != 1.0):

@@ -1,12 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from formtools.wizard.views import SessionWizardView
-from django.core.files.storage import FileSystemStorage
+from django.shortcuts import render
 from .models import Timetables
 from django.http import HttpResponse
 from services.utils import render_to_pdf
 import openpyxl
 from services import TimeTable
-from services import dbconvert
 from datetime import datetime, timedelta
 
 to_pdf = []
@@ -172,7 +169,19 @@ def step4(request):
     else:
         return render(request, 'services/manual-data.html')
 
-    return render(request, 'services/generated-timetable.html', {'wait': 'Please wait until your timetable generates'})
+    return render(request, 'services/generated-timetable.html', {'wait': 'We will send email AS soon As your Timetable is READY'})
+
+def fetchTT(request):
+
+    if request.method == 'POST':
+        try:
+            tables = Timetables.objects.get(org = request.user)
+            return render(request, 'services/org-dashboard.html', {'tables': tables})
+        except Timetables.DoesNotExist:
+            # elif table.DoesNotExist:
+            return render(request, 'services/org-dashboard.html', {'error': 'you do not have any timetables yet !'})
+    else:
+        return render(request, 'services/home.html')
 
 
 from services import dbconvert
@@ -199,8 +208,7 @@ def boom(request):
     TT.startDate = startdate
     TT.dueDate = duedate
     TT.accessCode = accesscode
-    # TT.orgId = "boom"
-    # TT.accessCode = 1
+    TT.org = request.user
     TT.exams = tt
     TT.save()
     timeslots = TimeTable.get_timeslots()
@@ -218,9 +226,6 @@ def boom(request):
             subjects[i[3]] = templist
     return render(request, 'services/generated-timetable.html',
                   {'success': 'Your timetable has been successfully generated', 'tt': tt, 'timeslots': timeslots, 'subjects': subjects})
-
-def search():
-    return render('services/timeslots.html')
 
 def create_pdf(request):
     data = {
