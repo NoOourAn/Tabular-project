@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render , get_object_or_404 , get_list_or_404 , _get_queryset
 from .models import Timetables
 from django.http import HttpResponse
 from services.utils import render_to_pdf
@@ -172,10 +172,10 @@ def step4(request):
     return render(request, 'services/generated-timetable.html', {'wait': 'We will send email AS soon As your Timetable is READY'})
 
 def fetchTT(request):
-
     if request.method == 'POST':
         try:
-            tables = Timetables.objects.get(org = request.user)
+            # tables = Timetables.objects.get(org = request.user)
+            tables = Timetables.objects.filter(org = request.user)
             return render(request, 'services/org-dashboard.html', {'tables': tables})
         except Timetables.DoesNotExist:
             # elif table.DoesNotExist:
@@ -183,6 +183,34 @@ def fetchTT(request):
     else:
         return render(request, 'services/home.html')
 
+def fetchOneTT(request):
+            tables = request.tables
+
+            # timeslots = TimeTable.get_timeslots()
+            # timeslots.sort
+            # tt = table.exams
+            # print(tt) #as a string
+            #
+            # # Converting string to list
+            # res = ast.literal_eval(tt)
+            #
+            # # printing final result and its type
+            # print("final list", res)
+            # print(type(res))
+            # subjects = {}
+            # for i in res:
+            #     if i[4] not in timeslots:
+            #         timeslots.append(i[4])
+            #     if i[3] in subjects:
+            #         templist = subjects[i[3]]
+            #         templist[i[4]] = [i[0], i[1], i[2]]
+            #         subjects[i[3]] = templist
+            #     else:
+            #         templist = {i[4]: [i[0], i[1], i[2]]}
+            #         subjects[i[3]] = templist
+            # return render(request, 'TT.html',
+            #               {'tables': tables, 'tt': res,'timeslots': timeslots, 'subjects': subjects})
+            return render(request, 'services/home.html', {'tables': tables})
 
 from services import dbconvert
 

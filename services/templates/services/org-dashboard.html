@@ -86,12 +86,37 @@
 
        {% if tables %}
 			<div class="alert alert-success" role="alert">
-				Found it!
+				Here are Your Timetables !
 			</div>
-<a href="#">{{tables}}</a>
-			{% for T in tables.items %}
-			<a href="#">{{tables}}</a>
-			{% endfor %}
+
+			<table class="table table-dark">
+			  <thead>
+				<tr>
+				  <th scope="col">Start Date</th>
+				  <th scope="col">Due Date</th>
+				  <th scope="col">Timetable</th>
+				</tr>
+			  </thead>
+			  <tbody>
+
+				{% for T in tables.all %}
+				<tr>
+				  <th scope="row">{{T.startDate}}</th>
+				  <td scope="row">{{T.dueDate}}</td>
+				  <td><a href="JavaScript:{document.getElementById('fetchtt').submit()}">{{T}}</a></td>
+					  <form id="fetchtt" method="POST" action="{% url 'TT' %}">
+									{%csrf_token%}
+						<input type="hidden">
+					  </form>
+
+				</tr>
+				{% endfor %}
+
+			  </tbody>
+			</table>
+
+
+
         {% endif %}
 
 
@@ -101,6 +126,8 @@
             {{ error }}
         </div>
         {% endif %}
+
+
 
 
         </div>

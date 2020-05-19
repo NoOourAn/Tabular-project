@@ -161,6 +161,16 @@
       </div>
   </div>
 
+
+
+      {% for T in tables.all %}
+				<tr>
+				  <th scope="row">{{T.startDate}}</th>
+				  <td scope="row">{{T.dueDate}}</td>
+
+				</tr>
+				{% endfor %}
+
 </div>
     <div class="bluebox" id="read-first">
       <p>Read carefully .. important!</p>
