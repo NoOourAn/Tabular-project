@@ -6,10 +6,8 @@ import openpyxl
 from services import TimeTable
 from datetime import datetime, timedelta
 import ast
-<<<<<<< HEAD
 from services import dbconvert
-=======
->>>>>>> 7365488e923983b560585c43c9d6668a46e8c5fc
+
 
 
 to_pdf = []
@@ -189,7 +187,6 @@ def fetchTT(request):
     else:
         return render(request, 'services/home.html')
 
-<<<<<<< HEAD
 def fetchOneTT(request):
             code = request.POST['accesscode']
 
@@ -219,11 +216,9 @@ def fetchOneTT(request):
                     subjects[i[3]] = templist
             return render(request, 'services/org-dashboard.html', {'code': code, 'tt': res, 'timeslots': timeslots, 'subjects': subjects})
 
-=======
 from services import dbconvert
 
 # assign = dbconvert.assign_filename()
->>>>>>> 7365488e923983b560585c43c9d6668a46e8c5fc
 
 def fetchOneTT(request):
     code = request.POST['accesscode']
