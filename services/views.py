@@ -5,6 +5,9 @@ from services.utils import render_to_pdf
 import openpyxl
 from services import TimeTable
 from datetime import datetime, timedelta
+import ast
+from services import dbconvert
+
 
 to_pdf = []
 startdate = None
@@ -184,37 +187,34 @@ def fetchTT(request):
         return render(request, 'services/home.html')
 
 def fetchOneTT(request):
-            tables = request.tables
+            code = request.POST['accesscode']
 
-            # timeslots = TimeTable.get_timeslots()
-            # timeslots.sort
-            # tt = table.exams
-            # print(tt) #as a string
-            #
-            # # Converting string to list
-            # res = ast.literal_eval(tt)
-            #
-            # # printing final result and its type
-            # print("final list", res)
-            # print(type(res))
-            # subjects = {}
-            # for i in res:
-            #     if i[4] not in timeslots:
-            #         timeslots.append(i[4])
-            #     if i[3] in subjects:
-            #         templist = subjects[i[3]]
-            #         templist[i[4]] = [i[0], i[1], i[2]]
-            #         subjects[i[3]] = templist
-            #     else:
-            #         templist = {i[4]: [i[0], i[1], i[2]]}
-            #         subjects[i[3]] = templist
-            # return render(request, 'TT.html',
-            #               {'tables': tables, 'tt': res,'timeslots': timeslots, 'subjects': subjects})
-            return render(request, 'services/home.html', {'tables': tables})
+            table = Timetables.objects.get(accessCode=code)
 
-from services import dbconvert
+            timeslots = TimeTable.get_timeslots()
+            timeslots.sort
+            print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+            print(timeslots)
+            tt = table.exams
+            print(tt)  # as a string
 
-# assign = dbconvert.assign_filename()
+            res = ast.literal_eval(tt)
+
+            print("final list", res)
+            print(type(res))
+            subjects = {}
+            for i in res:
+                if i[4] not in timeslots:
+                    timeslots.append(i[4])
+                if i[3] in subjects:
+                    templist = subjects[i[3]]
+                    templist[i[4]] = [i[0], i[1], i[2]]
+                    subjects[i[3]] = templist
+                else:
+                    templist = {i[4]: [i[0], i[1], i[2]]}
+                    subjects[i[3]] = templist
+            return render(request, 'services/org-dashboard.html', {'code': code, 'tt': res, 'timeslots': timeslots, 'subjects': subjects})
+
 
 def boom(request):
 

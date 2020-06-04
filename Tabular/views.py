@@ -20,14 +20,13 @@ def search(request):
     if request.method == 'POST':
         code = request.POST['search']
         try:
-            # table = Timetables.objects.get(pk=code)
             table = Timetables.objects.get(accessCode=code)
-            # table = get_object_or_404(Timetables , pk=code)
-
             print("menemenemenemenmenpppppppp")
             print(table)
             timeslots = TimeTable.get_timeslots()
             timeslots.sort
+            print("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppxxxxxxxxxxxxxxxxxx")
+            print(timeslots)
             tt = table.exams
             print(tt) #as a string
 

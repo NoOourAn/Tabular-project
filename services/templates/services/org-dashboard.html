@@ -106,7 +106,8 @@
 				  <td><a href="JavaScript:{document.getElementById('fetchtt').submit()}">{{T}}</a></td>
 					  <form id="fetchtt" method="POST" action="{% url 'TT' %}">
 									{%csrf_token%}
-						<input type="hidden">
+						<input type="hidden" value="{{T}}" name="accesscode">
+
 					  </form>
 
 				</tr>
@@ -126,6 +127,51 @@
             {{ error }}
         </div>
         {% endif %}
+
+
+
+	   {% if code %}
+        <div class="alert alert-success" role="alert">
+            Timetable with access code {{ code }} !
+        </div>
+        {% endif %}
+
+				{% if tt %}
+				<div class="table100 ver2 m-b-110">
+					<table data-vertable="ver2">
+						<thead>
+
+							<tr class="row100 head">
+								<th class="column100 column1" data-column="column1"></th>
+
+								{% for i in timeslots %}
+								<th class="column100 column2" data-column="column2">{{ i }}</th>
+								{% endfor %}
+
+							</tr>
+
+						</thead>
+						<tbody>
+
+
+							{% for key, value in subjects.items %}
+								<tr class="row100">
+									<td class="column100 column1" data-column="column1">{{ key }}</td>
+										{% for j in timeslots %}
+											{% if j not in value %}
+												<td class="column2">...</td>
+											{% else %}
+												<td class="column2">{{ value|get_subject:j }} <br> {{ value|get_room:j }}</td>
+											{% endif %}
+										{% endfor %}
+								</tr>
+							{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+
+			{% endif %}
 
 
 
