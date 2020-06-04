@@ -6,7 +6,10 @@ import openpyxl
 from services import TimeTable
 from datetime import datetime, timedelta
 import ast
+<<<<<<< HEAD
 from services import dbconvert
+=======
+>>>>>>> 7365488e923983b560585c43c9d6668a46e8c5fc
 
 
 to_pdf = []
@@ -186,6 +189,7 @@ def fetchTT(request):
     else:
         return render(request, 'services/home.html')
 
+<<<<<<< HEAD
 def fetchOneTT(request):
             code = request.POST['accesscode']
 
@@ -215,6 +219,49 @@ def fetchOneTT(request):
                     subjects[i[3]] = templist
             return render(request, 'services/org-dashboard.html', {'code': code, 'tt': res, 'timeslots': timeslots, 'subjects': subjects})
 
+=======
+from services import dbconvert
+
+# assign = dbconvert.assign_filename()
+>>>>>>> 7365488e923983b560585c43c9d6668a46e8c5fc
+
+def fetchOneTT(request):
+    code = request.POST['accesscode']
+
+    table = Timetables.objects.get(accessCode=code)
+
+    t = table.time_slots
+    res2 = ast.literal_eval(t)
+    timeslots = []
+    for input in res2:
+        if input[1] not in timeslots:
+            timeslots.append(input[1])
+    print(timeslots)
+    # res2.sort
+    # print(timeslots)
+    tt = table.exams
+    print(tt)  # as a string
+
+    # Converting string to list
+    res = ast.literal_eval(tt)
+
+    # printing final result and its type
+    print("final list", res)
+    print(type(res))
+    subjects = {}
+    for i in res:
+        if i[4] not in timeslots:
+            timeslots.append(i[4])
+        if i[3] in subjects:
+            templist = subjects[i[3]]
+            templist[i[4]] = [i[0], i[1], i[2]]
+            subjects[i[3]] = templist
+        else:
+            templist = {i[4]: [i[0], i[1], i[2]]}
+            subjects[i[3]] = templist
+            return render(request, 'services/org-dashboard.html', {'code': code, 'tt': res, 'timeslots': timeslots, 'subjects': subjects})
+
+
 
 def boom(request):
 
@@ -236,6 +283,7 @@ def boom(request):
     TT.startDate = startdate
     TT.dueDate = duedate
     TT.accessCode = accesscode
+    TT.time_slots = time_available
     TT.org = request.user
     TT.exams = tt
     TT.save()

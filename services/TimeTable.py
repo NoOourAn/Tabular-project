@@ -461,6 +461,14 @@ class Display:
             availableslotsTable.add_row([timeAvilable[i].get_id(), timeAvilable[i].get_time(), timeAvilable[i].get_day() , timeAvilable[i].get_date()])
         print(availableslotsTable)
 
+    # def get_Time_slots(self):
+    #     timeslots = []
+    #     timeAvilable = self.data.get_slots()
+    #     for i in range(0, len(timeAvilable)):
+    #         if timeAvilable[i].get_time() not in timeslots:
+    #             timeslots.append(timeAvilable[i].get_time())
+    #     return timeslots
+
     def get_Time_slots(self):
         timeslots = []
         timeAvilable = self.data.get_slots()

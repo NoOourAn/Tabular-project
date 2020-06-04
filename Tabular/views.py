@@ -20,13 +20,22 @@ def search(request):
     if request.method == 'POST':
         code = request.POST['search']
         try:
+            # table = Timetables.objects.get(pk=code)
             table = Timetables.objects.get(accessCode=code)
+            # table = get_object_or_404(Timetables , pk=code)
+
             print("menemenemenemenmenpppppppp")
             print(table)
-            timeslots = TimeTable.get_timeslots()
-            timeslots.sort
-            print("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppxxxxxxxxxxxxxxxxxx")
+            # timeslots = TimeTable.get_timeslots()
+            t = table.time_slots
+            res2 = ast.literal_eval(t)
+            timeslots = []
+            for input in res2:
+                if input[1] not in timeslots:
+                    timeslots.append(input[1])
             print(timeslots)
+            # res2.sort
+            # print(timeslots)
             tt = table.exams
             print(tt) #as a string
 
