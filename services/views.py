@@ -5,6 +5,8 @@ from services.utils import render_to_pdf
 import openpyxl
 from services import TimeTable
 from datetime import datetime, timedelta
+import ast
+
 
 to_pdf = []
 startdate = None
@@ -172,10 +174,10 @@ def step4(request):
     return render(request, 'services/generated-timetable.html', {'wait': 'We will send email AS soon As your Timetable is READY'})
 
 def fetchTT(request):
-
     if request.method == 'POST':
         try:
-            tables = Timetables.objects.get(org = request.user)
+            # tables = Timetables.objects.get(org = request.user)
+            tables = Timetables.objects.filter(org = request.user)
             return render(request, 'services/org-dashboard.html', {'tables': tables})
         except Timetables.DoesNotExist:
             # elif table.DoesNotExist:
@@ -183,10 +185,47 @@ def fetchTT(request):
     else:
         return render(request, 'services/home.html')
 
-
 from services import dbconvert
 
 # assign = dbconvert.assign_filename()
+
+def fetchOneTT(request):
+    code = request.POST['accesscode']
+
+    table = Timetables.objects.get(accessCode=code)
+
+    t = table.time_slots
+    res2 = ast.literal_eval(t)
+    timeslots = []
+    for input in res2:
+        if input[1] not in timeslots:
+            timeslots.append(input[1])
+    print(timeslots)
+    # res2.sort
+    # print(timeslots)
+    tt = table.exams
+    print(tt)  # as a string
+
+    # Converting string to list
+    res = ast.literal_eval(tt)
+
+    # printing final result and its type
+    print("final list", res)
+    print(type(res))
+    subjects = {}
+    for i in res:
+        if i[4] not in timeslots:
+            timeslots.append(i[4])
+        if i[3] in subjects:
+            templist = subjects[i[3]]
+            templist[i[4]] = [i[0], i[1], i[2]]
+            subjects[i[3]] = templist
+        else:
+            templist = {i[4]: [i[0], i[1], i[2]]}
+            subjects[i[3]] = templist
+            return render(request, 'services/org-dashboard.html', {'code': code, 'tt': res, 'timeslots': timeslots, 'subjects': subjects})
+
+
 
 def boom(request):
 
@@ -208,6 +247,7 @@ def boom(request):
     TT.startDate = startdate
     TT.dueDate = duedate
     TT.accessCode = accesscode
+    TT.time_slots = time_available
     TT.org = request.user
     TT.exams = tt
     TT.save()

@@ -52,7 +52,7 @@ class Timetables(models.Model):
     exams = models.TextField(default='' )  #exam[dept,course,room,instructor-id,timeslot-id,no of students]  / #editable=False
     accessCode = models.TextField(default='' , primary_key=True)  #editable=False
     org = models.ForeignKey(settings.AUTH_USER_MODEL , on_delete= models.CASCADE)   #forign key mn table el accounts(organisations)/one(org) to many(timetables)/one(timetable) to one(org) / editable = False
-
+    time_slots = models.TextField(default='' )
     def __str__(self):
         return self.accessCode
 
