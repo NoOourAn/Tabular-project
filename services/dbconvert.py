@@ -85,7 +85,7 @@ class fetch_data:
                     j=j+1
                 courses_data.add_cat(subjects.value, students)
                 i = i+1
-            print(courses_data)
+            # print(courses_data)
             for key in courses_data :
                 self.testdept.add_cat(courses_data[key][2],info)
             for x in self.testdept:

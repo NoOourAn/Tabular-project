@@ -161,7 +161,7 @@
           {% if user.is_authenticated %}
 
           <a class="dropdown-item" href="JavaScript:{document.getElementById('logout').submit()}">logout</a>
-          <form id="logout" method="POST" action="{%url 'logout' %}">
+          <form id="logout" method="POST" action="{% url 'logout' %}">
                         {%csrf_token%}
             <input type="hidden">
           </form>

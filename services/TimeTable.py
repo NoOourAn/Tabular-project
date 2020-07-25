@@ -15,7 +15,6 @@ class Instructor:
 
     def __str__(self): return self._name
 
-
 class Student:
     def __init__(self, id, name, courses):
         self._id = id
@@ -30,14 +29,6 @@ class Student:
 
     def __str__(self): return self._name
 
-
-# class StudentCategory:
-#     def __init__(self, courses, students):
-#         self._courses = courses
-#         self._students = students
-#
-#     def get_courses(self): return self._courses
-#     def get_students(self): return self._students
 class Room:
     def __init__(self, number, seatingCapacity):
         self._number = number
@@ -46,7 +37,6 @@ class Room:
     def get_number(self): return self._number
 
     def get_seatingCapacity(self): return self._seatingCapacity
-
 
 class slots:
     def __init__(self, id, time, day, date):
@@ -62,8 +52,6 @@ class slots:
     def get_day(self): return self.day
 
     def get_date(self): return self.date
-
-
 
 class Courses:
     def __init__(self, number, name, instructors, students, maxNumbOfStudents):  # maxnumber htb2a len(students)
@@ -85,7 +73,6 @@ class Courses:
 
     def __str__(self): return self._name
 
-
 class Department:
     def __init__(self, name, Courses):
         self._name = name
@@ -94,7 +81,6 @@ class Department:
     def get_name(self): return self._name
 
     def get_Courses(self): return self._Courses
-
 
 class Data:#[id, "start - end", day, daynum]
     # timeslots = [[1, "09:00 - 10:00", "SUNDAY", "1/1"],
@@ -233,8 +219,6 @@ class Data:#[id, "start - end", day, daynum]
     def get_numberOfClasses(self):
         return self.numberOfClasses
 
-
-###################################################
 class Exam:
     def __init__(self, id, dept, course, students):
         self._id = id
@@ -271,7 +255,6 @@ class Exam:
         return "{" + str(self._dept.get_name()) + "," + str(self._course.get_number()) + "," + \
                str(self._room.get_number()) + "," + str(self._instructor.get_id()) + "," + str(
             self._slots.get_id()) + "," + str(len(self._students)) + "}"
-
 
 class schedule:
     def __init__(self):
@@ -311,8 +294,7 @@ class schedule:
                 self.num_of_conflict += 1
             for j in range(0, len(exams)):
                 if (j >= i):
-                    if (exams[i].get_slots() == exams[j].get_slots() and exams[i].get_id() != exams[
-                        j].get_id()):
+                    if (exams[i].get_slots() == exams[j].get_slots() and exams[i].get_id() != exams[j].get_id()):
                         if (exams[i].get_room() == exams[j].get_room()): self.num_of_conflict += 1
                         # if (exams[i].get_instructor() == exams[j].get_instructor()): self.num_of_conflict += 1
                         # lists of students need to be alphabetically ordered
@@ -334,7 +316,6 @@ class schedule:
 
         return pharse
 
-
 class Population:
     def __init__(self, size):
         self.size = size
@@ -344,8 +325,6 @@ class Population:
     def get_schedules(self):
         return self.schedules
 
-
-############################## L7d hena done ^_^
 class genatic_algorithm:
     POPULATION_SIZE = 10
     NUMB_OFELITE_SCHEDULES = 1  ####
@@ -398,7 +377,6 @@ class genatic_algorithm:
             i += 1
         tournament_pop.get_schedules().sort(key=get_sort_key, reverse=True)
         return tournament_pop
-
 
 class Display:
     def __init__(self):
@@ -515,13 +493,10 @@ class Display:
         exams.sort(key=sort_by_id)
         return exams
 
-
 def get_sort_key(list):
     return list.get_fitness()  # de func mwgoda fe class schedule
-
 def sort_by_id(exams):
     return datetime.strptime(exams[3], "%d/%m")
-
 def generateTT():
     POPULATION_SIZE = 10
     display = Display()
@@ -531,7 +506,7 @@ def generateTT():
     population = Population(POPULATION_SIZE)  # awl random generation  --- awl nadha LL data
 
     population.get_schedules().sort(key=get_sort_key, reverse=True)  # higher fitness & less no. of conflicts foooooo2
-    # display.print_generation(population)
+    display.print_generation(population)
     genatic = genatic_algorithm()
 
     while (population.get_schedules()[0].get_fitness() != 1.0):
@@ -539,12 +514,11 @@ def generateTT():
         print("\n> Generation # " + str(genrationNumber))
         population = genatic.evolve(population)
         population.get_schedules().sort(key=get_sort_key, reverse=True)  # reverse 34an by sort 7sb elfitness
-        # display.print_generation(population)
+        display.print_generation(population)
 
     print("\n\n")
     display.print_schedule_as_table(population.get_schedules()[0])
     return display.save_schedule_as_model(population.get_schedules()[0])
-
 def get_timeslots():
     display = Display()
     return display.get_Time_slots()

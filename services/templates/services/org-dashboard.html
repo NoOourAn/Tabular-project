@@ -84,6 +84,14 @@
 
 <br>
 
+
+
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+
        {% if tables %}
 			<div class="alert alert-success" role="alert">
 				Here are Your Timetables !
@@ -103,13 +111,12 @@
 				<tr>
 				  <th scope="row">{{T.startDate}}</th>
 				  <td scope="row">{{T.dueDate}}</td>
-				  <td><a href="JavaScript:{document.getElementById('fetchtt').submit()}">{{T}}</a></td>
+				  <td><a href="JavaScript:{document.getElementById('fetchtt').submit()}">{{T.accessCode}}</a></td>
+					<td scope="row">{{T.exams}}</td>
 					  <form id="fetchtt" method="POST" action="{% url 'TT' %}">
 									{%csrf_token%}
-						<input type="hidden" value="{{T}}" name="accesscode">
-
+						<input type="hidden" value="{{T.accessCode}}" name="accesscode">
 					  </form>
-
 				</tr>
 				{% endfor %}
 
@@ -120,13 +127,6 @@
 
         {% endif %}
 
-
-
-        {% if error %}
-        <div class="alert alert-danger" role="alert">
-            {{ error }}
-        </div>
-        {% endif %}
 
 
 

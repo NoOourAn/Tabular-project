@@ -178,43 +178,13 @@ def step4(request):
 def fetchTT(request):
     if request.method == 'POST':
         try:
-            # tables = Timetables.objects.get(org = request.user)
             tables = Timetables.objects.filter(org = request.user)
             return render(request, 'services/org-dashboard.html', {'tables': tables})
         except Timetables.DoesNotExist:
-            # elif table.DoesNotExist:
             return render(request, 'services/org-dashboard.html', {'error': 'you do not have any timetables yet !'})
     else:
         return render(request, 'services/home.html')
 
-def fetchOneTT(request):
-            code = request.POST['accesscode']
-
-            table = Timetables.objects.get(accessCode=code)
-
-            timeslots = TimeTable.get_timeslots()
-            timeslots.sort
-            print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
-            print(timeslots)
-            tt = table.exams
-            print(tt)  # as a string
-
-            res = ast.literal_eval(tt)
-
-            print("final list", res)
-            print(type(res))
-            subjects = {}
-            for i in res:
-                if i[4] not in timeslots:
-                    timeslots.append(i[4])
-                if i[3] in subjects:
-                    templist = subjects[i[3]]
-                    templist[i[4]] = [i[0], i[1], i[2]]
-                    subjects[i[3]] = templist
-                else:
-                    templist = {i[4]: [i[0], i[1], i[2]]}
-                    subjects[i[3]] = templist
-            return render(request, 'services/org-dashboard.html', {'code': code, 'tt': res, 'timeslots': timeslots, 'subjects': subjects})
 
 from services import dbconvert
 
@@ -222,8 +192,11 @@ from services import dbconvert
 
 def fetchOneTT(request):
     code = request.POST['accesscode']
+    print(code)
 
     table = Timetables.objects.get(accessCode=code)
+    # table = get_object_or_404(Timetables , pk = TT_accesscode)
+    print(table)
 
     t = table.time_slots
     res2 = ast.literal_eval(t)
@@ -267,10 +240,10 @@ def boom(request):
     dbconvert.fetch_data.assign.set_SubjectsFile(subjectdb)
     dbconvert.fetch_data.assign.set_RoomsFile(roomdb)
     dbconvert.fetch_data.assign.set_TimeSlots(time_available)
-    print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
-    print(dbconvert.fetch_data.assign.get_SubjectsFile())
-    print(dbconvert.fetch_data.assign.get_StudentsFile())
-    print(dbconvert.fetch_data.assign.get_RoomsFile())
+    # print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+    # print(dbconvert.fetch_data.assign.get_SubjectsFile())
+    # print(dbconvert.fetch_data.assign.get_StudentsFile())
+    # print(dbconvert.fetch_data.assign.get_RoomsFile())
     tt = TimeTable.generateTT()
     global to_pdf
     to_pdf = tt
@@ -285,16 +258,25 @@ def boom(request):
     timeslots = TimeTable.get_timeslots()
     timeslots.sort
     subjects = {}
+    tempdict = {}
+    templist = []
     for i in tt:
-        if i[4] not in timeslots:
-            timeslots.append(i[4])
+#[classes[i].get_course().get_name(),classes[i].get_room().get_number(),classes[i].get_slots().get_day(),classes[i].get_slots().get_date(),classes[i].get_slots().get_time()])
+        # if i[4] not in timeslots:
+        #     timeslots.append(i[4])
         if i[3] in subjects:
-            templist = subjects[i[3]]
-            templist[i[4]] = [i[0], i[1], i[2]]
-            subjects[i[3]] = templist
+            tempdict = subjects[i[3]]
+            if i[4] not in tempdict:
+                templist =  [i[0], i[1], i[2]]
+                subjects[i[3]][i[4]] = templist
+
+            else:
+                subjects[i[3]][i[4]].append(i[0])
+                subjects[i[3]][i[4]].append(i[1])
+                subjects[i[3]][i[4]].append(i[2])
         else:
-            templist = {i[4]: [i[0], i[1], i[2]]}
-            subjects[i[3]] = templist
+            tempdict = {i[4]: [i[0], i[1], i[2]]}
+            subjects[i[3]] = tempdict
     return render(request, 'services/generated-timetable.html',
                   {'success': 'Your timetable has been successfully generated', 'tt': tt, 'timeslots': timeslots, 'subjects': subjects})
 
